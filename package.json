@@ -1,0 +1,20 @@
+{
+  "name": "tryxer",
+  "version": "0.0.1",
+  "description": "Super-duper-mega-ultra-epic-legendary-combo bot",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "El deivid y el Free",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0"
+  }
+}
