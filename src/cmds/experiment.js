@@ -11,6 +11,9 @@ class Experiment extends Command {
   }
 
   async run(message, args) {
+
+    console.log(this.user)
+
     let level = parseInt(args[0]) ? parseInt(args[0]) : 1;
     if (level > 5) level = 5;
     if (level < 1) level = 1;

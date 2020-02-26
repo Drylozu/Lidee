@@ -1,9 +1,12 @@
+const Guild = require('../models/guild.js');
+const User = require('../models/user.js')
+
 module.exports = class {
   constructor(client) {
     this.client = client;
   }
 
-  run(message) {
+  async run(message) {
     if (message.channel.type === "dm") return;
     if (message.author.bot) return;
     if (!message.content.startsWith(this.client.botConfig.prefix)) return;
@@ -15,6 +18,7 @@ module.exports = class {
       let cmdFile = this.client.commands.find((c) => c.name === cmd || c.aliases.includes(cmd));
       if (!cmdFile) return;
       if (cmdFile.usersCooldown.includes(message.author.id)) return message.channel.send('Ya veremos que poner aca');
+      cmdFile.prepare({ guild: await Guild.findOne({ id: message.guild.id }).exec(), user: await User.findOne({ id: message.author.id }).exec() })
       cmdFile.configuration({ user: message.author.id, message });
       cmdFile.run(message, args);
     } catch (e) {

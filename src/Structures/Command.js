@@ -40,6 +40,12 @@ class Command {
     }
   }
 
+  prepare(values) {
+    this.guild = values.guild;
+    this.user = values.user;
+    console.log(values)
+  }
+
 }
 
 module.exports = Command;

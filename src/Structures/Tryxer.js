@@ -1,6 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const path = require("path");
 const fs = require("fs");
+require('../prototypes.js')();
 
 class Tryxer extends Client {
   constructor(...args) {
@@ -33,15 +34,5 @@ class Tryxer extends Client {
     console.log(`\x1b[36m[${new Date().toLocaleTimeString()}]${e ? "\x1b[31m" : "\x1b[32m"}[LOG] \x1b[0m${msg}`);
   }
 }
-
-// Prototypes
-Array.prototype.getRandom = function(num = false) {
-  if (!num) return this[Math.floor(Math.random() * this.length)];
-  let elements = []
-  for (let i = 0; i < num; i++) {
-    elements.push(this[Math.floor(Math.random() * this.length)])
-  }
-  return elements;
-};
 
 module.exports = Tryxer;
