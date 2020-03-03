@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGOURL, {
   useUnifiedTopology: true
 })
 
-new Tryxer({
+let client = new Tryxer({
   ws: {
     properties: {
       $browser: "Discord iOS"

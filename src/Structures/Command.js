@@ -8,7 +8,8 @@ class Command {
     this.cooldown = options.cooldown || 0;
     this.nsfw = options.nsfw || false;
     this.devOnly = options.devOnly || false;
-    this.permissions = options.permissions || [];
+    this.category = options.category;
+    this.description = options.description || "Este comando aun no tiene una descripcion";
 
     this.usersCooldown = [];
   }
@@ -43,6 +44,7 @@ class Command {
   prepare(values) {
     this.guild = values.guild;
     this.user = values.user;
+
     console.log(values)
   }
 

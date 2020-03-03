@@ -6,7 +6,9 @@ const { RichEmbed } = require("discord.js")
 class Experiment extends Command {
   constructor(client) {
     super(client, {
-      name: "experiment"
+      name: "experiment",
+      description: "Un juego de memoria que esta actualmente en desarollo",
+      category: "Prototype",
     });
   }
 

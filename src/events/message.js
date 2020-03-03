@@ -9,6 +9,19 @@ module.exports = class {
   async run(message) {
     if (message.channel.type === "dm") return;
     if (message.author.bot) return;
+
+    let prefix = this.client.botConfig.prefix;
+
+    if (await Guild.exists({ id: message.guild.id })) {
+      let data = await Guild.findOne({ id: message.guild.id }).exec();
+      prefix = data.prefix;
+    } else {
+      let newGuild = new Guild({
+        id: message.guild.id
+      })
+      newGuild.save();
+    }
+
     if (!message.content.startsWith(this.client.botConfig.prefix)) return;
     let args = message.content.slice(this.client.botConfig.prefix.length).trim().split(/ +/g);
     let cmd = args.shift().toLowerCase();

@@ -5,6 +5,22 @@ let Guild = new mongoose.Schema({
   prefix: {
     type: String,
     default: 't?'
+  },
+  modlogs: {
+    type: String,
+    default: ''
+  },
+  mutedmembers: {
+    type: Array,
+    default: []
+  },
+  kickcount: {
+    type: Number,
+    default: 0
+  },
+  bancount: {
+    type: Number,
+    default: 0
   }
 })
 
