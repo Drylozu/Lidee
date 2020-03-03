@@ -1,20 +1,14 @@
-const Tryxer = require("./Structures/Tryxer");
-const mongoose = require('mongoose');
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
+const Tryxer = require("./structures/Tryxer.js");
 
-mongoose.connect(process.env.MONGOURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-
-let client = new Tryxer({
-  ws: {
-    properties: {
-      $browser: "Discord iOS"
+new Tryxer({
+    ws: {
+        properties: {
+            $browser: "Discord iOS"
+        }
+    },
+    botConfig: {
+        prefix: "t?",
+        token: process.env.botToken
     }
-  },
-  botConfig: {
-    prefix: "t?",
-    token: process.env.TOKEN
-  }
 });

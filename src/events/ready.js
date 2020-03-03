@@ -1,9 +1,9 @@
-module.exports = class {
+module.exports = class EventReady {
     constructor(client) {
         this.client = client;
     }
 
     run() {
-        this.client.log("Tryrex Ready!");
+        this.client.log("Bot Ready!");
     }
 }
