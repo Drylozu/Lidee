@@ -15,9 +15,6 @@ module.exports = class Eval extends Command {
             if (typeof evalued !== "string")
                 evalued = require("util").inspect(evalued, { depth: 1 });
             let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime) / 1000;
-            if (txt.length > limit)
-                message.channel.send(`Evalued in ${endTimeMs}ms.\`\`\`js\n${evalued}\n\`\`\``);
-            else
                 message.channel.send(`Evalued in ${endTimeMs}ms.\`\`\`js\n${evalued}\n\`\`\``);
         } catch (err) {
             let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime) / 1000;
