@@ -1,70 +1,26 @@
 const Command = require("../structures/Command.js");
-const { MessageEmbed } = require("discord.js");
 
-class Ban extends Command {
+module.exports = class Ban extends Command {
     constructor(client) {
         super(client, {
             name: "ban",
-            aliases: [],
             category: "Moderation",
-            description: "Bans a member from the server",
+            description: "Bans a member from the server.",
             botPermissions: ["BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"]
         });
     }
 
     run(message, args) {
-        if (!message.member.permissions.has("BAN_MEMBERS"))
-            return message.channel.send("<:Error:608819673336905729> » Necesitas el permiso `Banear Miembros` para ejecutar este comando");
-
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
-        if (!member) return message.channel.send("<:Error:608819673336905729> » No se a podido encontrar la mencion de un miembro");
-
-        if (!member.bannable) return message.channel.send("<:Error:608819673336905729> » No puedes banear a ese miembro");
-
-
-        let msg = await message.channel.send(`⚠️ » Estas a punto de banear a ${member}, para confirmar reacciona en el emoji`);
-        msg.react('✅')
-
-        const filter = (emojis, usuario) => (emojis.emoji.name == "✅") && usuario.id === message.author.id;
-        const collector = msg.createReactionCollector(filter, {
-            time: 30000
-        });
-
-        collector.on("collect", async (emojis) => {
-            if (emojis.emoji.name != "✅") return;
-            message.delete()
-            msg.delete()
-            // member.ban(args.slice(1).join(' ').length > 0 ? args.slice(1).join(' ') : 'Razon no dada :(');
-            message.channel.send(`<:Check:608819078903365662> » El miembro ${member} a sido baneado por ${message.author}`).then(m => m.delete({ timeout: 30000 }))
-
-            this.guild.bancount++;
-            this.guild.save()
-
-            if (!this.guild.modlogs) return;
-            let channel = message.guild.channels.get(this.guild.modlogs);
-            if (!channel) return;
-
-            let embed = new RichEmbed()
-                .setAuthor(`${message.guild.name} » Server Ban`, message.guild.iconURL)
-                .setDescription(`> Este es el baneo ${this.guild.bancount} del servidor\n
-        **Miembro**: ${member.user.tag} ● ${member.user.id}
-        **Moderador**: ${message.author.tag} ● ${message.author.id}
-
-        \`Razon\`: ${args.slice(1).join(' ').length > 0 ? args.slice(1).join(' ') : 'Razon no establecida'}\n
-
-        `)
-                .setTimestamp()
-                .setFooter(`${message.author.tag} - Moderador`)
-                .setColor("#3A91F9")
-                .setThumbnail(message.author.displayAvatarURL);
-
-            channel.send(embed)
-
-        });
-
+        if (!member) return message.channel.send("You need to mention an user or provide his ID.");
+        if (!member.bannable) return message.channel.send("I don't able to ban that member.");
+        message.guild.members.ban(member.id, {
+            reason: `${message.author.tag}.${args.join(" ").length > 0 ? ` ${args.join(" ")}` : ""}`
+        }).then(() => message.channel.send(`The member **${member.user.tag}** has been banned from the server.`))
+            .catch((e) => {
+                this.client.log(e.toString(), true);
+                message.channel.send("An error ocurred while banning the member.");
+            });
     }
-
 }
-
-module.exports = Ban;

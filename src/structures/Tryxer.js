@@ -1,4 +1,4 @@
-require("./utils/prototypes.js")();
+require("../utils/prototypes.js")();
 const { Client, Collection } = require("discord.js");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -8,18 +8,18 @@ module.exports = class Tryxer extends Client {
     constructor(...args) {
         super(...args);
         this.commands = new Collection();
+        
+        Object.defineProperty(this, "botConfig", { value: args[0].botConfig });
+        this.ownersId = this.botConfig.ownersId.split(",");
 
-        mongoose.connect(process.env.mongoDbUrl, (err) => {
+        mongoose.connect(this.botConfig.mongoDbUrl, (err) => {
             if (err) {
                 this.log("There was an error while connecting the database.");
                 this.log(err.toString(), true);
                 process.exit();
             } else this.log("MongoDB Ready!", true);
         });
-        this.db = require("./utils/database.js");
-
-        Object.defineProperty(this, "botConfig", { value: args[0].botConfig });
-        this.ownersId = this.botConfig.ownersId.split(",");
+        this.db = require("../utils/database.js");
 
         this.loadCommands();
         this.loadEvents();

@@ -1,57 +1,55 @@
-const Command = require("../Structures/Command.js");
-const { RichEmbed } = require('discord.js')
+const Command = require("../structures/Command.js");
+const { MessageEmbed } = require("discord.js");
 
-class Help extends Command {
-  constructor(client) {
-    super(client, {
-      name: "help"
-    });
-  }
+module.exports = class Help extends Command {
+    constructor(client) {
+        super(client, {
+            name: "help",
+            aliases: ["h"]
+        });
+    }
 
-  async run(message) {
+    run(message) {
 
-    let index = new RichEmbed()
-      .setTitle('<:discord:682794186877173774> | Tryxer » Página Inicial')
-      .setDescription(`Reacciona en su respectivo emoji para ver los comandos de la categoria
-
-        <:moderation:682792050101453088> » Moderacion
-        <:prototype:683123994265780285> » Prototype`)
-
-    let moderation = new RichEmbed()
-      .setTitle('<:discord:682794186877173774> | Tryxer » Moderacion')
-      .setDescription(`A continuacion se les mostrara los comandos de Moderacion
-
-            ${this.client.commands.filter((c) => c.category == 'Moderation').map(x => `${this.guild.prefix}${x.name} » ${x.description}`)}`)
-
-    let prototype = new RichEmbed()
-      .setTitle('<:discord:682794186877173774> | Tryxer » Prototype')
-      .setDescription(`los comandos que se encuentran aca estan actualmente en desarollo y no estan completos asi que puede haber errores en su ejecucion.
+        let prototype = new RichEmbed()
+            .setTitle('<:discord:682794186877173774> | Tryxer » Prototype')
+            .setDescription(`los comandos que se encuentran aca estan actualmente en desarollo y no estan completos asi que puede haber errores en su ejecucion.
 
             ${this.client.commands.filter((c) => c.category == 'Prototype').map(x => `${this.guild.prefix}${x.name} » ${x.description}`)}`)
 
-    let msg = await message.channel.send(index)
+        let msg = await message.channel.send(new MessageEmbed()
+            .setTitle("Help")
+            .setDescription("React with the category that you wanna see\n- <:moderation:682792050101453088> Moderation\n-<:prototype:683123994265780285> Prototype")
+            .setTimestamp());
 
-    const filter = (emojis, usuario) => (emojis.emoji.id == "682792050101453088" || emojis.emoji.id == "683123994265780285") && usuario.id === message.author.id;
-    const collector = msg.createReactionCollector(filter, {
-      time: 1000000
-    });
-    collector.on("collect", (emojis) => {
-      if (emojis.emoji.id == "682792050101453088") {
-        msg.edit(moderation)
-        emojis.remove(message.author.id);
-      };
-      if (emojis.emoji.id == "683123994265780285") {
-        msg.edit(prototype)
-        emojis.remove(message.author.id);
-      }
-    });
+        msg.react("682792050101453088");
+        msg.react("683123994265780285");
 
-    await msg.react("682792050101453088"); // Staff Emoji
-    await msg.react("683123994265780285"); // Prototype Emoji
-
-
-  }
-
+        const filter = (emojis, usuario) => (emojis.emoji.id == "682792050101453088" || emojis.emoji.id == "683123994265780285") && usuario.id === message.author.id;
+        const collector = msg.createReactionCollector(filter, {
+            time: 1000000
+        });
+        collector.on("collect", (emojis) => {
+            if (emojis.emoji.id == "682792050101453088") {
+                let moderationCommands =
+                    this.client.commands
+                        .filter((c) => c.category == "Moderation")
+                        .map((c) => `- \`${c.name}\`: ${c.description}`);
+                msg.edit(new MessageEmbed()
+                    .setTitle("Help - Moderation Commands")
+                    .setDescription(`In this category are \`${moderationCommands.size}\` command, these are:\n${moderationCommands.join("\n")}`));
+                emojis.remove(message.author.id);
+            }
+            if (emojis.emoji.id == "683123994265780285") {
+                let prototypeCommands =
+                    this.client.commands
+                        .filter((c) => c.category == "Prototype")
+                        .map((c) => `- \`${c.name}\`: ${c.description}`);
+                msg.edit(new MessageEmbed()
+                    .setTitle("Help - Prototype Commands")
+                    .setDescription(`**Note**: these commands are in development, may contain errors.\nIn this category are \`${prototypeCommands.size}\` command, these are:\n${prototypeCommands.join("\n")}`));
+                emojis.remove(message.author.id);
+            }
+        });
+    }
 }
-
-module.exports = Help;

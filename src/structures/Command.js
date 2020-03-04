@@ -5,7 +5,7 @@ module.exports = class Command {
         this.client = client;
         this.name = options.name;
         this.aliases = options.alises || [];
-        this.cooldown = options.cooldown || 0;
+        this.cooldown = options.cooldown || 500;
         this.nsfw = options.nsfw || false;
         this.ownerOnly = options.ownerOnly || false;
         this.category = options.category;
@@ -21,8 +21,8 @@ module.exports = class Command {
     }
 
     validate({ message }) {
-        if (this.devOnly)
-            if (this.client.ownersId.includes(message.author.id)) return true;
+        /*if (this.devOnly)
+            if (this.client.ownersId.includes(message.author.id)) return true;*/
 
         if (this.cooldown > 0)
             if (!this.usersCooldown.has(message.author.id)) {

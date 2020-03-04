@@ -10,7 +10,7 @@ module.exports = () => {
         return elements;
     };
 
-    Number.random = (minimum, minimum) => {
+    Number.random = (minimum, maximum) => {
         if (isNaN(minimum) || isNaN(maximum)) return;
         minimum = Math.ceil(minimum), maximum = Math.floor(maximum);
 

@@ -8,7 +8,8 @@ new Tryxer({
         }
     },
     botConfig: {
-        prefix: "t?",
-        token: process.env.botToken
+        token: process.env.botToken,
+        ownersId: process.env.ownersId,
+        mongoDbUrl: process.env.mongoDbUrl
     }
 });
