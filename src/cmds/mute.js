@@ -26,11 +26,11 @@ module.exports = class Mute extends Command {
         }
       });
       message.guild.channels.cache.filter(channel => channel.manageable).forEach((channel) => {
-        channel.updateOverwrite([{
-          id: role.id,
-          deny: ["SEND_MESSAGES", "ADD_REACTIONS"],
-        }, ], 'Needed to change permissions')
-      });
+        channel.updateOverwrite(role.id, {
+          SEND_MESSAGES: false,
+          ADD_REACTIONS: false
+        })
+      })
     }
 
     if (member.roles.cache.has(role.id)) return message.channel.send("That member is already muted!");
