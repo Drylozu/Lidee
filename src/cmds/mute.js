@@ -1,4 +1,5 @@
 const Command = require("../structures/Command.js");
+const { Permissions } = require("discord.js")
 
 module.exports = class Mute extends Command {
   constructor(client) {
@@ -31,6 +32,18 @@ module.exports = class Mute extends Command {
           ADD_REACTIONS: false
         })
       })
+    }
+
+    let x = message.guild.channels.cache.get('684520722705416349').permissionsFor(role.id).toArray()
+    console.log(role.id)
+    if (!message.guild.channels.cache.filter(channel => channel.manageable).some((c) => c.permissionsFor(role.id).toArray().includes("SEND_MESSAGES"))) {
+        message.guild.channels.cache.filter(channel => channel.manageable).filter(channel => !channel.permissionsFor(role.id).toArray().includes("SEND_MESSAGE")).forEach(channel => {
+          channel.updateOverwrite(role.id, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          })
+        })
+        console.log('hola')
     }
 
     if (member.roles.cache.has(role.id)) return message.channel.send("That member is already muted!");
