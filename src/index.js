@@ -1,7 +1,7 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 const Tryxer = require("./structures/Tryxer.js");
 
-new Tryxer({
+const bot = new Tryxer({
     ws: {
         properties: {
             $browser: "Discord iOS"
@@ -12,4 +12,8 @@ new Tryxer({
         ownersId: process.env.ownersId,
         mongoDbUrl: process.env.mongoDbUrl
     }
+});
+
+process.on("unhandledRejection", (reason) => {
+    bot.log(reason.toString(), true);
 });

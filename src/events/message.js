@@ -1,6 +1,9 @@
+const { Collection } = require("discord.js");
+
 module.exports = class EventMessage {
     constructor(client) {
         this.client = client;
+        this.usersCooldown = new Collection();
     }
 
     async run(message) {
@@ -23,9 +26,20 @@ module.exports = class EventMessage {
         try {
             let cmdFile = this.client.commands.find((c) => c.name === cmd || c.aliases.includes(cmd));
             if (!cmdFile) return;
+            if (!this.usersCooldown.has(message.author.id)) {
+                this.usersCooldown.set(message.author.id, Date.now());
+
+                setTimeout(() => {
+                    this.usersCooldown.delete(message.author.id);
+                }, 2500);
+            } else
+                return message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
             cmdFile.prepare({ guild });
-            let cmdValid = cmdFile.validate({ message });
-            if (!cmdValid) return;
+            let cmdValids = cmdFile.validate({ message });
+            if (!cmdValids.ownerOnly) return;
+            //if (cmdValids.cooldown && !cmdValids.ownerOnly) return;
+            if (!cmdValids.userPermissions) return;
+            if (!cmdValids.botPermissions) return;
             cmdFile.run(message, args);
         } catch (e) {
             err = true;

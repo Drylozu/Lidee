@@ -14,10 +14,10 @@ module.exports = class Eval extends Command {
             let evalued = eval(args.join(" "));
             if (typeof evalued !== "string")
                 evalued = require("util").inspect(evalued, { depth: 1 });
-            let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime) / 1000;
-                message.channel.send(`Evalued in ${endTimeMs}ms.\`\`\`js\n${evalued}\n\`\`\``);
+            let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime)[1] / 1000;
+            message.channel.send(`Evalued in ${endTimeMs}ms.\`\`\`js\n${evalued}\n\`\`\``);
         } catch (err) {
-            let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime) / 1000;
+            let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime)[1] / 1000;
             message.channel.send(`Evalued in ${endTimeMs}ms.\`\`\`js\n${err.toString()}\n\`\`\``);
         }
     }
