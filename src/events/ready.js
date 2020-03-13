@@ -5,5 +5,12 @@ module.exports = class EventReady {
 
     run() {
         this.client.log("Bot Ready!");
+        this.client.user.setPresence({
+            status: "idle",
+            activity: {
+                name: "commands",
+                type: "WATCHING"
+            }
+        });
     }
 }

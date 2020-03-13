@@ -1,4 +1,4 @@
-const { Collection } = require("discord.js");
+//const { Collection } = require("discord.js");
 
 module.exports = class Command {
     constructor(client, options) {
@@ -21,46 +21,53 @@ module.exports = class Command {
     }
 
     validate({ message }) {
-        let conditionals = {};
+        let conditionals = {
+            ownerOnly: "none",
+            userPermissions: "none",
+            botPermissions: "none",
+            nsfw: "none"
+        };
 
         if (this.ownerOnly)
-            if (this.client.ownersId.includes(message.author.id)) conditionals.ownerOnly = true;
-            else conditionals.ownerOnly = false;
+            if (this.client.ownersId.includes(message.author.id)) conditionals.ownerOnly = "yes";
+            else conditionals.ownerOnly = "no";
 
         if (this.userPermissions.length > 0)
-            if (message.member.hasPermission(this.userPermissions)) conditionals.userPermissions = true;
+            if (message.member.hasPermission(this.userPermissions)) conditionals.userPermissions = "yes";
             else {
                 message.channel.send("You don't have permission to execute this command.");
-                conditionals.userPermissions = false;
+                conditionals.userPermissions = "no";
             }
 
         if (this.botPermissions.length > 0)
-            if (message.guild.me.hasPermission(this.botPermissions)) conditionals.botPermissions = true;
+            if (message.guild.me.hasPermission(this.botPermissions)) conditionals.botPermissions = "yes";
             else {
                 message.channel.send("I don't have permission to execute this command.");
-                conditionals.botPermissions = false;
+                conditionals.botPermissions = "no";
             }
 
         if (this.nsfw)
-            if (message.channel.nsfw) conditionals.nsfw = true;
+            if (message.channel.nsfw) conditionals.nsfw = "yes";
             else {
                 message.channel.send("This command must be executed in a NSFW channel.");
-                conditionals.nsfw = false;
+                conditionals.nsfw = "no";
             }
 
-            /*if (this.cooldown > 0)
-                if (!this.usersCooldown.has(message.author.id)) {
-                    this.usersCooldown.set(message.author.id, Date.now());
+        /*
+        if (this.cooldown > 0)
+            if (!this.usersCooldown.has(message.author.id)) {
+                this.usersCooldown.set(message.author.id, Date.now());
 
-                    setTimeout(() => {
-                        this.usersCooldown.delete(message.author.id);
-                    }, this.cooldown);
+                setTimeout(() => {
+                    this.usersCooldown.delete(message.author.id);
+                }, this.cooldown);
 
-                    conditionals.cooldown = true;
-                } else {
-                    message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
-                    conditionals.cooldown = false;
-                }*/
+                conditionals.cooldown = true;
+            } else {
+                message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
+                conditionals.cooldown = false;
+            }
+        */
 
         return conditionals;
     }

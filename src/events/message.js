@@ -26,6 +26,7 @@ module.exports = class EventMessage {
         try {
             let cmdFile = this.client.commands.find((c) => c.name === cmd || c.aliases.includes(cmd));
             if (!cmdFile) return;
+
             if (!this.usersCooldown.has(message.author.id)) {
                 this.usersCooldown.set(message.author.id, Date.now());
 
@@ -34,12 +35,13 @@ module.exports = class EventMessage {
                 }, 2500);
             } else
                 return message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
+                
             cmdFile.prepare({ guild });
             let cmdValids = cmdFile.validate({ message });
-            if (!cmdValids.ownerOnly) return;
+            if (cmdValids.ownerOnly === "no") return;
             //if (cmdValids.cooldown && !cmdValids.ownerOnly) return;
-            if (!cmdValids.userPermissions) return;
-            if (!cmdValids.botPermissions) return;
+            if (cmdValids.userPermissions === "no") return;
+            if (cmdValids.botPermissions === "no") return;
             cmdFile.run(message, args);
         } catch (e) {
             err = true;

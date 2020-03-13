@@ -1,5 +1,4 @@
 const Command = require("../structures/Command.js");
-const { Permissions } = require("discord.js")
 
 module.exports = class Mute extends Command {
     constructor(client) {
@@ -17,7 +16,7 @@ module.exports = class Mute extends Command {
         if (!member) return message.channel.send("You need to mention an user or provide his ID.");
 
         let role = message.guild.roles.cache.find(r => r.name === "Tryxer Mute");
-        if (!role) {
+        if (!role)
             role = await message.guild.roles.create({
                 data: {
                     name: "Tryxer Mute",
@@ -26,7 +25,6 @@ module.exports = class Mute extends Command {
                     permissions: 0
                 }
             });
-        }
 
         message.guild.channels.cache
             .filter((c) => c.manageable)

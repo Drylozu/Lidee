@@ -24,22 +24,22 @@ module.exports = class Experiment extends Command {
 
         let i = 0;
         let interval = setInterval(() => {
-            embed.setTitle(`Memorize: ${correctAnswer[i]}`)
-            msg.edit(embed)
+            embed.setTitle(`Memorize: ${correctAnswer[i]}`);
+            msg.edit(embed);
             i++;
             if (i >= correctAnswer.length) {
                 clearInterval(interval);
                 setTimeout(function () {
-                    embed.setTitle(`Clickea en los emojis correspondientes`)
-                    msg.edit(embed)
-                    let applied = []
+                    embed.setTitle(`Clickea en los emojis correspondientes`);
+                    msg.edit(embed);
+                    let applied = [];
                     for (let it = 0; it < (possibleFigures.length - 5) + level; it++) {
-                        msg.react(possibleFigures[it])
+                        msg.react(possibleFigures[it]);
                         applied.push(possibleFigures[it]);
                     }
                     for (let ite = 0; ite < correctAnswer.length; ite++) {
                         if (!applied.includes(correctAnswer[ite])) {
-                            msg.react(correctAnswer[ite])
+                            msg.react(correctAnswer[ite]);
                         }
                     }
                 }, 1000);
@@ -59,32 +59,31 @@ module.exports = class Experiment extends Command {
             if (!possibleFigures.includes(emojis.emoji.name)) return;
             if (emojis.emoji.name == correctAnswer[x]) {
                 answer += emojis.emoji.name;
-                embed.setDescription(`${answer}`)
-                msg.edit(embed)
+                embed.setDescription(`${answer}`);
+                msg.edit(embed);
                 x++;
                 if (x >= correctAnswer.length) {
-                    embed.setTitle("Congratulations! has resuelto esto :D")
-                    embed.setDescription(":tada: :tada:")
-                    msg.edit(embed)
-                    collector.stop()
+                    embed.setTitle("Congratulations! has resuelto esto :D");
+                    embed.setDescription(":tada: :tada:");
+                    msg.edit(embed);
+                    collector.stop();
                 }
             } else {
                 vidas--;
                 if (vidas == 0) {
-                    embed.setTitle("Has perdido :(")
-                    embed.setDescription("Lose Game")
-                    msg.edit(embed)
-                    collector.stop()
+                    embed.setTitle("Has perdido :(");
+                    embed.setDescription("Lose Game");
+                    msg.edit(embed);
+                    collector.stop();
                 }
             }
-        })
+        });
 
         collector.on("end", (collected) => {
             setTimeout(() => {
-                message.delete()
-                msg.delete()
+                message.delete();
+                msg.delete();
             }, 10000);
-        })
-
+        });
     }
 }

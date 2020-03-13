@@ -1,12 +1,6 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 const Tryxer = require("./structures/Tryxer.js");
-
 const bot = new Tryxer({
-    ws: {
-        properties: {
-            $browser: "Discord iOS"
-        }
-    },
     botConfig: {
         token: process.env.botToken,
         ownersId: process.env.ownersId,

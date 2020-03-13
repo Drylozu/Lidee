@@ -23,7 +23,7 @@ module.exports = class Tryxer extends Client {
             } else this.log("MongoDB Ready!");
         });
 
-        this.db = require("../utils/database.js");
+        this.db = require("../utils/databases.js");
 
         this.loadCommands();
         this.loadEvents();
@@ -33,14 +33,14 @@ module.exports = class Tryxer extends Client {
 
     loadEvents() {
         for (let file of fs.readdirSync(path.join(__dirname, "../events/"))) {
-            let event = new(require(`../events/${file}`))(this);
+            let event = new (require(`../events/${file}`))(this);
             this.on(file.split(".")[0], (...args) => event.run(...args));
         }
     }
 
     loadCommands() {
         for (let file of fs.readdirSync(path.join(__dirname, "../cmds/"))) {
-            let command = new(require(`../cmds/${file}`))(this);
+            let command = new (require(`../cmds/${file}`))(this);
             this.commands.set(command.name, command);
         }
     }

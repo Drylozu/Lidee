@@ -16,7 +16,7 @@ module.exports = class Unmute extends Command {
         if (!member) return message.channel.send("You need to mention an user or provide his ID.");
 
         let role = message.guild.roles.cache.find(r => r.name === "Tryxer Mute");
-        if (!role) {
+        if (!role)
             role = await message.guild.roles.create({
                 data: {
                     name: "Tryxer Mute",
@@ -25,13 +25,17 @@ module.exports = class Unmute extends Command {
                     permissions: 0
                 }
             });
-            message.guild.channels.cache.filter(channel => channel.manageable).forEach((channel) => {
-                channel.updateOverwrite([{
-                    id: role.id,
-                    deny: ["SEND_MESSAGES", "ADD_REACTIONS"],
-                }, ], 'Needed to change permissions')
+
+        message.guild.channels.cache
+            .filter((c) => c.manageable)
+            .forEach((channel) => {
+                if (!channel.permissionOverwrites.get(role.id).deny.has("SEND_MESSAGES") ||
+                    !channel.permissionOverwrites.get(role.id).deny.has("ADD_REACTIONS"))
+                    channel.createOverwrite(role.id, {
+                        SEND_MESSAGES: false,
+                        ADD_REACTIONS: false
+                    });
             });
-        }
 
         if (!member.roles.cache.has(role.id)) return message.channel.send("That member is not muted!");
         await member.roles.remove(role.id);

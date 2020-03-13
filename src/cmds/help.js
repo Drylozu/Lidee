@@ -10,40 +10,62 @@ module.exports = class Help extends Command {
     }
 
     async run(message) {
+        let moderationCommands =
+            this.client.commands
+                .filter((c) => c.category == "Moderation")
+                .map((c) => `\`${c.name}\` » ${c.description}`);
+        let prototypeCommands =
+            this.client.commands
+                .filter((c) => c.category == "Prototype")
+                .map((c) => `\`${c.name}\` » ${c.description}`);
+
+        let page = 0;
+        let pages = [
+            ["Help", "Moderation Commands", "Experimental Commands"],
+            ["Hello, I'm Tryxer.\n\nThis is a useful bot.", `In this category are \`${moderationCommands.length}\` command, these are:\n\n${moderationCommands.join("\n")}`, `**Note**: these commands are in development, may contain errors.\n\nIn this category are \`${prototypeCommands.length}\` command, these are:\n\n${prototypeCommands.join("\n")}`]]
 
         let msg = await message.channel.send(new MessageEmbed()
-            .setTitle("Help")
-            .setDescription("React with the category that you wanna see\n<:moderation:682792050101453088> » Moderation\n<:prototype:683123994265780285> » Prototype")
+            .setTitle(pages[0][page])
+            .setDescription(pages[1][page])
+            .setFooter(`Page ${page + 1}/${pages[0].length}`)
+            .setColor(0x7777ff)
             .setTimestamp());
+        await msg.react("◀️");
+        await msg.react("🟥");
+        await msg.react("▶️");
 
-        msg.react("682792050101453088");
-        msg.react("683123994265780285");
+        let collector = msg.createReactionCollector(
+            (r, u) => ["◀️", "🟥", "▶️"].includes(r.emoji.name) && u.id === message.author.id,
+            { time: 60000 });
 
-        const filter = (emojis, usuario) => (emojis.emoji.id == "682792050101453088" || emojis.emoji.id == "683123994265780285") && usuario.id === message.author.id;
-        const collector = msg.createReactionCollector(filter, {
-            time: 1000000
+        collector.on("collect", (r, u) => {
+            r.users.remove(message.author)
+                .catch(() => { });
+            if (r.emoji.name === "▶️") {
+                if ((page + 1) > (pages[0].length - 1)) return;
+                page++;
+                msg.edit(new MessageEmbed()
+                    .setTitle(pages[0][page])
+                    .setDescription(pages[1][page])
+                    .setFooter(`Page ${page + 1}/${pages[0].length}`)
+                    .setColor(0x7777ff)
+                    .setTimestamp());
+            } else if (r.emoji.name === "◀️") {
+                if ((page - 1) < 0) return;
+                page--;
+                msg.edit(new MessageEmbed()
+                    .setTitle(pages[0][page])
+                    .setDescription(pages[1][page])
+                    .setFooter(`Page ${page + 1}/${pages[0].length}`)
+                    .setColor(0x7777ff)
+                    .setTimestamp());
+            } else if (r.emoji.name === "🟥") {
+                collector.stop();
+            }
         });
-        collector.on("collect", (emojis) => {
-            if (emojis.emoji.id == "682792050101453088") {
-                let moderationCommands =
-                    this.client.commands
-                        .filter((c) => c.category == "Moderation")
-                        .map((c) => `● \`${c.name}\` » ${c.description}`);
-                msg.edit(new MessageEmbed()
-                    .setTitle("Help - Moderation Commands")
-                    .setDescription(`In this category are \`${moderationCommands.length}\` command, these are:\n${moderationCommands.join("\n")}`));
-                emojis.users.remove(message.author.id);
-            }
-            if (emojis.emoji.id == "683123994265780285") {
-                let prototypeCommands =
-                    this.client.commands
-                        .filter((c) => c.category == "Prototype")
-                        .map((c) => `● \`${c.name}\` » ${c.description}`);
-                msg.edit(new MessageEmbed()
-                    .setTitle("Help - Prototype Commands")
-                    .setDescription(`**Note**: these commands are in development, may contain errors.\nIn this category are \`${prototypeCommands.length}\` command, these are:\n${prototypeCommands.join("\n")}`));
-                emojis.users.remove(message.author.id);
-            }
+
+        collector.on("end", () => {
+            msg.delete();
         });
     }
 }
