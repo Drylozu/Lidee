@@ -1,4 +1,34 @@
-//const { Collection } = require("discord.js");
+/*
+Permissions: {
+  CREATE_INSTANT_INVITE
+  KICK_MEMBERS
+  BAN_MEMBERS
+  ADMINISTRATOR
+  MANAGE_CHANNELS
+  MANAGE_GUILD
+  ADD_REACTIONS
+  READ_MESSAGES
+  SEND_MESSAGES
+  SEND_TTS_MESSAGES
+  MANAGE_MESSAGES
+  EMBED_LINKS
+  ATTACH_FILES
+  READ_MESSAGE_HISTORY
+  MENTION_EVERYONE
+  EXTERNAL_EMOJIS
+  CONNECT
+  SPEAK
+  MUTE_MEMBERS
+  DEAFEN_MEMBERS
+  MOVE_MEMBERS
+  USE_VAD
+  CHANGE_NICKNAME
+  MANAGE_NICKNAMES
+  MANAGE_ROLES_OR_PERMISSIONS
+  MANAGE_WEBHOOKS
+  MANAGE_EMOJIS
+}
+ */
 
 module.exports = class Command {
     constructor(client, options) {
@@ -22,52 +52,48 @@ module.exports = class Command {
 
     validate({ message }) {
         let conditionals = {
-            ownerOnly: "none",
-            userPermissions: "none",
-            botPermissions: "none",
-            nsfw: "none"
+            ownerOnly: false,
+            userPermissions: false,
+            botPermissions: false,
+            nsfw: false
         };
 
         if (this.ownerOnly)
-            if (this.client.ownersId.includes(message.author.id)) conditionals.ownerOnly = "yes";
-            else conditionals.ownerOnly = "no";
+            if (!this.client.ownersId.includes(message.author.id)) conditionals.ownerOnly = true;
 
         if (this.userPermissions.length > 0)
-            if (message.member.hasPermission(this.userPermissions)) conditionals.userPermissions = "yes";
-            else {
+            if (!message.member.hasPermission(this.userPermissions)) {
                 message.channel.send("You don't have permission to execute this command.");
-                conditionals.userPermissions = "no";
+                conditionals.userPermissions = true;
             }
 
         if (this.botPermissions.length > 0)
-            if (message.guild.me.hasPermission(this.botPermissions)) conditionals.botPermissions = "yes";
-            else {
+            if (!message.guild.me.hasPermission(this.botPermissions)) {
+                conditionals.botPermissions = true;
                 message.channel.send("I don't have permission to execute this command.");
-                conditionals.botPermissions = "no";
             }
 
         if (this.nsfw)
-            if (message.channel.nsfw) conditionals.nsfw = "yes";
-            else {
+            if (!message.channel.nsfw) {
                 message.channel.send("This command must be executed in a NSFW channel.");
-                conditionals.nsfw = "no";
+                conditionals.nsfw = true
             }
 
-        /*
-        if (this.cooldown > 0)
-            if (!this.usersCooldown.has(message.author.id)) {
-                this.usersCooldown.set(message.author.id, Date.now());
+            /*
+            if (this.cooldown > 0)
+                if (!this.usersCooldown.has(message.author.id)) {
+                    this.usersCooldown.set(message.author.id, Date.now());
 
-                setTimeout(() => {
-                    this.usersCooldown.delete(message.author.id);
-                }, this.cooldown);
+                    setTimeout(() => {
+                        this.usersCooldown.delete(message.author.id);
+                    }, this.cooldown);
 
-                conditionals.cooldown = true;
-            } else {
-                message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
-                conditionals.cooldown = false;
-            }
-        */
+                    conditionals.cooldown = true;
+                } else {
+                    message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
+                    conditionals.cooldown = false;
+                }
+            */
 
         return conditionals;
     }

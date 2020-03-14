@@ -35,13 +35,15 @@ module.exports = class EventMessage {
                 }, 2500);
             } else
                 return message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
-                
+
             cmdFile.prepare({ guild });
             let cmdValids = cmdFile.validate({ message });
-            if (cmdValids.ownerOnly === "no") return;
-            //if (cmdValids.cooldown && !cmdValids.ownerOnly) return;
-            if (cmdValids.userPermissions === "no") return;
-            if (cmdValids.botPermissions === "no") return;
+            if (cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
+            // if (cmdValids.ownerOnly) return;
+            // if (cmdValids.cooldown && !cmdValids.ownerOnly) return;
+            // if (cmdValids.userPermissions) return;
+            // if (cmdValids.botPermissions) return;
+            console.log(cmdValids)
             cmdFile.run(message, args);
         } catch (e) {
             err = true;
