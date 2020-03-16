@@ -1,4 +1,5 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
+
 const Tryxer = require("./structures/Tryxer.js");
 const bot = new Tryxer({
     botConfig: {

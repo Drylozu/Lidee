@@ -26,24 +26,10 @@ module.exports = class EventMessage {
         try {
             let cmdFile = this.client.commands.find((c) => c.name === cmd || c.aliases.includes(cmd));
             if (!cmdFile) return;
-
-            if (!this.usersCooldown.has(message.author.id)) {
-                this.usersCooldown.set(message.author.id, Date.now());
-
-                setTimeout(() => {
-                    this.usersCooldown.delete(message.author.id);
-                }, 2500);
-            } else
-                return message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
-
             cmdFile.prepare({ guild });
+            let cooldowned = this.handleCooldown({ message });
             let cmdValids = cmdFile.validate({ message });
-            if (cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
-            // if (cmdValids.ownerOnly) return;
-            // if (cmdValids.cooldown && !cmdValids.ownerOnly) return;
-            // if (cmdValids.userPermissions) return;
-            // if (cmdValids.botPermissions) return;
-            console.log(cmdValids)
+            if (cooldowned || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
             cmdFile.run(message, args);
         } catch (e) {
             err = true;
@@ -51,5 +37,16 @@ module.exports = class EventMessage {
         } finally {
             this.client.log(`${message.author.tag} ran the command ${cmd} in ${message.guild.name}`, err);
         }
+    }
+
+    handleCooldown({ message }) {
+        if (!this.usersCooldown.has(message.author.id)) {
+            this.usersCooldown.set(message.author.id, Date.now());
+
+            setTimeout(() => {
+                this.usersCooldown.delete(message.author.id);
+            }, 3000);
+        } else
+            return message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
     }
 }

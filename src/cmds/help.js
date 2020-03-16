@@ -22,7 +22,7 @@ module.exports = class Help extends Command {
         let page = 0;
         let pages = [
             ["Help", "Moderation Commands", "Experimental Commands"],
-            ["Hello, I'm Tryxer.\n\nThis is a useful bot.", `In this category are \`${moderationCommands.length}\` command, these are:\n\n${moderationCommands.join("\n")}`, `**Note**: these commands are in development, may contain errors.\n\nIn this category are \`${prototypeCommands.length}\` command, these are:\n\n${prototypeCommands.join("\n")}`]]
+            [this.lang.get("help"), this.lang.get("helpModeration", moderationCommands.length, moderationCommands.join("\n")), this.lang.get("helpPrototype", prototypeCommands.length, prototypeCommands.join("\n"))]]
 
         let msg = await message.channel.send(new MessageEmbed()
             .setTitle(pages[0][page])

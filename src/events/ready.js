@@ -6,7 +6,7 @@ module.exports = class EventReady {
     run() {
         this.client.log("Bot Ready!");
         this.client.user.setPresence({
-            status: "idle",
+            status: "online",
             activity: {
                 name: "commands",
                 type: "WATCHING"

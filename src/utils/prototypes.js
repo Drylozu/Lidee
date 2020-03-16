@@ -16,4 +16,8 @@ module.exports = () => {
 
         return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     };
+
+    String.prototype.capitalize = () => {
+        return this.replace(/^[a-z]/gi, (v) => v.toUpperCase());
+    };
 }
