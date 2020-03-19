@@ -10,7 +10,7 @@ let guildSchema = new Schema({
     },
     language: {
         type: String,
-        default:"English"
+        default: "en"
     }
 });
 

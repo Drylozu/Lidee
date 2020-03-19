@@ -2,10 +2,6 @@ const Language = require("../structures/Language.js");
 
 module.exports = class Spanish extends Language {
     constructor() {
-        this.displayName = "spanish";
-        this.nativeName = "español";
-        this.languageCode = "es";
-        
         super({
             // Global
             userNo: `Debes mencionar un usuario o colocar su ID.`,
@@ -38,5 +34,9 @@ module.exports = class Spanish extends Language {
             descriptionPrototype: (count, commands) => `**Nota**: estos comandos están en desarrollo, pueden contener errores.\n\nEn esta categoría hay \`${count}\` comandos, esos son:\n\n${commands}`
             // Description's Commands
         });
+
+        this.displayName = "spanish";
+        this.nativeName = "español";
+        this.languageCode = "es";
     }
 }

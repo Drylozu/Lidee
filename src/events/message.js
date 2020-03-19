@@ -33,7 +33,7 @@ module.exports = class EventMessage {
             cmdFile.run(message, args);
         } catch (e) {
             err = true;
-            this.client.log(e.toString(), true);
+            this.client.log(e.stack, true);
         } finally {
             this.client.log(`${message.author.tag} ran the command ${cmd} in ${message.guild.name}`, err);
         }
