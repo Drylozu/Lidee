@@ -5,24 +5,34 @@ module.exports = class Help extends Command {
     constructor(client) {
         super(client, {
             name: "help",
-            aliases: ["h"]
+            aliases: ["h"],
+            category: "Information"
         });
     }
 
     async run(message) {
         let moderationCommands =
             this.client.commands
-                .filter((c) => c.category == "Moderation")
-                .map((c) => `\`${c.name}\` » ${c.description}`);
+                .filter((c) => c.category == 1)
+                .map((c) => `\`${c.name}\` » ${this.lang.getHelp(c.name)}`);
         let prototypeCommands =
             this.client.commands
-                .filter((c) => c.category == "Prototype")
-                .map((c) => `\`${c.name}\` » ${c.description}`);
+                .filter((c) => c.category == 0)
+                .map((c) => `\`${c.name}\` » ${this.lang.getHelp(c.name)}`);
 
         let page = 0;
         let pages = [
-            ["Help", "Moderation Commands", "Experimental Commands"],
-            [this.lang.get("help"), this.lang.get("helpModeration", moderationCommands.length, moderationCommands.join("\n")), this.lang.get("helpPrototype", prototypeCommands.length, prototypeCommands.join("\n"))]]
+            [
+                this.lang.getHelp("titleHelp"),
+                this.lang.getHelp("titleModeration"),
+                this.lang.getHelp("titlePrototype")
+            ],
+            [
+                this.lang.getHelp("descriptionHelp", client.user.username),
+                this.lang.getHelp("descriptionModeration", moderationCommands.length, moderationCommands.join("\n")),
+                this.lang.getHelp("descriptionPrototype", prototypeCommands.length, prototypeCommands.join("\n"))
+            ]
+        ];
 
         let msg = await message.channel.send(new MessageEmbed()
             .setTitle(pages[0][page])

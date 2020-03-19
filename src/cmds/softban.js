@@ -5,7 +5,6 @@ module.exports = class Softban extends Command {
         super(client, {
             name: "softban",
             category: "Moderation",
-            description: "No Provided...",
             botPermissions: ["BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"]
         });
@@ -14,17 +13,17 @@ module.exports = class Softban extends Command {
     run(message, args) {
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
         let banDays = parseInt(args[1]);
-        if (!member) return message.channel.send("You need to mention an user or provide his ID.");
-        if (!member.bannable) return message.channel.send("I don't able to ban that member.");
+        if (!member) return message.channel.send(this.lang.get("userNo"));
+        if (!member.bannable) return message.channel.send(this.lang.get("banNo"));
 
         message.guild.members.ban(member.id, {
             days: banDays && banDays > 0 ? banDays : 1,
-            reason: `${message.author.tag}.${args.slice(1).join(" ").length > 0 ? ` ${args.slice(1).join(" ")}` : ""}`
+            reason: `${message.author.tag}.${args.slice(2).join(" ").length > 0 ? ` ${args.slice(2).join(" ")}` : ""}`
         }).then(() => {
-            message.channel.send(`The member **${member.user.tag}** has been banned from the server.`)
+            message.channel.send(this.lang.get("ban", member.user.tag));
         }).catch((e) => {
             this.client.log(e.toString(), true);
-            message.channel.send("An error ocurred while banning the member.");
+            message.channel.send(this.lang.get("banError"));
         });
     }
 }

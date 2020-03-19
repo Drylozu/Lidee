@@ -1,7 +1,8 @@
 module.exports = class Language {
-    constructor(strings, constants) {
-        this.strings = strings;
-        this.constants = constants;
+    constructor(strings, constants, help) {
+        Object.defineProperty(this, "strings", { value: strings });
+        Object.defineProperty(this, "constants", { value: constants });
+        Object.defineProperty(this, "help", { value: help });
     }
 
     get(string, ...args) {
@@ -13,7 +14,15 @@ module.exports = class Language {
     }
 
     getConstant(string, ...args) {
-        let value = this.strings[string];
+        let value = this.constants[string];
+        if (typeof value === "function")
+            return value(...args);
+        else
+            return value;
+    }
+
+    getHelp(string, ...args) {
+        let value = this.help[string];
         if (typeof value === "function")
             return value(...args);
         else

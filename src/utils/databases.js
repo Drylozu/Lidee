@@ -7,6 +7,10 @@ let guildSchema = new Schema({
     prefix: {
         type: String,
         default: "t?"
+    },
+    language: {
+        type: String,
+        default:"English"
     }
 });
 

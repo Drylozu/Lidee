@@ -5,7 +5,6 @@ module.exports = class Experiment extends Command {
     constructor(client) {
         super(client, {
             name: "experiment",
-            description: "A memory game in development",
             category: "Prototype"
         });
     }

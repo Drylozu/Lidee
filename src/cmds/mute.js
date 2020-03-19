@@ -5,7 +5,6 @@ module.exports = class Mute extends Command {
         super(client, {
             name: "mute",
             category: "Moderation",
-            description: "Mutes a member in the server",
             botPermissions: ["MANAGE_ROLES"],
             userPermissions: ["MANAGE_ROLES"]
         });
@@ -13,7 +12,7 @@ module.exports = class Mute extends Command {
 
     async run(message, args) {
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
-        if (!member) return message.channel.send("You need to mention an user or provide his ID.");
+        if (!member) return message.channel.send(this.lang.get("userNo"));
 
         let role = message.guild.roles.cache.find(r => r.name === "Tryxer Mute");
         if (!role)
@@ -37,8 +36,8 @@ module.exports = class Mute extends Command {
                     });
             });
 
-        if (member.roles.cache.has(role.id)) return message.channel.send("That member is already muted!");
+        if (member.roles.cache.has(role.id)) return message.channel.send(this.lang.get("muteNo"));
         await member.roles.add(role.id);
-        message.channel.send(`The member **${member.user.tag}** has been muted from the server.`);
+        message.channel.send(this.lang.get("mute", member.user.tag));
     }
 }

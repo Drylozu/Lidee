@@ -1,5 +1,6 @@
 require("../utils/prototypes.js")();
 const { Client, Collection } = require("discord.js");
+const LanguageManager = require("./Languages.js");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
@@ -24,6 +25,8 @@ module.exports = class Tryxer extends Client {
         });
 
         this.db = require("../utils/databases.js");
+        this.languages = new LanguageManager();
+        this.languages.loadLanguages(path.join(__dirname, "../languages/"));
 
         this.loadCommands();
         this.loadEvents();

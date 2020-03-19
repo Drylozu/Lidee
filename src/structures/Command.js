@@ -5,15 +5,14 @@ module.exports = class Command {
         this.aliases = options.alises || [];
         this.nsfw = options.nsfw || false;
         this.ownerOnly = options.ownerOnly || false;
-        this.category = options.category;
+        this.category = options.category || -1;
         this.botPermissions = options.botPermissions || [];
         this.userPermissions = options.userPermissions || [];
-        this.description = options.description || "This command doesn't have description yet.";
     }
 
     prepare({ guild }) {
         this.guild = guild;
-        //this.lang = new (require(`../languages/${this.guild.language.capitalize()}.js`))();
+        this.lang = this.client.languages.get(this.guild.language);
     }
 
     validate({ message }) {

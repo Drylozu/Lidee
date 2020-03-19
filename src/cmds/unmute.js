@@ -5,7 +5,6 @@ module.exports = class Unmute extends Command {
         super(client, {
             name: "unmute",
             category: "Moderation",
-            description: "Unmutes a member in the server",
             botPermissions: ["MANAGE_ROLES"],
             userPermissions: ["MANAGE_ROLES"]
         });
@@ -13,7 +12,7 @@ module.exports = class Unmute extends Command {
 
     async run(message, args) {
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
-        if (!member) return message.channel.send("You need to mention an user or provide his ID.");
+        if (!member) return message.channel.send(this.lang.get("userNo"));
 
         let role = message.guild.roles.cache.find(r => r.name === "Tryxer Mute");
         if (!role)
@@ -37,8 +36,8 @@ module.exports = class Unmute extends Command {
                     });
             });
 
-        if (!member.roles.cache.has(role.id)) return message.channel.send("That member is not muted!");
+        if (!member.roles.cache.has(role.id)) return message.channel.send(this.lang.get("unmuteNo"));
         await member.roles.remove(role.id);
-        message.channel.send(`The member **${member.user.tag}** has been unmuted from the server.`);
+        message.channel.send(this.lang.get("unmute"));
     }
 }
