@@ -30,19 +30,19 @@ module.exports = class Command {
         if (this.userPermissions.length > 0)
             if (!message.member.hasPermission(this.userPermissions)) {
                 conditionals.userPermissions = true;
-                message.channel.send("You don't have permission to execute this command.");
+                message.channel.send(this.lang.get("userPerms", this.userPermissions));
             }
 
         if (this.botPermissions.length > 0)
             if (!message.guild.me.hasPermission(this.botPermissions)) {
                 conditionals.botPermissions = true;
-                message.channel.send("I don't have permission to execute this command.");
+                message.channel.send(this.lang.get("botPerms", this.botPermissions));
             }
 
         if (this.nsfw)
             if (!message.channel.nsfw) {
                 conditionals.nsfw = true;
-                message.channel.send("This command must be executed in a NSFW channel.");
+                message.channel.send(this.lang.get("nsfwChannel"));
             }
 
         return conditionals;

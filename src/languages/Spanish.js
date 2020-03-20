@@ -5,6 +5,9 @@ module.exports = class Spanish extends Language {
         super({
             // Global
             userNo: `Debes mencionar un usuario o colocar su ID.`,
+            userPerms: (permission) => `Necesitas el permiso ${permission} para ejecutar este comando.`,
+            botPerms: (permission) => `Requiero el permiso ${permission} para ejecutar este comando.`,
+            nsfwChannel: `Este comando solo esta disponible en canales NSFW.`,
             // Ban Command
             banNo: `No puedo banear a ese miembro.`,
             ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,
