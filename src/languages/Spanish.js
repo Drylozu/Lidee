@@ -5,8 +5,8 @@ module.exports = class Spanish extends Language {
         super({
             // Global
             userNo: `Debes mencionar un usuario o colocar su ID.`,
-            userPerms: (permission) => `Debes tener el permiso de \`${this.getConstant("permissions")[permission]}\` para ejecutar este comando.`,
-            botPerms: (permission) => `Debo tener el permiso de \`${this.getConstant("permissions")[permission]}\` para ejecutar este comando.`,
+            userPerms: (permission) => `Debes tener el permiso de \`${this.getConstant("permissions", permission)}\` para ejecutar este comando.`,
+            botPerms: (permission) => `Debo tener el permiso de \`${this.getConstant("permissions", permission)}\` para ejecutar este comando.`,
             nsfwChannel: `Este comando solo esta disponible en canales NSFW.`,
             cooldown: (time) => `Debes esperar ${time} segundos para ejecutar este comando.`,
             // Ban Command
@@ -64,12 +64,10 @@ module.exports = class Spanish extends Language {
             }
         }, {
             // Help Command
-            titleHelp: `Ayuda`,
-            descriptionHelp: (name) => `Holaaa, me llaman ${name}.\n\nSoy un bot de utilidad.`,
-            titleModeration: `Comandos de moderación`,
-            descriptionModeration: (count, commands) => `En esta categoría hay \`${count}\` comndos, esos son:\n\n${commands}`,
-            titlePrototype: `Comandos experimentales`,
-            descriptionPrototype: (count, commands) => `**Nota**: estos comandos están en desarrollo, pueden contener errores.\n\nEn esta categoría hay \`${count}\` comandos, esos son:\n\n${commands}`
+            title: `Ayuda`,
+            description: (name, prefix) => `Holaaaa, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\`.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.`,
+            categories: ["Información", "Entretenimiento", "Administración", "NSFW"],
+            footer: (count) => `${count} comandos disponibles`
             // Description's Commands
         });
 

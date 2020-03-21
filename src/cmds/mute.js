@@ -4,7 +4,7 @@ module.exports = class Mute extends Command {
     constructor(client) {
         super(client, {
             name: "mute",
-            category: 1,
+            category: 3,
             botPermissions: ["MANAGE_ROLES"],
             userPermissions: ["MANAGE_ROLES"]
         });

@@ -4,7 +4,7 @@ module.exports = class Ban extends Command {
     constructor(client) {
         super(client, {
             name: "ban",
-            category: 1,
+            category: 3,
             botPermissions: ["BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"]
         });

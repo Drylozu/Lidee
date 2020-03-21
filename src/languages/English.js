@@ -64,13 +64,13 @@ module.exports = class English extends Language {
             }
         }, {
             // Help Command
-            titleHelp: `Help`,
-            descriptionHelp: (name) => `Hello, I'm ${name}.\n\nI'm a useful bot.`,
-            titleModeration: `Moderation Commands`,
-            descriptionModeration: (count, commands) => `In this category are \`${count}\` command, these are:\n\n${commands}`,
-            titlePrototype: `Prototype Commands`,
-            descriptionPrototype: (count, commands) => `**Note**: these commands are in development, may contain errors.\n\nIn this category are \`${count}\` command, these are:\n\n${commands}`
+            title: `Help`,
+            description: (name, prefix) => `Hello~, I'm ${name}. I'm here to help you in everything you wanna do, you can get information about the server and/or of an user, you can also have a lot of fun playing games incorporated in me with your friends or just execute the administrative part.\n\nMy prefix in this server is \`${prefix}\`.\nBelow you will find different categories with the different commands I have available, each one of them starts with the previously mentioned prefix.`,
+            categories: ["Information", "Entertainment", "Administration", "NSFW"],
+            footer: (count) => `${count} commands available`
             // Description's Commands
+
+            // Commands Usage
         });
 
         this.displayName = "english";

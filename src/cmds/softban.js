@@ -4,7 +4,7 @@ module.exports = class Softban extends Command {
     constructor(client) {
         super(client, {
             name: "softban",
-            category: 1,
+            category: 3,
             botPermissions: ["BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"]
         });
