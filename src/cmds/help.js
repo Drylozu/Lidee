@@ -5,8 +5,8 @@ module.exports = class Help extends Command {
     constructor(client) {
         super(client, {
             name: "help",
-            aliases: ["h"],
-            category: "Information"
+            category: 2,
+            aliases: ["h"]
         });
     }
 
@@ -28,7 +28,7 @@ module.exports = class Help extends Command {
                 this.lang.getHelp("titlePrototype")
             ],
             [
-                this.lang.getHelp("descriptionHelp", client.user.username),
+                this.lang.getHelp("descriptionHelp", this.client.user.username),
                 this.lang.getHelp("descriptionModeration", moderationCommands.length, moderationCommands.join("\n")),
                 this.lang.getHelp("descriptionPrototype", prototypeCommands.length, prototypeCommands.join("\n"))
             ]
@@ -48,7 +48,7 @@ module.exports = class Help extends Command {
             (r, u) => ["◀️", "🟥", "▶️"].includes(r.emoji.name) && u.id === message.author.id,
             { time: 60000 });
 
-        collector.on("collect", (r, u) => {
+        collector.on("collect", (r) => {
             r.users.remove(message.author)
                 .catch(() => { });
             if (r.emoji.name === "▶️") {

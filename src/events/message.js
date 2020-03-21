@@ -27,7 +27,7 @@ module.exports = class EventMessage {
             let cmdFile = this.client.commands.find((c) => c.name === cmd || c.aliases.includes(cmd));
             if (!cmdFile) return;
             cmdFile.prepare({ guild });
-            let cooldowned = this.handleCooldown({ message });
+            let cooldowned = this.handleCooldown({ message, cmd });
             let cmdValids = cmdFile.validate({ message });
             if (cooldowned || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
             cmdFile.run(message, args);
@@ -39,7 +39,7 @@ module.exports = class EventMessage {
         }
     }
 
-    handleCooldown({ message }) {
+    handleCooldown({ message, cmd }) {
         if (!this.usersCooldown.has(message.author.id)) {
             this.usersCooldown.set(message.author.id, Date.now());
 
@@ -47,6 +47,6 @@ module.exports = class EventMessage {
                 this.usersCooldown.delete(message.author.id);
             }, 3000);
         } else
-            return message.channel.send(`You need wait ${((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)} seconds to execute this command.`);
+            return message.channel.send(cmd.lang.get("cooldown", ((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)));
     }
 }

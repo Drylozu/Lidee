@@ -1,5 +1,5 @@
 module.exports = () => {
-    Array.prototype.getRandom = (quantity) => {
+    Array.prototype.getRandom = function (quantity) {
         if (isNaN(quantity)) return this[Math.floor(Math.random() * this.length)];
 
         let elements = [];
@@ -10,14 +10,18 @@ module.exports = () => {
         return elements;
     };
 
-    Number.random = (minimum, maximum) => {
+    Number.random = function (minimum, maximum) {
         if (isNaN(minimum) || isNaN(maximum)) return;
         minimum = Math.ceil(minimum), maximum = Math.floor(maximum);
 
         return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     };
 
-    String.prototype.capitalize = () => {
-        return this.replace(/^[a-z]/gi, (v) => v.toUpperCase());
+    String.prototype.firstUpperCase = function () {
+        return this.replace(/^[a-z]/gi, (c) => c.toUpperCase());
+    };
+
+    String.prototype.capitalize = function () {
+        return this.replace(/(?:^|\s)\S/g, (c) => c.toUpperCase());
     };
 }

@@ -4,7 +4,7 @@ module.exports = class Kick extends Command {
     constructor(client) {
         super(client, {
             name: "kick",
-            category: "Moderation",
+            category: 1,
             botPermissions: ["KICK_MEMBERS"],
             userPermissions: ["KICK_MEMBERS"]
         });

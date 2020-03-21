@@ -13,12 +13,16 @@ module.exports = class Language {
             return value;
     }
 
-    getConstant(string, ...args) {
-        let value = this.constants[string];
-        if (typeof value === "function")
-            return value(...args);
-        else
-            return value;
+    getConstant(category, property, ...args) {
+        let object = this.constants[category];
+        if (typeof object === "object") {
+            let value = object[property];
+            if (typeof value === "function")
+                return value(...args);
+            else
+                return value;
+        } else
+            return object;
     }
 
     getHelp(string, ...args) {

@@ -5,9 +5,10 @@ module.exports = class Spanish extends Language {
         super({
             // Global
             userNo: `Debes mencionar un usuario o colocar su ID.`,
-            userPerms: (permission) => `Necesitas el permiso ${permission} para ejecutar este comando.`,
-            botPerms: (permission) => `Requiero el permiso ${permission} para ejecutar este comando.`,
+            userPerms: (permission) => `Debes tener el permiso de \`${this.getConstant("permissions")[permission]}\` para ejecutar este comando.`,
+            botPerms: (permission) => `Debo tener el permiso de \`${this.getConstant("permissions")[permission]}\` para ejecutar este comando.`,
             nsfwChannel: `Este comando solo esta disponible en canales NSFW.`,
+            cooldown: (time) => `Debes esperar ${time} segundos para ejecutar este comando.`,
             // Ban Command
             banNo: `No puedo banear a ese miembro.`,
             ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,
@@ -27,7 +28,41 @@ module.exports = class Spanish extends Language {
             // Unmute Command
             unmuteNo: `¡Ese miembro no está muteado!`,
             unmute: (member) => `El miembro **${member}** ha sido desmuteado del servidor.`
-        }, {}, {
+        }, {
+            permissions: {
+                ADMINISTRATOR: "administrador",
+                CREATE_INSTANT_INVITE: "crear invitación instantánea",
+                KICK_MEMBERS: "expulsar miembros",
+                BAN_MEMBERS: "banear miembros",
+                MANAGE_CHANNELS: "administrar canales",
+                MANAGE_GUILD: "administrar servidor",
+                ADD_REACTIONS: "añadir reacciones",
+                VIEW_AUDIT_LOG: "ver registro de auditoría",
+                PRIORITY_SPEAKER: "hablar prioritariamente",
+                STREAM: "transmitir",
+                VIEW_CHANNEL: "ver canal",
+                SEND_MESSAGES: "enviar mensajes",
+                SEND_TTS_MESSAGES: "enviar mensajes de texto a voz",
+                MANAGE_MESSAGES: "administrar mensajes",
+                EMBED_LINKS: "insertar enlaces",
+                ATTACH_FILES: "adjuntar archivos",
+                READ_MESSAGE_HISTORY: "leer el historial de mensjes",
+                MENTION_EVERYONE: "mencionar a todos",
+                USE_EXTERNAL_EMOJIS: "usar emojis externos",
+                VIEW_GUILD_INSIGHTS: "ver resúmen del servidor",
+                CONNECT: "conectar en canales de voz",
+                SPEAK: "hablar en canales de voz",
+                MUTE_MEMBERS: "silenciar miembros",
+                DEAFEN_MEMBERS: "ensordecer miembros",
+                MOVE_MEMBERS: "mover miembros",
+                USE_VAD: "usar la actividad de voz",
+                CHANGE_NICKNAME: "cambiar apodo",
+                MANAGE_NICKNAMES: "administrar apodos",
+                MANAGE_ROLES: "administrar roles",
+                MANAGE_WEBHOOKS: "administrar webhooks",
+                MANAGE_EMOJIS: "administrar emojis"
+            }
+        }, {
             // Help Command
             titleHelp: `Ayuda`,
             descriptionHelp: (name) => `Holaaa, me llaman ${name}.\n\nSoy un bot de utilidad.`,

@@ -4,8 +4,8 @@ module.exports = class Clearmsg extends Command {
     constructor(client) {
         super(client, {
             name: "clear",
+            category: 1,
             aliases: ["prune"],
-            category: "Moderation",
             botPermissions: ["MANAGE_MESSAGES"],
             userPermissions: ["MANAGE_MESSAGES"]
         });

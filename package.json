@@ -1,25 +1,27 @@
 {
-  "name": "tryxer",
-  "version": "0.1.0",
-  "description": "Super-duper-mega-ultra-epic-legendary-combo bot",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "test": "nodemon src/index.js"
-  },
-  "keywords": [
-    "Epic",
-    "Discord",
-    "Bot"
-  ],
-  "author": "Deivid & Free",
-  "license": "GNU v3",
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  },
-  "dependencies": {
-    "discord.js": "github:discordjs/discord.js",
-    "dotenv": "^8.2.0",
-    "mongoose": "^5.9.2"
-  }
+    "name": "tryxer",
+    "version": "0.1.0",
+    "description": "Super-duper-mega-ultra-epic-legendary-combo bot",
+    "main": "src/index.js",
+    "scripts": {
+        "eslint": "eslint src/",
+        "start": "node src/index.js",
+        "test": "nodemon src/index.js"
+    },
+    "keywords": [
+        "Epic",
+        "Discord",
+        "Bot"
+    ],
+    "author": "Deivid & Free",
+    "license": "GNU v3",
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "nodemon": "^2.0.2"
+    },
+    "dependencies": {
+        "discord.js": "github:discordjs/discord.js",
+        "dotenv": "^8.2.0",
+        "mongoose": "^5.9.2"
+    }
 }

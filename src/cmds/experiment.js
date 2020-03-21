@@ -5,7 +5,7 @@ module.exports = class Experiment extends Command {
     constructor(client) {
         super(client, {
             name: "experiment",
-            category: "Prototype"
+            ownerOnly: true
         });
     }
 
@@ -17,9 +17,11 @@ module.exports = class Experiment extends Command {
         let possibleFigures = ["🎮", "⚽", "🏀", "⚾", "🏈", "🎾", "🎱", "🎸", "🎲", "🎳", "🎰"];
         let correctAnswer = possibleFigures.getRandom(level + 1);
 
-        let msg = await message.channel.send(new MessageEmbed()
+        let embed = new MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
-            .setTitle("Memoriza los emojis y clickea en ellos"));
+            .setTitle("Memoriza los emojis y clickea en ellos");
+
+        let msg = await message.channel.send(embed);
 
         let i = 0;
         let interval = setInterval(() => {
@@ -78,7 +80,7 @@ module.exports = class Experiment extends Command {
             }
         });
 
-        collector.on("end", (collected) => {
+        collector.on("end", () => {
             setTimeout(() => {
                 message.delete();
                 msg.delete();
