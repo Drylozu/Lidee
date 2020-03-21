@@ -1,20 +1,16 @@
 {
-    "name": "tryxer",
-    "version": "0.1.0",
-    "description": "Super-duper-mega-ultra-epic-legendary-combo bot",
+    "name": "maoid",
+    "version": "1.0.0",
+    "description": "Maoid Discord Bot",
+    "author": "Deivid & Free",
     "main": "src/index.js",
+    "license": "GNU v3",
+    "private": true,
     "scripts": {
         "eslint": "eslint src/",
         "start": "node src/index.js",
         "test": "nodemon src/index.js"
     },
-    "keywords": [
-        "Epic",
-        "Discord",
-        "Bot"
-    ],
-    "author": "Deivid & Free",
-    "license": "GNU v3",
     "devDependencies": {
         "eslint": "^6.8.0",
         "nodemon": "^2.0.2"
@@ -23,5 +19,13 @@
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
         "mongoose": "^5.9.2"
+    },
+    "keywords": [
+        "Maoid",
+        "Discord Bot"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BlueGameYT/Maoid.git"
     }
 }

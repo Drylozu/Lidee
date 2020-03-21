@@ -14,11 +14,11 @@ module.exports = class Mute extends Command {
         let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
         if (!member) return message.channel.send(this.lang.get("userNo"));
 
-        let role = message.guild.roles.cache.find(r => r.name === "Tryxer Mute");
+        let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);
         if (!role)
             role = await message.guild.roles.create({
                 data: {
-                    name: "Tryxer Mute",
+                    name: `${this.client.user.username} Mute`,
                     color: 0x010101,
                     position: message.guild.me.roles.cache.sort((a, b) => b.position - a.position).first().position - 1,
                     permissions: 0

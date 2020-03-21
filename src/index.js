@@ -1,7 +1,7 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 
-const Tryxer = require("./structures/Tryxer.js");
-const bot = new Tryxer({
+const Maoid = require("./structures/Maoid.js");
+const bot = new Maoid({
     botConfig: {
         token: process.env.botToken,
         ownersId: process.env.ownersId,

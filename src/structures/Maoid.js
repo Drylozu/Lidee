@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 
-module.exports = class Tryxer extends Client {
+module.exports = class Maoid extends Client {
     constructor(...args) {
         super(...args);
         this.commands = new Collection();
