@@ -1,8 +1,31 @@
+const { Permissions } = require("discord.js");
+
 module.exports = class Language {
     constructor(strings, constants, help) {
         Object.defineProperty(this, "strings", { value: strings });
         Object.defineProperty(this, "constants", { value: constants });
         Object.defineProperty(this, "help", { value: help });
+
+        this.emojis = {
+            serverPartnered: "<:ServerPartnered:690932029797302363>",
+            serverVerified: "<:ServerVerified:690932030464065580>",
+            serverBoosted: "<:ServerBoosted:690932026987249685>",
+            richPresence: "<:RichPresence:690932026290995253>",
+            userBooster: "<a:UserBooster:690932040152907856>",
+            userOwner: "<:UserOwner:690932030145429504>",
+            userBot: "<:UserBot:690932029214162975>",
+            statusMobile: {
+                online: "<:SOnline:690932028908109874>",
+                idle: "<:SIdle:690932031215108106>",
+                dnd: "<:SDnd:690932026844643398>"
+            },
+            status: {
+                invisible: "<a:UInvisible:690932032187924500>",
+                online: "<a:UOnline:690932032812875876>",
+                idle: "<a:UIdle:690932032485982238>",
+                dnd: "<a:UDnd:690932031705579551>"
+            }
+        };
     }
 
     get(string, ...args) {
@@ -31,5 +54,28 @@ module.exports = class Language {
             return value(...args);
         else
             return value;
+    }
+
+    getEmoji(name) {
+        return this.emojis[name];
+    }
+
+    parsePermissions(permissions) {
+        if (permissions.includes("ADMINISTRATOR"))
+            return `\`\`\`fix\n+ ${this.getConstant("permissions", "ADMINISTRATOR").firstUpperCase()}\n\`\`\``;
+        let output = "";
+        let defaultPermissions = new Permissions(Permissions.DEFAULT).toArray();
+        permissions
+            .filter((p) => !defaultPermissions.includes(p)).sort()
+            .forEach((permission) => {
+                output += `+ ${this.getConstant("permissions", permission).firstUpperCase()}\n`;
+            });
+        output += `--- ${this.getConstant("permissions", "default").firstUpperCase()}\n`;
+        defaultPermissions
+            .filter((dP) => !permissions.includes(dP)).sort()
+            .forEach((permission) => {
+                output += `- ${this.getConstant("permissions", permission).firstUpperCase()}\n`;
+            });
+        return `\`\`\`diff\n${output}\n\`\`\``;
     }
 }

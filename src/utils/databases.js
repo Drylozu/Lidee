@@ -6,7 +6,7 @@ let guildSchema = new Schema({
     },
     prefix: {
         type: String,
-        default: "t?"
+        default: "m:"
     },
     language: {
         type: String,

@@ -27,9 +27,12 @@ module.exports = class English extends Language {
             mute: (member) => `The member **${member}** has been muted from the server.`,
             // Unmute Command
             unmuteNo: `That member is not muted!`,
-            unmute: (member) => `The member **${member}** has been unmuted from the server.`
+            unmute: (member) => `The member **${member}** has been unmuted from the server.`,
+            // User Command
+            userPermissions: "User permissions",
         }, {
             permissions: {
+                default: "default permissions",
                 ADMINISTRATOR: "administrator",
                 CREATE_INSTANT_INVITE: "create instant invite",
                 KICK_MEMBERS: "kick members",
@@ -42,7 +45,7 @@ module.exports = class English extends Language {
                 STREAM: "stream",
                 VIEW_CHANNEL: "view channel",
                 SEND_MESSAGES: "send messages",
-                SEND_TTS_MESSAGES: "send text to spech messages",
+                SEND_TTS_MESSAGES: "send TTS messages",
                 MANAGE_MESSAGES: "manage messages",
                 EMBED_LINKS: "embed links",
                 ATTACH_FILES: "attach files",
@@ -68,7 +71,7 @@ module.exports = class English extends Language {
             description: (name, prefix) => `Hello~, I'm ${name}. I'm here to help you in everything you wanna do, you can get information about the server and/or of an user, you can also have a lot of fun playing games incorporated in me with your friends or just execute the administrative part.\n\nMy prefix in this server is \`${prefix}\`.\nBelow you will find different categories with the different commands I have available, each one of them starts with the previously mentioned prefix.`,
             categories: ["Information", "Entertainment", "Administration", "NSFW"],
             footer: (count) => `${count} commands available`
-            // Description's Commands
+            // Commands Description
 
             // Commands Usage
         });

@@ -27,9 +27,13 @@ module.exports = class Spanish extends Language {
             mute: (member) => `El miembro **${member}** ha sido muteado del servidor.`,
             // Unmute Command
             unmuteNo: `¡Ese miembro no está muteado!`,
-            unmute: (member) => `El miembro **${member}** ha sido desmuteado del servidor.`
+            unmute: (member) => `El miembro **${member}** ha sido desmuteado del servidor.`,
+            // User Command
+            userPermissions: "Permisos de usuario",
+
         }, {
             permissions: {
+                default: "permisos por defecto",
                 ADMINISTRATOR: "administrador",
                 CREATE_INSTANT_INVITE: "crear invitación instantánea",
                 KICK_MEMBERS: "expulsar miembros",
