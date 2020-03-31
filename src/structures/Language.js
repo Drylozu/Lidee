@@ -56,6 +56,14 @@ module.exports = class Language {
             return value;
     }
 
+    getTime(string, ...args) {
+        let value = this.help[string];
+        if (typeof value === "function")
+            return value(...args);
+        else
+            return value;
+    }
+
     getEmoji(name) {
         return this.emojis[name];
     }
@@ -79,34 +87,30 @@ module.exports = class Language {
         return `\`\`\`diff\n${output}\n\`\`\``;
     }
 
-    parseMS(milliseconds) {
-        if (typeof milliseconds !== 'number') throw new TypeError('Expected a number');
-
-        const roundTowardsZero = milliseconds > 0 ? Math.floor : Math.ceil;
-
-        const timeObj = {
-            years: roundTowardsZero(milliseconds / 3.154e+10),
-            months: roundTowardsZero(milliseconds / 2.628e+9) % 12,
-            weeks: roundTowardsZero(milliseconds / 6.048e+8) % 4,
-            days: roundTowardsZero(milliseconds / 86400000) % 7,
-            hours: roundTowardsZero(milliseconds / 3600000) % 24,
-            minutes: roundTowardsZero(milliseconds / 60000) % 60,
-            seconds: roundTowardsZero(milliseconds / 1000) % 60,
-            milliseconds: roundTowardsZero(milliseconds) % 1000,
-            microseconds: roundTowardsZero(milliseconds * 1000) % 1000,
-            nanoseconds: roundTowardsZero(milliseconds * 1e6) % 1000
+    parseMiliseconds(milliseconds) {
+        let timeObj = {
+            years: Math.floor(milliseconds / 3.154e+10),
+            months: Math.floor(milliseconds / 2.628e+9) % 12,
+            weeks: Math.floor(milliseconds / 6.048e+8) % 4,
+            days: Math.floor(milliseconds / 86400000) % 7,
+            hours: Math.floor(milliseconds / 3600000) % 24,
+            minutes: Math.floor(milliseconds / 60000) % 60,
+            seconds: Math.floor(milliseconds / 1000) % 60,
+            milliseconds: Math.floor(milliseconds) % 1000,
+            microseconds: Math.floor(milliseconds * 1000) % 1000,
+            nanoseconds: Math.floor(milliseconds * 1e6) % 1000
         };
 
         let time = [
-            timeObj.years ? timeObj.years > 1 ? `${timeObj.years} ${this.get("years")}` : `${timeObj.years} ${this.get("year")}` : false,
-            timeObj.months ? timeObj.months > 1 ? `${timeObj.months} ${this.get("months")}` : `${timeObj.months} ${this.get("month")}` : false,
-            timeObj.weeks ? timeObj.weeks > 1 ? `${timeObj.weeks} ${this.get("weeks")}` : `${timeObj.weeks} ${this.get("week")}` : false,
-            timeObj.days ? timeObj.days > 1 ? `${timeObj.days} ${this.get("days")}` : `${timeObj.days} ${this.get("day")}` : false,
-            timeObj.hours ? timeObj.hours > 1 ? `${timeObj.hours} ${this.get("hours")}` : `${timeObj.hours} ${this.get("hour")}` : false,
-            timeObj.minutes ? timeObj.minutes > 1 ? `${timeObj.minutes} ${this.get("minutes")}` : `${timeObj.minutes} ${this.get("minute")}` : false,
-            timeObj.seconds ? timeObj.seconds > 1 ? `${timeObj.seconds} ${this.get("seconds")}` : `${timeObj.seconds} ${this.get("second")}` : false
-        ]
+            timeObj.years ? this.getTime(`year${timeObj.years > 1 ? "s" : ""}`, timeObj.years) : "",
+            timeObj.months ? this.getTime(`month${timeObj.months > 1 ? "s" : ""}`, timeObj.months) : "",
+            timeObj.weeks ? this.getTime(`week${timeObj.weeks > 1 ? "s" : ""}`, timeObj.weeks) : "",
+            timeObj.days ? this.getTime(`day${timeObj.weeks > 1 ? "s" : ""}`, timeObj.days) : "",
+            timeObj.hours ? this.getTime(`hour${timeObj.hours > 1 ? "s" : ""}`, timeObj.hours) : "",
+            timeObj.minutes ? this.getTime(`minute${timeObj.minutes > 1 ? "s" : ""}`, timeObj.minutes) : "",
+            timeObj.seconds ? this.getTime(`second${timeObj.seconds > 1 ? "s" : ""}`, timeObj.seconds) : ""
+        ];
 
-        return time.filter(x => x).join(', ')
+        return time.filter((t) => t !== "").slice(0, 4).join(", ");
     }
 }

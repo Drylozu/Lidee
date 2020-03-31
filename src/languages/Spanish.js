@@ -30,7 +30,9 @@ module.exports = class Spanish extends Language {
             unmute: (member) => `El miembro **${member}** ha sido desmuteado del servidor.`,
             // User Command
             userPermissions: "Permisos de usuario",
-
+            userCreated: "Cuenta creada el",
+            userJoined: "Entró al servidor el",
+            userRoles: "Roles"
         }, {
             permissions: {
                 default: "permisos por defecto",
@@ -73,6 +75,23 @@ module.exports = class Spanish extends Language {
             categories: ["Información", "Entretenimiento", "Administración", "NSFW"],
             footer: (count) => `${count} comandos disponibles`
             // Description's Commands
+
+            // Commands Usage
+        }, {
+            seconds: "segundos", 
+            second: "segundo",
+            minutes: "minutos", 
+            minute: "minuto", 
+            hours: "horas", 
+            hour: "hora",
+            days: "días", 
+            day: "día",
+            weeks: "weeks", 
+            week: "week",
+            months: "months", 
+            month: "month",
+            years: "years",
+            year: "year"
         });
 
         this.displayName = "spanish";

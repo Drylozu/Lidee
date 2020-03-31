@@ -9,23 +9,6 @@ module.exports = class English extends Language {
             botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions")[permission]}\` to execute this command.`,
             nsfwChannel: `Este comando solo esta disponible en canales NSFW.`,
             cooldown: (time) => `You need wait ${time} seconds to execute this command.`,
-
-            // Time
-            seconds: `seconds`, 
-            second: `second`,
-            minutes: `minutes`, 
-            minute: `minute`, 
-            hours: `hours`, 
-            hour: `hour`,
-            days: `days`, 
-            day: `day`,
-            weeks: `weeks`, 
-            week: `week`,
-            months: `months`, 
-            month: `month`,
-            years: `years`,
-            year: `year`,
-
             // Ban Command
             banNo: `I don't able to ban that member.`,
             ban: (member) => `The member **${member}** has been banned from the server.`,
@@ -47,11 +30,9 @@ module.exports = class English extends Language {
             unmute: (member) => `The member **${member}** has been unmuted from the server.`,
             // User Command
             userPermissions: "User permissions",
-            userCreatedAt: "Account created At",
-
-            // Member
-            memberRoles: "Roles",
-            memberJoinedAt: "Member joined At:",
+            userCreated: "Account created at",
+            userJoined: "Member joined at",
+            userRoles: "Roles"
         }, {
             permissions: {
                 default: "default permissions",
@@ -96,6 +77,21 @@ module.exports = class English extends Language {
             // Commands Description
 
             // Commands Usage
+        }, {
+            seconds: "seconds", 
+            second: "second",
+            minutes: "minutes", 
+            minute: "minute", 
+            hours: "hours", 
+            hour: "hour",
+            days: "days", 
+            day: "day",
+            weeks: "weeks", 
+            week: "week",
+            months: "months", 
+            month: "month",
+            years: "years",
+            year: "year"
         });
 
         this.displayName = "english";
