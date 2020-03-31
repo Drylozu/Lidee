@@ -11,4 +11,4 @@ const bot = new Maoid({
 
 process.on("unhandledRejection", (reason) => {
     bot.log(reason.toString(), true);
-});
+}); //test
