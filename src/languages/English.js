@@ -78,20 +78,20 @@ module.exports = class English extends Language {
 
             // Commands Usage
         }, {
-            seconds: "seconds", 
-            second: "second",
-            minutes: "minutes", 
-            minute: "minute", 
-            hours: "hours", 
-            hour: "hour",
-            days: "days", 
-            day: "day",
-            weeks: "weeks", 
-            week: "week",
-            months: "months", 
-            month: "month",
-            years: "years",
-            year: "year"
+            seconds: (seconds) => `${seconds} seconds`, 
+            second: (second) => `${second} second`,
+            minutes: (minutes) => `${minutes} minutes`, 
+            minute: (minute) => `${minute} minute`, 
+            hours: (hours) => `${hours} hours`, 
+            hour: (hour) => `${hour} hour`,
+            days: (days) => `${days} days`, 
+            day: (day) => `${day} day`,
+            weeks: (weeks) => `${weeks} weeks`, 
+            week: (week) => `${week} week`,
+            months: (months) => `${months} months`, 
+            month: (month) => `${month} month`,
+            years: (years) => `${years} years`,
+            year: (year) => `${year} year`
         });
 
         this.displayName = "english";

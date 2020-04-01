@@ -1,10 +1,11 @@
 const { Permissions } = require("discord.js");
 
 module.exports = class Language {
-    constructor(strings, constants, help) {
+    constructor(strings, constants, help, time) {
         Object.defineProperty(this, "strings", { value: strings });
         Object.defineProperty(this, "constants", { value: constants });
         Object.defineProperty(this, "help", { value: help });
+        Object.defineProperty(this, "time", { value: time })
 
         this.emojis = {
             serverPartnered: "<:ServerPartnered:690932029797302363>",
@@ -57,7 +58,7 @@ module.exports = class Language {
     }
 
     getTime(string, ...args) {
-        let value = this.help[string];
+        let value = this.time[string];
         if (typeof value === "function")
             return value(...args);
         else
