@@ -1,13 +1,15 @@
 const { Collection } = require("discord.js");
+const path = require("path");
 const fs = require("fs");
 
 module.exports = class LanguageManager {
     constructor() {
         Object.defineProperty(this, "languages", { value: new Collection() });
+        this.loadLanguages();
     }
 
-    loadLanguages(dir) {
-        for (let file of fs.readdirSync(dir)) {
+    loadLanguages() {
+        for (let file of fs.readdirSync(path.join(__dirname, "../languages/"))) {
             let language = new (require(`../languages/${file}`))();
             if (this.languages.get(language.languageCode)) return;
             this.languages.set(language.languageCode, language);

@@ -1,4 +1,5 @@
 const Command = require("../structures/Command.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = class Ping extends Command {
     constructor(client) {
@@ -9,6 +10,20 @@ module.exports = class Ping extends Command {
     }
 
     run(message) {
-        message.channel.send(`Pong! ${this.client.ws.ping}ms.`);
+        message.channel.send(new MessageEmbed()
+            .setDescription(this.lang.get("pingCalculating"))
+            .setColor(0x66ff66)
+            .setTimestamp())
+            .then((msg) => {
+                let ping = Math.abs((new Date() - msg.createdAt));
+                let color = 0xff6666;
+                if (ping <= 650)
+                    color = 0xffff66;
+                if (ping <= 150)
+                    color = 0x66ff66;
+                msg.edit(new MessageEmbed(msg.embeds[0])
+                    .setDescription(this.lang.get("ping", ping))
+                    .setColor(color));
+            });
     }
 }

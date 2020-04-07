@@ -11,7 +11,7 @@ module.exports = class Mute extends Command {
     }
 
     async run(message, args) {
-        let member = message.guild.members.cache.get(args[0]) || message.mentions.members.first();
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
         if (!member) return message.channel.send(this.lang.get("userNo"));
 
         let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);

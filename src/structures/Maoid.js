@@ -27,7 +27,6 @@ module.exports = class Maoid extends Client {
         this.db = require("../utils/databases.js");
         
         this.languages = new LanguageManager();
-        this.languages.loadLanguages(path.join(__dirname, "../languages/"));
 
         this.loadCommands();
         this.loadEvents();

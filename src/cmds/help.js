@@ -16,7 +16,7 @@ module.exports = class Help extends Command {
             .setDescription(`>>> ${this.lang.getHelp("description", this.client.user.username, this.guild.prefix)}`)
             .setFooter(this.lang.getHelp("footer", this.client.commands.size))
             .setTimestamp()
-            .setColor(0xff0000);
+            .setColor(0x66ff66);
 
         let cmdsCategories = [];
         for (let i = 0; i < this.lang.getHelp("categories").length; i++)

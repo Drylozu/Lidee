@@ -8,17 +8,15 @@
     "private": true,
     "scripts": {
         "eslint": "eslint src/",
-        "start": "node src/index.js",
-        "test": "nodemon src/index.js"
+        "start": "node src/index.js"
     },
     "devDependencies": {
-        "eslint": "^6.8.0",
-        "nodemon": "^2.0.2"
+        "eslint": "^6.8.0"
     },
     "dependencies": {
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
-        "mongoose": "^5.9.2"
+        "mongoose": "^5.9.7"
     },
     "keywords": [
         "Maoid",

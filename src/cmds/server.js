@@ -10,17 +10,23 @@ module.exports = class Server extends Command {
         });
     }
 
-    run(message, args) {
+    run(message) {
 
         let embed = new MessageEmbed()
-            .setAuthor(message.guild.name, message.guild.iconURL())
-            .setDescription(`> <@${message.guild.ownerID}> ${message.guild.ownerID === message.author.id ? this.lang.getEmoji("userOwner") : ""}`)
-            .addField(this.lang.get("guildCreated"), this.lang.parseMiliseconds(Date.now() - message.guild.createdAt), true)
-            .addField(this.lang.get("guildRoles"), message.guild.roles.cache.filter((r) => r.id != "633379996999876658").sort((a, b) => b.position - a.position).map((r) => `<@&${r.id}>`).join(", "), true)
-            .addField(this.lang.get("afkChannel"), message.guild.afkChannelID ? `<#${message.guild.afkChannelID}` : 'Not Defined', true)
-            .addField(this.lang.get("Emojis"), message.guild.emojis.cache.map((emoji) => `<${emoji.name}:${emoji.id}>`).join(" "))
-            .setColor('0xFFFFFF')
-            .setFooter(`ID: ${message.guild.id}`);
+            .setAuthor(message.guild.nameAcronym, message.guild.iconURL())
+            .setDescription(`> **${message.guild.name}** ${message.guild.verified ? this.lang.getEmoji("serverVerified") : ""}${message.guild.partnered ? this.lang.getEmoji("serverPartner") : ""}${message.guild.premiumSubscriptionCount ? this.lang.getEmoji("serverBoosts")[message.guild.premiumTier] : ""}${message.guild.defaultMessageNotifications === "ALL" ? this.lang.getEmoji("notifyMessages") : this.lang.getEmoji("notifyMentions")}${message.guild.mfaLevel ? this.lang.getEmoji("serverMfa") : ""}${message.guild.vanityURLCode ? `\n**${this.lang.get("serverVanityUrl")}**: ${message.guild.vanityURLCode}` : ""}`)
+            .addField(this.lang.get("serverCreated"), this.lang.parseCompleteDate(message.guild.createdAt))
+            .addField(this.lang.get("serverOwner"), `${this.lang.getEmoji("userOwner")} <@${message.guild.owner.id}> (${this.lang.get("id", message.guild.owner.id)})`);
+        if (message.guild.description)
+            embed.addField(this.lang.get("serverDescription"), message.guild.description);
+        if (message.guild.features.length > 0)
+            embed.addField(this.lang.get("serverFeatures"), this.lang.parseServerFeatures(message.guild.features));
+        if (message.guild.emojis.cache.size > 0)
+            embed.addField(this.lang.get("serverEmojis"), this.lang.parseServerEmojis(message.guild.emojis));
+        embed.addField(this.lang.get("roles", message.guild.roles.cache.filter((r) => r.id !== r.guild.roles.everyone.id).size), this.lang.parseServerRoles(message.guild.roles))
+            .setFooter(this.lang.get("id", message.guild.id))
+            .setColor(0x66ff66)
+            .setTimestamp();
 
         message.channel.send(embed);
     }

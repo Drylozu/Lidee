@@ -8,7 +8,7 @@ module.exports = class EventReady {
         this.client.user.setPresence({
             status: "online",
             activity: {
-                name: "commands",
+                name: `@${this.client.user.tag}`,
                 type: "WATCHING"
             }
         });

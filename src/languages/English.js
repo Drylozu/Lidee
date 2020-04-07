@@ -9,6 +9,10 @@ module.exports = class English extends Language {
             botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions")[permission]}\` to execute this command.`,
             nsfwChannel: `Este comando solo esta disponible en canales NSFW.`,
             cooldown: (time) => `You need wait ${time} seconds to execute this command.`,
+            others: (number) => `and ${number} others more...`,
+            roles: (number) => `Roles (${number})`,
+            id: (id) => `ID: ${id}`,
+            nothing: "Nothing to show...",
             // Ban Command
             banNo: `I don't able to ban that member.`,
             ban: (member) => `The member **${member}** has been banned from the server.`,
@@ -32,7 +36,22 @@ module.exports = class English extends Language {
             userPermissions: "User permissions",
             userCreated: "Account created at",
             userJoined: "Member joined at",
-            userRoles: "Roles"
+            userActivity: "User activity",
+            userBoosting: "Boosting since",
+            // Server Command
+            serverVanityUrl: "Vanity URL",
+            serverCreated: "Server created at",
+            serverOwner: "Server owner",
+            serverVerification: "Verification level",
+            serverExplicitContentFilter: "Explicit media content filter",
+            serverDescription: "Server description",
+            serverFeatures: "Features",
+            serverEmojis: "Server emojis",
+            serverEmojisNormal: "Normal emojis",
+            serverEmojisAnimated: "Animated emojis",
+            // Ping Command
+            pingCalculating: "Pong! *calculating...*",
+            ping: (ms) => `Pong! **${ms}ms**.`
         }, {
             permissions: {
                 default: "default permissions",
@@ -67,6 +86,60 @@ module.exports = class English extends Language {
                 MANAGE_ROLES: "manage roles",
                 MANAGE_WEBHOOKS: "manage webhooks",
                 MANAGE_EMOJIS: "manage emojis"
+            },
+            serverFeatures: {
+                ANIMATED_ICON: "animated icon",
+                BANNER: "banner",
+                COMMERCE: "commerce",
+                DISCOVERABLE: "discoverable",
+                FEATURABLE: "featurable",
+                INVITE_SPLASH: "invite splash",
+                NEWS: "news",
+                PARTNERED: "partnered",
+                PUBLIC: "public",
+                PUBLIC_DISABLED: "public disabled",
+                VANITY_URL: "vanity URL",
+                VERIFIED: "verified",
+                VIP_REGIONS: "VIP regions",
+                WELCOME_SCREEN_ENABLED: "welcome screen enabled"
+            },
+            activities: {
+                PLAYING: "Playing",
+                STREAMING: "Streaming",
+                LISTENING: "Listening",
+                WATCHING: "Watching",
+                CUSTOM_STATUS: "Custom Status"
+            },
+            verificationLevels: [
+                "Unrestricted",
+                "Must have a verified email on their Discord account.",
+                "Must have a verified email and be registered on Discord for longer than 5 minutes.",
+                "Must have a verified email, be registered on Discord for longer than 5 minutes and be a member of this server for longer than 10 minutes.",
+                "Must have a verified email, be registered on Discord for longer than 5 minutes, be a member of this server for longer than 10 minutes and have a verified phone on their Discord account."
+            ],
+            explicitContentFilter: [
+                "Don't scan any media content.",
+                "Scan media content from members without a role.",
+                "Scan media content from all members."
+            ],
+            time: {
+                seconds: (seconds) => `${seconds} seconds`,
+                second: (second) => `${second} second`,
+                minutes: (minutes) => `${minutes} minutes`,
+                minute: (minute) => `${minute} minute`,
+                hours: (hours) => `${hours} hours`,
+                hour: (hour) => `${hour} hour`,
+                days: (days) => `${days} days`,
+                day: (day) => `${day} day`,
+                weeks: (weeks) => `${weeks} weeks`,
+                week: (week) => `${week} week`,
+                months: (months) => `${months} months`,
+                month: (month) => `${month} month`,
+                years: (years) => `${years} years`,
+                year: (year) => `${year} year`,
+                ago: (date) => `${date} ago`,
+                elapsed: (time) => `**${time}** elapsed.`,
+                left: (time) => `**${time}** left.`
             }
         }, {
             // Help Command
@@ -77,21 +150,6 @@ module.exports = class English extends Language {
             // Commands Description
 
             // Commands Usage
-        }, {
-            seconds: (seconds) => `${seconds} seconds`, 
-            second: (second) => `${second} second`,
-            minutes: (minutes) => `${minutes} minutes`, 
-            minute: (minute) => `${minute} minute`, 
-            hours: (hours) => `${hours} hours`, 
-            hour: (hour) => `${hour} hour`,
-            days: (days) => `${days} days`, 
-            day: (day) => `${day} day`,
-            weeks: (weeks) => `${weeks} weeks`, 
-            week: (week) => `${week} week`,
-            months: (months) => `${months} months`, 
-            month: (month) => `${month} month`,
-            years: (years) => `${years} years`,
-            year: (year) => `${year} year`
         });
 
         this.displayName = "english";
