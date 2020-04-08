@@ -13,6 +13,7 @@ module.exports = class Spanish extends Language {
             roles: (number) => `Roles (${number})`,
             id: (id) => `ID: ${id}`,
             nothing: "Nada para mostrar...",
+            guildPrefix: (prefix)=> `Hola! Mi prefijo en este servidor es \`${prefix}\``,
             // Ban Command
             banNo: `No puedo banear a ese miembro.`,
             ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,

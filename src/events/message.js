@@ -10,6 +10,7 @@ module.exports = class EventMessage {
         if (message.channel.type === "dm") return;
         if (message.author.bot) return;
 
+        // GUILD PREPARE
         let guild = await this.client.db.guilds.findOne({ _id: message.guild.id }).exec();
         if (!guild) {
             guild = new this.client.db.guilds({
@@ -17,16 +18,35 @@ module.exports = class EventMessage {
             });
             guild.save();
         }
+        // USER PREPARE
+        let user = await this.client.db.users.findOne({ _id: message.author.id }).exec();
+        if (!user) {
+            user = new this.client.db.users({
+                _id: message.author.id
+            });
+            user.save();
+        }
 
-        if (!message.content.startsWith(guild.prefix)) return;
+        let isClientMentioned = () => {
+            return (message.content.startsWith(`<@${this.client.user.id}>`) || message.content.startsWith(`<@!${this.client.user.id}>`))
+        }
+
+        if ((!message.content.startsWith(guild.prefix) && !isClientMentioned())) return;
         let args = message.content.slice(guild.prefix.length).trim().split(/ +/g);
         let cmd = args.shift().toLowerCase();
         let err = false;
 
+        if (isClientMentioned()) {
+            if (args[0]) {
+                cmd = args[0];
+                args.splice(0, 1)
+            }
+        }
+
         try {
             let cmdFile = this.client.commands.find((c) => c.name === cmd || c.aliases.includes(cmd));
             if (!cmdFile) return;
-            cmdFile.prepare({ guild });
+            cmdFile.prepare({ guild, user });
             let cooldowned = this.handleCooldown({ message, cmd });
             let cmdValids = cmdFile.validate({ message });
             if (cooldowned || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;

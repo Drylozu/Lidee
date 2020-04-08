@@ -51,7 +51,14 @@ module.exports = class English extends Language {
             serverEmojisAnimated: "Animated emojis",
             // Ping Command
             pingCalculating: "Pong! *calculating...*",
-            ping: (ms) => `Pong! **${ms}ms**.`
+            ping: (ms) => `Pong! **${ms}ms**.`,
+            // Premium Command
+            noPremium: (prefix) => `${this.emojis.Error}Your server don't have a active premium key!\n\nYou have a key? Active using: \`${prefix}premium <key>\``,
+            // Prefix Command
+            
+            prefixUser: (prefix) => `My prefix in this server is \`${prefix}\``,
+            prefixAdmin: (prefix) => `My prefix in this server is \`${prefix}\`\nYou can change it using: \`${prefix}prefix <prefix>\``,
+            prefixChanged: (newprefix) => `The prefix in this server has been change to \`${newprefix}\``
         }, {
             permissions: {
                 default: "default permissions",

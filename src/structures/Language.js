@@ -18,6 +18,7 @@ module.exports = class Language {
             serverMfa: "<:2FAModeration:696972838598344794>",
             userOwner: "<:UserOwner:697135843210690571>",
             userBot: "<:UserBot:690932029214162975>",
+            Error: "<:Error:690932023325491240>",
             serverBoosts: [
                 "<:0Boost:697135839624560671>",
                 "<:1Boost:697135840362496020>",

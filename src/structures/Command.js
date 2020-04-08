@@ -10,8 +10,9 @@ module.exports = class Command {
         this.userPermissions = options.userPermissions || [];
     }
 
-    prepare({ guild }) {
+    prepare({ guild, user }) {
         this.guild = guild;
+        this.user = user;
         this.lang = this.client.languages.get(this.guild.language);
     }
 
