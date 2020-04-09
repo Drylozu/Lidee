@@ -28,5 +28,30 @@ let userSchema = new Schema({
     }
 });
 
+let keySchema = new Schema({
+    _id: {
+        type: String
+    },
+    createdBy: {
+        type: String
+    },
+    createdAt: {
+        type: Number
+    },
+    usedBy: {
+        type: String,
+        default: ""
+    },
+    usedAt: {
+        type: Number,
+        default: 0
+    },
+    expiresAt: {
+        type: Number,
+        default: 9e13
+    }
+});
+
 exports.guilds = model("Guild", guildSchema);
 exports.users = model("User", userSchema);
+exports.keys = model("Keys", keySchema);

@@ -1,10 +1,10 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 
 module.exports = class Softban extends Command {
     constructor(client) {
         super(client, {
             name: "softban",
-            category: 3,
+            category: 4,
             botPermissions: ["BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"]
         });
@@ -22,7 +22,7 @@ module.exports = class Softban extends Command {
         }).then(() => {
             message.channel.send(this.lang.get("ban", member.user.tag));
         }).catch((e) => {
-            this.client.log(e.toString(), true);
+            this.client.log(e.toString(), e, message);
             message.channel.send(this.lang.get("banError"));
         });
     }

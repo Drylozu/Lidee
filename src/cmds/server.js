@@ -1,4 +1,4 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class Server extends Command {
@@ -14,7 +14,7 @@ module.exports = class Server extends Command {
 
         let embed = new MessageEmbed()
             .setAuthor(message.guild.nameAcronym, message.guild.iconURL())
-            .setDescription(`> **${message.guild.name}** ${message.guild.verified ? this.lang.getEmoji("serverVerified") : ""}${message.guild.partnered ? this.lang.getEmoji("serverPartner") : ""}${message.guild.premiumSubscriptionCount ? this.lang.getEmoji("serverBoosts")[message.guild.premiumTier] : ""}${message.guild.defaultMessageNotifications === "ALL" ? this.lang.getEmoji("notifyMessages") : this.lang.getEmoji("notifyMentions")}${message.guild.mfaLevel ? this.lang.getEmoji("serverMfa") : ""}${message.guild.vanityURLCode ? `\n**${this.lang.get("serverVanityUrl")}**: ${message.guild.vanityURLCode}` : ""}`)
+            .setDescription(`> **${message.guild.name}** ${this.guild.premium ? this.lang.getEmoji("serverPremium") : ""}${message.guild.verified ? this.lang.getEmoji("serverVerified") : ""}${message.guild.partnered ? this.lang.getEmoji("serverPartner") : ""}${message.guild.premiumSubscriptionCount ? this.lang.getEmoji("serverBoosts")[message.guild.premiumTier] : ""}${message.guild.defaultMessageNotifications === "ALL" ? this.lang.getEmoji("notifyMessages") : this.lang.getEmoji("notifyMentions")}${message.guild.mfaLevel ? this.lang.getEmoji("serverMfa") : ""}${message.guild.vanityURLCode ? `\n**${this.lang.get("serverVanityUrl")}**: ${message.guild.vanityURLCode}` : ""}`)
             .addField(this.lang.get("serverCreated"), this.lang.parseCompleteDate(message.guild.createdAt))
             .addField(this.lang.get("serverOwner"), `${this.lang.getEmoji("userOwner")} <@${message.guild.owner.id}> (${this.lang.get("id", message.guild.owner.id)})`);
         if (message.guild.description)

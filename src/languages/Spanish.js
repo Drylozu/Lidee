@@ -1,4 +1,4 @@
-const Language = require("../structures/Language.js");
+const Language = require("../structures/Language");
 
 module.exports = class Spanish extends Language {
     constructor() {
@@ -13,7 +13,6 @@ module.exports = class Spanish extends Language {
             roles: (number) => `Roles (${number})`,
             id: (id) => `ID: ${id}`,
             nothing: "Nada para mostrar...",
-            guildPrefix: (prefix)=> `Hola! Mi prefijo en este servidor es \`${prefix}\``,
             // Ban Command
             banNo: `No puedo banear a ese miembro.`,
             ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,
@@ -52,7 +51,21 @@ module.exports = class Spanish extends Language {
             serverEmojisAnimated: "Emojis animados",
             // Ping Command
             pingCalculating: "Pong! *calculando...*",
-            ping: (ms) => `Pong! **${ms}ms**.`
+            ping: (ms) => `Pong! **${ms}ms**.`,
+            // Premium Command
+            premiumNo: (prefix) => `¡El servidor no tiene premium!\n\n¿Tienes una llave? Activa el premium en el servidor usando \`${prefix}premium [Llave]\`.`,
+            premiumYes: `¡El servidor tiene premium!\nPuedes usar comandos especiales con premium.`,
+            premium: `¡Has mejorado el servidor! El servidor ahora tiene premium.\nPuedes usar comandos especiales con premium.`,
+            premiumInvalid: "La llave ingresada no es valida o está expirada.",
+            // Prefix Command
+            prefix: (prefix) => `Mi prefijo en este servidor es \`${prefix}\`.`,
+            prefixChange: (prefix) => `Puedes cambiar el prefijo usando \`${prefix}prefix [Prefijo]\`.`,
+            prefixChanged: (prefix) => `El prefijo en este servidor ha sido cambiado a \`${prefix}\`.`,
+            // Language Command
+            languageSupport: "Idioma soportados",
+            languageActual: "Idioma actual",
+            languageChange: (prefix) => `Puedes cambiar el idioma usando \`${prefix}language [Código de idioma]\`.`,
+            languageChanged: (language) => `El idioma del servidor ahora es \`${language}\``
         }, {
             permissions: {
                 default: "permisos por defecto",
@@ -145,16 +158,44 @@ module.exports = class Spanish extends Language {
         }, {
             // Help Command
             title: `Ayuda`,
-            description: (name, prefix) => `Holaaaa, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\`.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.`,
-            categories: ["Información", "Entretenimiento", "Administración", "NSFW"],
-            footer: (count) => `${count} comandos disponibles`
-            // Description's Commands
-
+            description: (name, prefix) => `Hola, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\` pero puedes mencionarme como remplazo al prefijo.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.\n\n¿Deseas información más detallada de un comando? Utiliza \`${prefix}help [Comando]\``,
+            categories: ["Información", "Entretenimiento", "Configuración", "Administración", "NSFW"],
+            footer: (count) => `${count} comandos disponibles`,
+            usage: "Uso",
+            aliases: "Alias",
+            // Commands Description
+            banDescription: "Banea un miembro por ID o mención, se puede agregar una razón.",
+            softbanDescription: "Banea un miembro por ID o mención eliminando mensajes por días de antiguedad, una razón se puede agregar.",
+            clearDescription: "Elimina mensajes de acuerdo a la cantidad especificada entre 1 y 100.",
+            kickDescription: "Expulsa a un miembro, se puede agregar una razón.",
+            muteDescription: "Mutea a un miembro sin límite de tiempo definido.",
+            unmuteDescription: "Desmutea a un miembro ya muteado.",
+            helpDescription: "Muestra este mensaje.",
+            userDescription: "Muestra información detallada de un usuario.",
+            serverDescription: "Muestra información detallada del servidor.",
+            pingDescription: "Muestra la latencia del bot al responder y con el API de Discord.",
+            prefixDescription: "Muestra y cambia la configuración del prefijo del servidor.",
+            languageDescription: "Muestra y cambia la configuración del idioma del servidor.",
+            premiumDescription: "Muestra y establece la configuración premium del servidor.",
             // Commands Usage
+            banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
+            softbanUsage: (prefix) => `${prefix}softban <Miembro> [Razón] [Antiguedad de mensajes en días para eliminar]\n${prefix}softban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
+            clearUsage: (prefix) => `${prefix}clear <Cantidad 1-100>\n${prefix}clear 10`,
+            kickUsage: (prefix) => `${prefix}kick <Miembro> [Razón]\n${prefix}kick @Someone#0001\n${prefix}ban 123123123123123123 Estás haciendo spam? Sí? Bieen, expulsado.`,
+            muteUsage: (prefix) => `${prefix}mute <Miembro>\n${prefix}mute @Free#7870\n${prefix}mute 123123123123123123`,
+            unmuteUsage: (prefix) => `${prefix}unmute <Miembro>\n${prefix}unmute @Deivid#0045\n${prefix}unmute 123123123123123123`,
+            helpUsage: (prefix) => `${prefix}help [comando]`,
+            userUsage: (prefix) => `${prefix}user`,
+            serverUsage: (prefix) => `${prefix}server`,
+            pingUsage: (prefix) => `${prefix}ping`,
+            prefixUsage: (prefix) => `${prefix}prefix [Prefix]\n${prefix}prefix !`,
+            languageUsage: (prefix) => `${prefix}language [Language]\n${prefix}language es`,
+            premiumUsage: (prefix) => `${prefix}premium [Key]\n${prefix}premium 237A2C3A58374`
         });
 
         this.displayName = "spanish";
         this.nativeName = "español";
         this.languageCode = "es";
+        this.flag = "🇪🇸";
     }
 }

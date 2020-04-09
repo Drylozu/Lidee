@@ -1,40 +1,28 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class Language extends Command {
     constructor(client) {
         super(client, {
             name: "language",
-            category: 6,
-            botPermissions: [],
-            userPermissions: ["MANAGE_GUILD"]
+            category: 3
         });
     }
 
-    async run(message, args) {
-        let embed = new MessageEmbed()
-            .setAuthor(message.guild.name, message.guild.iconURL())
-            .setDescription(`**Support Languages**\n\n● :flag_us: English\n● :flag_es: Español`)
-            .setColor(0x6666ff)
-            .setTimestamp()
-            .setFooter(`Actual Language: ${this.lang.nativeName.firstUpperCase()}`)
-        let msg = await message.channel.send(embed)
-        await msg.react("🇺🇸")
-        await msg.react("🇪🇸")
-        const filter = (emojis, usuario) => (emojis.emoji.name == "🇺🇸" || emojis.emoji.name == "🇪🇸") && usuario.id === message.author.id;
-        const collector = msg.createReactionCollector(filter, { time: 20000 });
-        collector.on("collect", (emojis) => {
-            if (emojis.emoji.name === "🇺🇸") {
-                this.guild.language = "en";
-                this.guild.save()
-                message.channel.send(`OK! All commands are in english language`)
-            };
-            if (emojis.emoji.name === "🇪🇸") {
-                this.guild.language = "es";
-                this.guild.save()
-                message.channel.send(`Ok! Ahora todos los comandos estaran en español`)
-            };
-
-        });
+    run(message, [language]) {
+        if (language && this.client.languages.exists(language) && message.member.hasPermission(["MANAGE_GUILD"])) {
+            this.guild.language = language;
+            this.guild.save();
+            message.channel.send(new MessageEmbed()
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(this.lang.get("languageChanged", this.client.languages.get(language).nativeName))
+                .setColor(0x66ff66)
+                .setTimestamp());
+        } else
+            message.channel.send(new MessageEmbed()
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${this.lang.get("languageSupport")}**:\n\n${this.client.languages.getAll().map((l) => `• ${l.flag} **${l.nativeName.firstUpperCase()}** (${l.displayName.firstUpperCase()} - \`${l.languageCode}\`)`).join("\n")}\n${this.lang.get("languageChange", this.guild.prefix)}`)
+                .setColor(0x6666ff)
+                .setTimestamp());
     }
 }

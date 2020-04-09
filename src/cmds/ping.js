@@ -1,4 +1,4 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class Ping extends Command {

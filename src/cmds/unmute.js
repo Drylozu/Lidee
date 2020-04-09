@@ -1,10 +1,10 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 
 module.exports = class Unmute extends Command {
     constructor(client) {
         super(client, {
             name: "unmute",
-            category: 3,
+            category: 4,
             botPermissions: ["MANAGE_ROLES"],
             userPermissions: ["MANAGE_ROLES"]
         });

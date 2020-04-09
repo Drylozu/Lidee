@@ -1,10 +1,10 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 
 module.exports = class Ban extends Command {
     constructor(client) {
         super(client, {
             name: "ban",
-            category: 3,
+            category: 4,
             botPermissions: ["BAN_MEMBERS"],
             userPermissions: ["BAN_MEMBERS"]
         });
@@ -16,11 +16,11 @@ module.exports = class Ban extends Command {
         if (!member.bannable) return message.channel.send(this.lang.get("banNo"));
 
         message.guild.members.ban(member.id, {
-            reason: `${message.author.tag}.${args.join(" ").length > 0 ? ` ${args.join(" ")}` : ""}`
+            reason: `${message.author.tag}.${args.slice(1).join(" ").length > 0 ? ` ${args.slice(1).join(" ")}` : ""}`
         }).then(() => {
             message.channel.send(this.lang.get("ban", member.user.tag));
         }).catch((e) => {
-            this.client.log(e.toString(), true);
+            this.client.log(e.toString(), e, message);
             message.channel.send(this.lang.get("banError"));
         });
     }

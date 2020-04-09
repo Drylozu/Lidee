@@ -1,10 +1,10 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 
 module.exports = class Kick extends Command {
     constructor(client) {
         super(client, {
             name: "kick",
-            category: 3,
+            category: 4,
             botPermissions: ["KICK_MEMBERS"],
             userPermissions: ["KICK_MEMBERS"]
         });
@@ -20,7 +20,7 @@ module.exports = class Kick extends Command {
         }).then(() => {
             message.channel.send(this.lang.get("kick"));
         }).catch((e) => {
-            this.client.log(e.toString(), true);
+            this.client.log(e.toString(), e, message);
             message.channel.send(this.lang.get("kickError"));
         });
     }

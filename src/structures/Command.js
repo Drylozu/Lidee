@@ -1,3 +1,5 @@
+const UserFlags = require("./UserFlags");
+
 module.exports = class Command {
     constructor(client, options) {
         this.client = client;
@@ -26,7 +28,7 @@ module.exports = class Command {
         let messageSent = false;
 
         if (this.ownerOnly)
-            if (!this.client.ownersId.includes(message.author.id))
+            if (!new UserFlags(this.user.flags).has("DEVELOPER"))
                 conditionals.ownerOnly = true;
 
         if (this.userPermissions.length > 0)
