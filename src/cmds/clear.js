@@ -15,6 +15,7 @@ module.exports = class Clear extends Command {
         if (!messages || !parseInt(messages)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("clearNumber")}`);
         if (parseInt(message) < 1 || parseInt(messages) > 100) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("clearLimit")}`);
 
+        message.delete();
         message.channel.bulkDelete(messages, true)
             .then(() => {
                 message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("clear", parseInt(messages))}`)

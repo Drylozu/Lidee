@@ -90,7 +90,17 @@ module.exports = class English extends Language {
             covidTodayDeaths: "Today new deceased people",
             covidTotal: "Total cases",
             covidTotalRecovered: "Total recovered people",
-            covidTotalDeaths: "Total deceased people"
+            covidTotalDeaths: "Total deceased people",
+            // Fortnite Command
+            fortniteStats: (player, level) => `Player Statistic ${player} (Level: ${level})`,
+            fortniteSingle: "Mode singleplayer",
+            fortniteDouble: "Mode duo",
+            fortniteSquad: "Mode squad",
+            fortniteWinrate: "Winrate",
+            fortniteKD: "KD",
+            fortniteKills: "Kills",
+            fortniteTotalMins: "Minutes played",
+            fortniteTotalsMatchs: "Matchs played"
         }, {
             permissions: {
                 default: "default permissions",
@@ -207,6 +217,7 @@ module.exports = class English extends Language {
             slapDescription: "Slaps a member by ID or mention.",
             patDescription: "Pats a member by ID or mention.",
             kissDescription: "Kisses a member by ID or mention.",
+            forniteDescription: "Get statistic of a fortnite User",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid#0045\n${prefix}softban 123123123123123123 >:[`,
@@ -225,7 +236,8 @@ module.exports = class English extends Language {
             hugUsage: (prefix) => `${prefix}hug <Member>\n${prefix}hug @Deivid#045`,
             slapUsage: (prefix) => `${prefix}slap <Member>\n${prefix}slap @Free#7870`,
             patUsage: (prefix) => `${prefix}pat <Member>\n${prefix}pat @Free#7870`,
-            kissUsage: (prefix) => `${prefix}kiss <Member>\n${prefix}kiss @Deivid#0045`
+            kissUsage: (prefix) => `${prefix}kiss <Member>\n${prefix}kiss @Deivid#0045`,
+            fortniteUsage: (prefix) => `${prefix}fortnite <Member>\n${prefix}fortnite Ninja`
         });
 
         this.displayName = "english";

@@ -1,10 +1,12 @@
 require("../utils/prototypes")();
 const { Client, Collection, MessageEmbed } = require("discord.js");
+const Fortnite = require('./apis/Fortnite.js')
 const LanguageManager = require("./Languages");
 const nekosLife = require("nekos.life");
 const KeyManager = require("./Keys");
 const mongoose = require("mongoose");
 const path = require("path");
+const osu = require('node-osu');
 const fs = require("fs");
 
 module.exports = class Maoid extends Client {
@@ -29,6 +31,8 @@ module.exports = class Maoid extends Client {
 
         this.languages = new LanguageManager();
         this.nekosLife = new nekosLife();
+        this.fortnite = new Fortnite(process.env.fortniteToken)
+        this.osu = new osu.Api(process.env.osuToken);
         this.keys = new KeyManager();
 
         this.loadCommands();
@@ -39,14 +43,14 @@ module.exports = class Maoid extends Client {
 
     loadEvents() {
         for (let file of fs.readdirSync(path.join(__dirname, "../events/"))) {
-            let event = new (require(`../events/${file}`))(this);
+            let event = new(require(`../events/${file}`))(this);
             this.on(file.split(".")[0], (...args) => event.run(...args));
         }
     }
 
     loadCommands() {
         for (let file of fs.readdirSync(path.join(__dirname, "../cmds/"))) {
-            let command = new (require(`../cmds/${file}`))(this);
+            let command = new(require(`../cmds/${file}`))(this);
             this.commands.set(command.name, command);
         }
     }
