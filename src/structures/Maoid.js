@@ -1,6 +1,8 @@
 require("../utils/prototypes")();
 const { Client, Collection, MessageEmbed } = require("discord.js");
 const LanguageManager = require("./Languages");
+const nekosLife = require("nekos.life");
+const KeyManager = require("./Keys");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
@@ -26,6 +28,8 @@ module.exports = class Maoid extends Client {
         this.db = require("../utils/databases");
 
         this.languages = new LanguageManager();
+        this.nekosLife = new nekosLife();
+        this.keys = new KeyManager();
 
         this.loadCommands();
         this.loadEvents();
@@ -56,8 +60,8 @@ module.exports = class Maoid extends Client {
                 .setColor(0xff6666)
                 .setTimestamp();
             if (message && message.author && message.guild) {
-                embed.setAuthor(`${message.guild.name} (${message.guild.id})`, message.author.displayAvatarURL())
-                    .setTitle(`${message.author.tag} (${message.author.id})`)
+                embed.setFooter(`${message.guild.name} (${message.guild.id})`, message.author.displayAvatarURL())
+                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.iconURL())
                     .addField("Message content", `\`${message.content}\``);
             }
             this.channels.resolve(this.botConfig.errorsChannel).send(embed);

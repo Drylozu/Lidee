@@ -29,6 +29,8 @@ module.exports = class EventMessage {
         let prefixes = [guild.prefix, `<@${this.client.user.id}>`, `<@!${this.client.user.id}>`];
         let prefix = prefixes.find((p) => message.content.startsWith(p));
         if (!prefix) return;
+        if (prefix !== guild.prefix)
+            message.mentions.users.delete(message.mentions.users.first().id);
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let cmd = args.shift().toLowerCase();
         let err = false;

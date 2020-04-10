@@ -5,7 +5,9 @@ module.exports = class Language extends Command {
     constructor(client) {
         super(client, {
             name: "language",
-            category: 3
+            aliases: ["lang"],
+            category: 4,
+            botPermissions: ["EMBED_LINKS"]
         });
     }
 

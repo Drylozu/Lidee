@@ -16,7 +16,9 @@
     "dependencies": {
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
-        "mongoose": "^5.9.7"
+        "mongoose": "^5.9.7",
+        "nekos.life": "^2.0.6",
+        "phin": "^3.4.1"
     },
     "keywords": [
         "Maoid",

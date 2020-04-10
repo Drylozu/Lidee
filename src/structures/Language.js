@@ -12,6 +12,7 @@ module.exports = class Language {
             notifyMentions: "<:NotifyMentions:696963830097641563>",
             userTranslator: "<:UserTranslator:697522235401043969>",
             serverPartner: "<:ServerPartner:697135845647581235>",
+            userBugHunter: "<:UserBugHunter:697872203080794234>",
             serverPremium: "<:ServerPremium:697522233513345126>",
             serverBoosted: "<:ServerBoosted:690932026987249685>",
             userDeveloper: "<:UserDeveloper:697522234490749008>",
@@ -21,6 +22,8 @@ module.exports = class Language {
             userDonator: "<:UserDonator:697522235044397076>",
             serverMfa: "<:2FAModeration:696972838598344794>",
             userOwner: "<:UserOwner:697135843210690571>",
+            inviteBot: "<:InviteBot:697944472868356136>",
+            voteBot: "<:VoteBot:697947690394189945>",
             userBot: "<:UserBot:690932029214162975>",
             error: "<:Error:690932023325491240>",
             okay: "<:Okay:690932026697711616>",
@@ -36,7 +39,7 @@ module.exports = class Language {
                 dnd: "<:MobileDnd:697135841474117695>"
             },
             status: {
-                invisible: "<a:UInvisible:690932032187924500>",
+                offline: "<a:UInvisible:690932032187924500>",
                 online: "<a:UOnline:690932032812875876>",
                 idle: "<a:UIdle:690932032485982238>",
                 dnd: "<a:UDnd:690932031705579551>"
@@ -116,7 +119,7 @@ module.exports = class Language {
             timeObj.years ? this.getConstant("time", `year${timeObj.years > 1 ? "s" : ""}`, timeObj.years) : "",
             timeObj.months ? this.getConstant("time", `month${timeObj.months > 1 ? "s" : ""}`, timeObj.months) : "",
             timeObj.weeks ? this.getConstant("time", `week${timeObj.weeks > 1 ? "s" : ""}`, timeObj.weeks) : "",
-            timeObj.days ? this.getConstant("time", `day${timeObj.weeks > 1 ? "s" : ""}`, timeObj.days) : "",
+            timeObj.days ? this.getConstant("time", `day${timeObj.days > 1 ? "s" : ""}`, timeObj.days) : "",
             timeObj.hours ? this.getConstant("time", `hour${timeObj.hours > 1 ? "s" : ""}`, timeObj.hours) : "",
             timeObj.minutes ? this.getConstant("time", `minute${timeObj.minutes > 1 ? "s" : ""}`, timeObj.minutes) : "",
             timeObj.seconds ? this.getConstant("time", `second${timeObj.seconds > 1 ? "s" : ""}`, timeObj.seconds) : ""
@@ -158,26 +161,25 @@ module.exports = class Language {
     }
 
     parseMemberActivity(activities) {
-        let customStatusActivity = activities.find((a) => a.type === "CUSTOM_STATUS");
+        let customStatus = activities.find((a) => a.type === "CUSTOM_STATUS");
         let principalActivity =
             activities.find((a) => a.type === "LISTENING" && (a.state && a.details)) ||
             activities.find((a) => a.state && a.details) ||
             activities.find((a) => a.type !== "CUSTOM_STATUS");
+        let { name, state, details, timestamps, type } = principalActivity;
         return [
-            customStatusActivity ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatusActivity.emoji ? `${customStatusActivity.emoji.toString()} ` : ""}${customStatusActivity.state}\n\n` : "",
-            principalActivity && principalActivity.name
-                ? `${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
-            principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
-            principalActivity && principalActivity.details ? `**•** ${principalActivity.details}\n` : "",
-            principalActivity && principalActivity.timestamps && principalActivity.timestamps.start
-                ? this.getConstant("time",
-                    principalActivity.timestamps.end
-                        ? "left" : "elapsed",
-                    this.parseTime(principalActivity.timestamps.end
-                        ? principalActivity.timestamps.end - principalActivity.timestamps.end
-                        : new Date() - principalActivity.timestamps.start)
-                )
-                : ""
+            customStatus && customStatus.state ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state}\n\n` : "",
+            name ? `${customStatus && customStatus.emoji && !customStatus.state
+                ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", type)} **${name}**.${state && details ? this.getEmoji("richPresence") : ""}\n` : "",
+            state ? `**•** ${state}\n` : "",
+            details ? `**•** ${details}\n` : "",
+            timestamps && timestamps.start ? this.getConstant("time",
+                timestamps.end
+                    ? "left" : "elapsed",
+                this.parseTime(timestamps.end
+                    ? timestamps.end - timestamps.end
+                    : new Date() - timestamps.start)
+            ) : ""
         ].filter((o) => o !== "").join("");
     }
 

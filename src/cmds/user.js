@@ -7,18 +7,19 @@ module.exports = class User extends Command {
         super(client, {
             name: "user",
             aliases: ["userinfo", "ui", "u"],
-            category: 1
+            category: 1,
+            botPermissions: ["EMBED_LINKS"]
         });
     }
 
-    run(message, args) {
-        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || message.member;
+    run(message, [id]) {
+        let member = message.guild.members.resolve(id) || message.mentions.members.first() || message.member;
         this.client.db.users.findOne({ _id: member.id }).exec()
             .then((user) => {
                 let userFlags = new UserFlags(user.flags);
                 let embed = new MessageEmbed()
                     .setAuthor(member.user.tag, member.user.displayAvatarURL())
-                    .setDescription(`> <@${member.id}> ${userFlags.has("DEVELOPER") ? this.lang.getEmoji("userDeveloper") : ""}${userFlags.has("TRANSLATOR") ? this.lang.getEmoji("userTranslator") : ""}${userFlags.has("DONATOR") ? this.lang.getEmoji("userDonator") : ""}${member.user.bot ? this.lang.getEmoji("userBot") : ""}${message.guild.owner.id === member.id ? this.lang.getEmoji("userOwner") : ""}${member.user.presence.clientStatus && member.user.presence.clientStatus.mobile ? this.lang.getEmoji("statusMobile")[member.user.presence.clientStatus.mobile] : this.lang.getEmoji("status")[member.user.presence.status]}${member.premiumSince ? this.lang.getEmoji("userBooster") : ""}${member.voice.channel ? this.lang.getEmoji("voiceChannel") : ""}`)
+                    .setDescription(`> <@${member.id}> ${userFlags.has("DEVELOPER") ? this.lang.getEmoji("userDeveloper") : ""}${userFlags.has("BUG_HUNTER") ? this.lang.getEmoji("userBugHunter") : ""}${userFlags.has("TRANSLATOR") ? this.lang.getEmoji("userTranslator") : ""}${userFlags.has("DONATOR") ? this.lang.getEmoji("userDonator") : ""}${member.user.bot ? this.lang.getEmoji("userBot") : ""}${message.guild.owner.id === member.id ? this.lang.getEmoji("userOwner") : ""}${member.user.presence.clientStatus && member.user.presence.clientStatus.mobile ? this.lang.getEmoji("statusMobile")[member.user.presence.clientStatus.mobile] : this.lang.getEmoji("status")[member.user.presence.status]}${member.premiumSince ? this.lang.getEmoji("userBooster") : ""}${member.voice.channel ? this.lang.getEmoji("voiceChannel") : ""}`)
                     .addField(this.lang.get("userJoined"), this.lang.parseCompleteDate(member.joinedAt), true)
                     .addField(this.lang.get("userCreated"), this.lang.parseCompleteDate(member.user.createdAt), true)
                     .addField(this.lang.get("userPermissions"), this.lang.parsePermissions(member.permissions.toArray()));

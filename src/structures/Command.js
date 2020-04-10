@@ -4,10 +4,11 @@ module.exports = class Command {
     constructor(client, options) {
         this.client = client;
         this.name = options.name;
-        this.aliases = options.aliases || [];
         this.nsfw = options.nsfw || false;
-        this.ownerOnly = options.ownerOnly || false;
+        this.aliases = options.aliases || [];
         this.category = options.category || -1;
+        this.ownerOnly = options.ownerOnly || false;
+        this.premiumOnly = options.premiumOnly || false;
         this.botPermissions = options.botPermissions || [];
         this.userPermissions = options.userPermissions || [];
     }
@@ -30,6 +31,15 @@ module.exports = class Command {
         if (this.ownerOnly)
             if (!new UserFlags(this.user.flags).has("DEVELOPER"))
                 conditionals.ownerOnly = true;
+
+        if (this.premiumOnly)
+            if (!this.guild.premium) {
+                conditionals.premiumOnly = true;
+                if (!messageSent) {
+                    message.channel.send(this.lang.get("premiumOnly"));
+                    messageSent = true;
+                }
+            }
 
         if (this.userPermissions.length > 0)
             if (!message.member.hasPermission(this.userPermissions)) {

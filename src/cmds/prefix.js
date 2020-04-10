@@ -5,7 +5,8 @@ module.exports = class Prefix extends Command {
     constructor(client) {
         super(client, {
             name: "prefix",
-            category: 3
+            category: 4,
+            botPermissions: ["EMBED_LINKS"]
         });
     }
 
