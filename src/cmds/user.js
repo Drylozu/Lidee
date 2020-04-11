@@ -16,6 +16,8 @@ module.exports = class User extends Command {
         let member = message.guild.members.resolve(id) || message.mentions.members.first() || message.member;
         this.client.db.users.findOne({ _id: member.id }).exec()
             .then((user) => {
+                if (!user)
+                    user = { flags: 0 };
                 let userFlags = new UserFlags(user.flags);
                 let embed = new MessageEmbed()
                     .setAuthor(member.user.tag, member.user.displayAvatarURL())

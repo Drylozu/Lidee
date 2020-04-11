@@ -1,11 +1,14 @@
 {
     "name": "maoid",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Maoid Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",
     "license": "GNU v3",
     "private": true,
+    "engines": {
+        "node": "13.x"
+    },
     "scripts": {
         "eslint": "eslint src/",
         "start": "node src/index.js"
@@ -17,7 +20,6 @@
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
         "mongoose": "^5.9.7",
-        "nekos.life": "^2.0.6",
         "phin": "^3.4.1"
     },
     "keywords": [

@@ -1,7 +1,7 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 
-const Maoid = require("./structures/Maoid");
-const bot = new Maoid({
+const Lidee = require("./structures/Lidee");
+const bot = new Lidee({
     botConfig: {
         token: process.env.botToken,
         mongoDbUrl: process.env.mongoDbUrl,

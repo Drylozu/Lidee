@@ -55,9 +55,9 @@ module.exports = class Spanish extends Language {
             ping: (ms) => `Pong! **${ms}ms**.`,
             // Premium Command
             premiumNo: (prefix) => `¡El servidor no tiene premium!\n\n¿Tienes una llave? Activa el premium en el servidor usando \`${prefix}premium [Llave]\`.`,
-            premiumYes: `¡El servidor tiene premium!\nPuedes usar comandos especiales con premium.`,
-            premium: `¡Has mejorado el servidor! El servidor ahora tiene premium.\nPuedes usar comandos especiales con premium.`,
-            premiumInvalid: "La llave ingresada no es valida o está expirada.",
+            premiumYes: (date) => `¡El servidor tiene premium! Hasta **${date}**\nPuedes usar comandos especiales con premium.`,
+            premium: (date) => `¡Has mejorado el servidor! El servidor ahora tiene premium hasta el **${date}**.\nPuedes usar comandos especiales con premium.`,
+            premiumInvalid: "La llave ingresada no es válida o está expirada.",
             // Prefix Command
             prefix: (prefix) => `Mi prefijo en este servidor es \`${prefix}\`.`,
             prefixChange: (prefix) => `Puedes cambiar el prefijo usando \`${prefix}prefix [Prefijo]\`.`,
@@ -92,15 +92,33 @@ module.exports = class Spanish extends Language {
             covidTotalRecovered: "Personas recuperadas en total",
             covidTotalDeaths: "Personas fallecidas en total",
             // Fortnite Command
-            fortniteStats: (player, level) => `Estadisticas del jugador ${player} (Nivel: ${level})`,
-            fortniteSingle: "Modo un jugador",
-            fortniteDouble: "Modo duo",
-            fortniteSquad: "Modo squad",
-            fortniteWinrate: "Porcentaje de partidas",
-            fortniteKD: "KD",
-            fortniteKills: "Asesinatos",
-            fortniteTotalMins: "Minutos jugados",
-            fortniteTotalsMatchs: "Partidas jugadas"
+            fortniteNo: "Debes colocar un nombre de usuario o `shop` para mostrar la tienda de hoy.",
+            fortniteUserStats: (player, level) => `Estadisticas del jugador ${player} en Fortnite (Nivel: ${level})`,
+            fortniteUserSolo: "Modo un jugador",
+            fortniteUserDuo: "Modo duo",
+            fortniteUserSquad: "Modo squad",
+            fortniteUserWinrate: "Porcentaje de partidas ganadas",
+            fortniteUserKD: "KD",
+            fortniteUserKills: "Asesinatos",
+            fortniteUserMinutes: "Minutos jugados",
+            fortniteUserMatchs: "Partidas jugadas",
+            fortniteShop: "Tienda diaria de Fortnite",
+            fortniteShopDescription: "Descripción",
+            fortniteShopType: "Tipo",
+            fortniteShopRarity: "Raredad",
+            fortniteShopPrice: "Precio",
+            fortniteShopCurrency: "PaVos",
+            fortniteShopItem: (current, max) => `Ítem ${current}/${max}`,
+            // Osu Command
+            osuNoMode: "Debes colocar un modo válido (`normal`, `taiko`, `catch` or `mania`).",
+            osuNoUser: "Debes colocar un nombre de usuario válido.",
+            osuStats: (player, mode) => `Estadísticas del jugador ${player} en osu!${mode}`,
+            osuCountry: "País",
+            osuLevel: "Nivel",
+            osuPP: "Puntos de rendimiento",
+            osuAccuracy: "Precisión",
+            osuTotalScore: "Puntuación total",
+            osuScores: "Puntuaciones"
         }, {
             permissions: {
                 default: "permisos por defecto",
@@ -187,12 +205,13 @@ module.exports = class Spanish extends Language {
                 years: (years) => `${years} años`,
                 year: (year) => `${year} año`,
                 ago: (date) => `hace ${date}`,
+                within: (date) => `dentro de ${date}`,
                 elapsed: (time) => `Tiempo transcurrido: **${time}**.`,
                 left: (time) => `Tiempo restante: **${time}**.`
             }
         }, {
             // Help Command
-            title: `Ayuda`,
+            title: "Ayuda",
             description: (name, prefix, links) => `Hola, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\` pero puedes mencionarme como remplazo al prefijo.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.\n\n¿Deseas información más detallada de un comando? Utiliza \`${prefix}help [Comando]\`.\n\nEnlaces útiles: ${links}`,
             categories: ["Información", "Entretenimiento", "Interacción", "Configuración", "Administración", "NSFW"],
             footer: (count) => `${count} comandos disponibles`,
@@ -217,10 +236,11 @@ module.exports = class Spanish extends Language {
             slapDescription: "Dale una paliza a un miembro por ID o mención.",
             patDescription: "Acaricia a un miembro por ID o mención.",
             kissDescription: "Besa a un miembro por ID o mención.",
-            forniteDescription: "Obten estadisticas de un jugador de Fortnite",
+            fortniteDescription: "Muestra información de la tienda de hoy o un jugador de Fortnite",
+            osuDescription: "Muestra información de un jugador de osu!",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
-            softbanUsage: (prefix) => `${prefix}softban <Miembro> [Razón] [Antiguedad de mensajes en días para eliminar]\n${prefix}softban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
+            softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
             clearUsage: (prefix) => `${prefix}clear <Cantidad 1-100>\n${prefix}clear 10`,
             kickUsage: (prefix) => `${prefix}kick <Miembro> [Razón]\n${prefix}kick @Someone#0001\n${prefix}ban 123123123123123123 Estás haciendo spam? Sí? Bieen, expulsado.`,
             muteUsage: (prefix) => `${prefix}mute <Miembro>\n${prefix}mute @Free#7870\n${prefix}mute 123123123123123123`,
@@ -229,15 +249,17 @@ module.exports = class Spanish extends Language {
             userUsage: (prefix) => `${prefix}user`,
             serverUsage: (prefix) => `${prefix}server`,
             pingUsage: (prefix) => `${prefix}ping`,
-            prefixUsage: (prefix) => `${prefix}prefix [Prefix]\n${prefix}prefix !`,
-            languageUsage: (prefix) => `${prefix}language [Language]\n${prefix}language en`,
-            premiumUsage: (prefix) => `${prefix}premium [Key]\n${prefix}premium 237A2C3A58374`,
+            prefixUsage: (prefix) => `${prefix}prefix [Prefix]\n${prefix}prefix\n${prefix}prefix !`,
+            languageUsage: (prefix) => `${prefix}language [Language]\n${prefix}language\n${prefix}language en`,
+            premiumUsage: (prefix) => `${prefix}premium [Key]\n${prefix}premium AValidKeyHere`,
             avatarUsage: (prefix) => `${prefix}avatar <Miembro>\n${prefix}avatar @Free#7870`,
             hugUsage: (prefix) => `${prefix}hug <Miembro>\n${prefix}hug @Deivid#045`,
             slapUsage: (prefix) => `${prefix}slap <Miembro>\n${prefix}slap @Free#7870`,
             patUsage: (prefix) => `${prefix}pat <Miembro>\n${prefix}pat @Free#7870`,
             kissUsage: (prefix) => `${prefix}kiss <Miembro>\n${prefix}kiss @Deivid#0045`,
-            fortniteUsage: (prefix) => `${prefix}fortnite <Miembro>\n${prefix}fortnite Ninja`
+            covid19Usage: (prefix) => `${prefix}covid19 [País]\n${prefix}covid19\n${prefix}covid19 Mexico`,
+            fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jugador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
+            osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jugador>\n${prefix}osu normal Motxi`
         });
 
         this.displayName = "spanish";

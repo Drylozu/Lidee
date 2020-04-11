@@ -55,8 +55,8 @@ module.exports = class English extends Language {
             ping: (ms) => `Pong! **${ms}ms**.`,
             // Premium Command
             premiumNo: (prefix) => `The server don't have premium!\n\nYou have a key? Active premium in the server using \`${prefix}premium [Key]\`.`,
-            premiumYes: "The server has premium!\nYou can use special commands with premium.",
-            premium: "You improved the server! The server now has premium.\nYou can use special commands with premium.",
+            premiumYes: (date) => `The server has premium until **${date}**!\nYou can use special commands with premium.`,
+            premium: (date) => `You improved the server! The server now has premium until **${date}**.\nYou can use special commands with premium.`,
             premiumInvalid: "The key entered isn't valid or is already expired.",
             // Prefix Command
             prefix: (prefix) => `My prefix in this server is \`${prefix}\`.`,
@@ -92,15 +92,34 @@ module.exports = class English extends Language {
             covidTotalRecovered: "Total recovered people",
             covidTotalDeaths: "Total deceased people",
             // Fortnite Command
-            fortniteStats: (player, level) => `Player Statistic ${player} (Level: ${level})`,
-            fortniteSingle: "Mode singleplayer",
-            fortniteDouble: "Mode duo",
-            fortniteSquad: "Mode squad",
-            fortniteWinrate: "Winrate",
-            fortniteKD: "KD",
-            fortniteKills: "Kills",
-            fortniteTotalMins: "Minutes played",
-            fortniteTotalsMatchs: "Matchs played"
+            fortniteNo: "You must enter an username or `shop` to display today's store.",
+            fortniteNoUser: "You must enter a valid username.",
+            fortniteUserStats: (player, level) => `${player} player statistic in Fortnite (Level: ${level})`,
+            fortniteUserSolo: "Mode singleplayer",
+            fortniteUserDuo: "Mode duo",
+            fortniteUserSquad: "Mode squad",
+            fortniteUserWinrate: "Winrate",
+            fortniteUserKD: "KD",
+            fortniteUserKills: "Kills",
+            fortniteUserMinutes: "Minutes played",
+            fortniteUserMatchs: "Matchs played",
+            fortniteShop: "Fortnite Daily Shop",
+            fortniteShopDescription: "Description",
+            fortniteShopType: "Type",
+            fortniteShopRarity: "Rarity",
+            fortniteShopPrice: "Price",
+            fortniteShopCurrency: "V-Bucks",
+            fortniteShopItem: (current, max) => `Item ${current}/${max}`,
+            // Osu Command
+            osuNoMode: "You must enter a valid mode (`normal`, `taiko`, `catch` or `mania`).",
+            osuNoUser: "You must enter a valid username.",
+            osuStats: (player, mode) => `${player} player statistics in osu!${mode}`,
+            osuCountry: "Country",
+            osuLevel: "Level",
+            osuPP: "Perfomance points",
+            osuAccuracy: "Acurracy",
+            osuTotalScore: "Total score",
+            osuScores: "Scores"
         }, {
             permissions: {
                 default: "default permissions",
@@ -187,12 +206,13 @@ module.exports = class English extends Language {
                 years: (years) => `${years} years`,
                 year: (year) => `${year} year`,
                 ago: (date) => `${date} ago`,
+                within: (date) => `within ${date}`,
                 elapsed: (time) => `**${time}** elapsed.`,
                 left: (time) => `**${time}** left.`
             }
         }, {
             // Help Command
-            title: `Help`,
+            title: "Help",
             description: (name, prefix, links) => `Hello, I'm ${name}. I'm here to help you in everything you wanna do, you can get information about the server and/or of an user, you can also have a lot of fun playing games incorporated in me with your friends or just execute the administrative part.\n\nMy prefix in this server is \`${prefix}\` but you can mention me as a replacement for the prefix.\nBelow you will find different categories with the different commands I have available, each one of them starts with the previously mentioned prefix.\n\nDo you want more detailed information about a command? Use \`${prefix}help [Command]\`.\n\nUsefull links: ${links}`,
             categories: ["Information", "Entertainment", "Interaction", "Configuration", "Administration", "NSFW"],
             footer: (count) => `${count} commands available`,
@@ -217,10 +237,11 @@ module.exports = class English extends Language {
             slapDescription: "Slaps a member by ID or mention.",
             patDescription: "Pats a member by ID or mention.",
             kissDescription: "Kisses a member by ID or mention.",
-            forniteDescription: "Get statistic of a fortnite User",
+            fortniteDescription: "Shows information from today's store or a Fortnite player",
+            osuDescription: "Shows information of a osu! player",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
-            softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid#0045\n${prefix}softban 123123123123123123 >:[`,
+            softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid#0045 1\n${prefix}softban 123123123123123123 1 >:[`,
             clearUsage: (prefix) => `${prefix}clear <Quantity 1-100>\n${prefix}clear 10`,
             kickUsage: (prefix) => `${prefix}kick <Member> [Reason]\n${prefix}kick @Someone#0001\n${prefix}ban 123123123123123123 Are you spamming? Yes? Ookay, kicked.`,
             muteUsage: (prefix) => `${prefix}mute <Member>\n${prefix}mute @Free#7870\n${prefix}mute 123123123123123123`,
@@ -229,15 +250,17 @@ module.exports = class English extends Language {
             userUsage: (prefix) => `${prefix}user`,
             serverUsage: (prefix) => `${prefix}server`,
             pingUsage: (prefix) => `${prefix}ping`,
-            prefixUsage: (prefix) => `${prefix}prefix [Prefix]\n${prefix}prefix !`,
-            languageUsage: (prefix) => `${prefix}language [Language]\n${prefix}language es`,
-            premiumUsage: (prefix) => `${prefix}premium [Key]\n${prefix}premium 237A2C3A58374`,
+            prefixUsage: (prefix) => `${prefix}prefix [Prefix]\n${prefix}prefix\n${prefix}prefix !`,
+            languageUsage: (prefix) => `${prefix}language [Language]\n${prefix}language\n${prefix}language es`,
+            premiumUsage: (prefix) => `${prefix}premium [Key]\n${prefix}premium AValidKeyHere`,
             avatarUsage: (prefix) => `${prefix}avatar <Member>\n${prefix}avatar @Free#7870`,
             hugUsage: (prefix) => `${prefix}hug <Member>\n${prefix}hug @Deivid#045`,
             slapUsage: (prefix) => `${prefix}slap <Member>\n${prefix}slap @Free#7870`,
             patUsage: (prefix) => `${prefix}pat <Member>\n${prefix}pat @Free#7870`,
             kissUsage: (prefix) => `${prefix}kiss <Member>\n${prefix}kiss @Deivid#0045`,
-            fortniteUsage: (prefix) => `${prefix}fortnite <Member>\n${prefix}fortnite Ninja`
+            covid19Usage: (prefix) => `${prefix}covid19 [Country]\n${prefix}covid19\n${prefix}covid19 United States`,
+            fortniteUsage: (prefix) => `${prefix}fortnite <shop|Player> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
+            osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Player>\n${prefix}osu normal Motxi`
         });
 
         this.displayName = "english";

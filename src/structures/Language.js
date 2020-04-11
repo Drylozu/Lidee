@@ -101,7 +101,10 @@ module.exports = class Language {
     }
 
     parseCompleteDate(date) {
-        let milliseconds = new Date() - date;
+        let old = true;
+        if (date.getTime() > new Date().getTime())
+            old = false;
+        let milliseconds = old ? new Date() - date : date - new Date();
         let timeObj = {
             years: Math.floor(milliseconds / 3.154e+10),
             months: Math.floor(milliseconds / 2.628e+9) % 12,
@@ -125,7 +128,7 @@ module.exports = class Language {
             timeObj.seconds ? this.getConstant("time", `second${timeObj.seconds > 1 ? "s" : ""}`, timeObj.seconds) : ""
         ];
 
-        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()} (${this.getConstant("time", "ago", time.filter((t) => t !== "").slice(0, 4).join(", "))})`;
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()} (${this.getConstant("time", old ? "ago" : "within", time.filter((t) => t !== "").slice(0, 4).join(", "))})`;
     }
 
     parseTime(milliseconds) {

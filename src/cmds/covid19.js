@@ -1,27 +1,22 @@
 const Command = require("../structures/Command");
 const { MessageEmbed } = require("discord.js");
-const phin = require("phin");
 
 module.exports = class Ping extends Command {
     constructor(client) {
         super(client, {
             name: "covid19",
             aliases: ["covid", "coronavirus"],
+            ownerOnly: true,
             category: 1,
             botPermissions: ["EMBED_LINKS"]
         });
     }
 
-    async run(message, [country]) {
-        let { body: { AllUpdated } } = await phin({
-            url: "https://api.covid19api.com/stats",
-            parse: "json"
-        });
-        let { body: { Global, Countries } } = await phin({
-            url: "https://api.covid19api.com/summary",
-            parse: "json"
-        });
-        if (!country || !Countries.find((c) => c.Country.toLowerCase() === country.toLowerCase()))
+    async run(message, args) {
+        let country = args.join(" ");
+        let AllUpdated = await this.client.apis.covid.getAllLastUpdate();
+        let { Global, Countries } = await this.client.apis.covid.getAllStats();
+        if (!country || !Countries.find((c) => c.Country.toLowerCase() === country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()))
             message.channel.send(new MessageEmbed()
                 .setAuthor(this.lang.get("covidStatsGlobal"), message.author.displayAvatarURL())
                 .setDescription(`**${this.lang.get("covidLastUpdate")}**:\n${this.lang.parseCompleteDate(new Date(AllUpdated))}`)
@@ -34,7 +29,7 @@ module.exports = class Ping extends Command {
                 .setColor(0x6666ff)
                 .setTimestamp());
         else {
-            let covidCountry = Countries.find((c) => c.Country.toLowerCase() === country.toLowerCase());
+            let covidCountry = Countries.find((c) => c.Country.toLowerCase() === country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase());
             message.channel.send(new MessageEmbed()
                 .setAuthor(this.lang.get("covidStatsCountry", covidCountry.Country), message.author.displayAvatarURL())
                 .setDescription(`**${this.lang.get("covidLastUpdate")}**:\n${this.lang.parseCompleteDate(new Date(covidCountry.Date))}`)

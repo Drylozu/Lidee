@@ -14,10 +14,10 @@ module.exports = class Pat extends Command {
         let member = message.guild.members.resolve(id) || message.mentions.members.first();
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
         if (member.user.bot) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("patBot")}`);
-        let image = await this.client.nekosLife.sfw.pat();
+        let image = await this.client.apis.nekosLife.getPatImage();
         message.channel.send(new MessageEmbed()
             .setDescription(this.lang.get("pat", message.member.displayName, member.displayName))
-            .setImage(image.url)
+            .setImage(image)
             .setColor(0x6666ff)
             .setTimestamp());
     }
