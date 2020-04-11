@@ -66,7 +66,7 @@ module.exports = class Portuguese extends Language {
             languageSupport: "Idioma suportados",
             languageActual: "Idioma atuais",
             languageChange: (prefix) => `Pode mudar o idioma usando: \`${prefix}language [Código do idioma]\`.`,
-            languageChanged: (language) => `O \`${language}\`.`,
+            languageChanged: (language) => `O idioma do server mudou para \`${language}\`.`,
             // Avatar Command
             avatar: "Link do resolução máxima",
             // Hug Command
