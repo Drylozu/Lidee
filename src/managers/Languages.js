@@ -16,14 +16,22 @@ module.exports = class LanguageManager {
         }
     }
 
-    get(code = "") {
+    exists(query) {
+        return Boolean(this.languages.find((l) => [l.languageCode, l.displayName, l.nativeName].includes(query)));
+    }
+
+    getAll() {
+        return this.languages;
+    }
+
+    get(code) {
         let lang = this.languages.get(code.toLowerCase());
-        if (!lang) 
+        if (!lang)
             return this.languages.get("en");
         return lang;
     }
 
-    getByDisplayName(name = "") {
+    getByDisplayName(name) {
         let lang = this.languages.find((l) => l.displayName === name.toLowerCase());
         if (!lang)
             return this.languages.find((l) => l.displayName === "english");

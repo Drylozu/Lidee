@@ -1,17 +1,21 @@
+const UserFlags = require("./UserFlags");
+
 module.exports = class Command {
     constructor(client, options) {
         this.client = client;
         this.name = options.name;
-        this.aliases = options.aliases || [];
         this.nsfw = options.nsfw || false;
-        this.ownerOnly = options.ownerOnly || false;
+        this.aliases = options.aliases || [];
         this.category = options.category || -1;
+        this.ownerOnly = options.ownerOnly || false;
+        this.premiumOnly = options.premiumOnly || false;
         this.botPermissions = options.botPermissions || [];
         this.userPermissions = options.userPermissions || [];
     }
 
-    prepare({ guild }) {
+    prepare({ guild, user }) {
         this.guild = guild;
+        this.user = user;
         this.lang = this.client.languages.get(this.guild.language);
     }
 
@@ -25,8 +29,17 @@ module.exports = class Command {
         let messageSent = false;
 
         if (this.ownerOnly)
-            if (!this.client.ownersId.includes(message.author.id))
+            if (!new UserFlags(this.user.flags).has("DEVELOPER"))
                 conditionals.ownerOnly = true;
+
+        if (this.premiumOnly)
+            if (!this.guild.premium) {
+                conditionals.premiumOnly = true;
+                if (!messageSent) {
+                    message.channel.send(this.lang.get("premiumOnly"));
+                    messageSent = true;
+                }
+            }
 
         if (this.userPermissions.length > 0)
             if (!message.member.hasPermission(this.userPermissions)) {

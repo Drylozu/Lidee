@@ -1,10 +1,10 @@
-const Command = require("../structures/Command.js");
+const Command = require("../structures/Command");
 
 module.exports = class Mute extends Command {
     constructor(client) {
         super(client, {
             name: "mute",
-            category: 3,
+            category: 5,
             botPermissions: ["MANAGE_ROLES"],
             userPermissions: ["MANAGE_ROLES"]
         });
@@ -12,7 +12,7 @@ module.exports = class Mute extends Command {
 
     async run(message, args) {
         let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
-        if (!member) return message.channel.send(this.lang.get("userNo"));
+        if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
 
         let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);
         if (!role)
@@ -36,8 +36,8 @@ module.exports = class Mute extends Command {
                     });
             });
 
-        if (member.roles.cache.has(role.id)) return message.channel.send(this.lang.get("muteNo"));
+        if (member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("muteNo")}`);
         await member.roles.add(role.id);
-        message.channel.send(this.lang.get("mute", member.user.tag));
+        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("mute", member.user.tag)}`);
     }
 }

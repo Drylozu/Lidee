@@ -1,36 +1,37 @@
-const Language = require("../structures/Language.js");
+const Language = require("../structures/Language");
 
 module.exports = class Spanish extends Language {
     constructor() {
         super({
             // Global
-            userNo: `Debes mencionar un usuario o colocar su ID.`,
+            userNo: "Debes mencionar un usuario o colocar su ID.",
             userPerms: (permission) => `Debes tener el permiso de \`${this.getConstant("permissions", permission)}\` para ejecutar este comando.`,
             botPerms: (permission) => `Debo tener el permiso de \`${this.getConstant("permissions", permission)}\` para ejecutar este comando.`,
-            nsfwChannel: `Este comando solo esta disponible en canales NSFW.`,
+            nsfwChannel: "Este comando solo esta disponible en canales NSFW.",
             cooldown: (time) => `Debes esperar ${time} segundos para ejecutar este comando.`,
+            premiumOnly: "El servidor debe tener premium para ejecutar este comando.",
             others: (number) => `y otros ${number} más...`,
             roles: (number) => `Roles (${number})`,
             id: (id) => `ID: ${id}`,
             nothing: "Nada para mostrar...",
             // Ban Command
-            banNo: `No puedo banear a ese miembro.`,
+            banNo: "No puedo banear a ese miembro.",
             ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,
-            banError: `Ha ocurrido un error mientras se baneaba al miembro.`,
+            banError: "Ha ocurrido un error mientras se baneaba al miembro.",
             // Clear Command
-            clearNumber: `Debes especifcar cuántos mensajes vas a eliminar.`,
-            clearLimit: `Debes especificar un número entre 0 y 100.`,
+            clearNumber: "Debes especifcar cuántos mensajes vas a eliminar.",
+            clearLimit: "Debes especificar un número entre 0 y 100.",
             clear: (number) => `Han sido eliminados ${number} mensajes.`,
-            clearError: `Ha ocurrido un error mientras se eliminaban mensajes.`,
+            clearError: "Ha ocurrido un error mientras se eliminaban mensajes.",
             // Kick Command
-            kickNo: `No puedo expulsar a ese miembro.`,
+            kickNo: "No puedo expulsar a ese miembro.",
             kick: (member) => `El miembro **${member}** ha sido expulsado del servidor.`,
-            kickError: `Ha ocurrido un error mientras se expulsaba al miembro.`,
+            kickError: "Ha ocurrido un error mientras se expulsaba al miembro.",
             // Mute Command
-            muteNo: `¡Ese miembro ya está muteado!`,
+            muteNo: "¡Ese miembro ya está muteado!",
             mute: (member) => `El miembro **${member}** ha sido muteado del servidor.`,
             // Unmute Command
-            unmuteNo: `¡Ese miembro no está muteado!`,
+            unmuteNo: "¡Ese miembro no está muteado!",
             unmute: (member) => `El miembro **${member}** ha sido desmuteado del servidor.`,
             // User Command
             userPermissions: "Permisos de usuario",
@@ -51,7 +52,73 @@ module.exports = class Spanish extends Language {
             serverEmojisAnimated: "Emojis animados",
             // Ping Command
             pingCalculating: "Pong! *calculando...*",
-            ping: (ms) => `Pong! **${ms}ms**.`
+            ping: (ms) => `Pong! **${ms}ms**.`,
+            // Premium Command
+            premiumNo: (prefix) => `¡El servidor no tiene premium!\n\n¿Tienes una llave? Activa el premium en el servidor usando \`${prefix}premium [Llave]\`.`,
+            premiumYes: (date) => `¡El servidor tiene premium! Hasta **${date}**\nPuedes usar comandos especiales con premium.`,
+            premium: (date) => `¡Has mejorado el servidor! El servidor ahora tiene premium hasta el **${date}**.\nPuedes usar comandos especiales con premium.`,
+            premiumInvalid: "La llave ingresada no es válida o está expirada.",
+            // Prefix Command
+            prefix: (prefix) => `Mi prefijo en este servidor es \`${prefix}\`.`,
+            prefixChange: (prefix) => `Puedes cambiar el prefijo usando \`${prefix}prefix [Prefijo]\`.`,
+            prefixChanged: (prefix) => `El prefijo en este servidor ha sido cambiado a \`${prefix}\`.`,
+            // Language Command
+            languageSupport: "Idioma soportados",
+            languageActual: "Idioma actual",
+            languageChange: (prefix) => `Puedes cambiar el idioma usando \`${prefix}language [Código de idioma]\`.`,
+            languageChanged: (language) => `El idioma del servidor ahora es \`${language}\`.`,
+            // Avatar Command
+            avatar: "Enlace con máxima resolución",
+            // Hug Command
+            hug: (author, user) => `**${author}** ha abrazado a **${user}** ༼ つ ◕_◕ ༽つ`,
+            hugBot: "No puedes abrazar a un bot.",
+            // Slap Command
+            slap: (author, user) => `**${author}** le dio una paliza a **${user}** ',:)`,
+            slapBot: "No puedes darle una paliza a un bot.",
+            // Pat Command
+            pat: (author, user) => `**${author}** acarició a **${user}** ᓚᘏᗢ`,
+            patBot: "No puedes acariciar a un bot.",
+            // Kiss Command
+            kiss: (author, user) => `**${author}** besó a **${user}** 🤍`,
+            kissBot: "No puedes besar a un bot.",
+            // Covid Command
+            covidLastUpdate: "Última actualización",
+            covidStatsGlobal: "Estadísticas del COVID19 globalmente",
+            covidStatsCountry: (country) => `Estadísticas del COVID19 en ${country}`,
+            covidToday: "Nuevos casos de hoy",
+            covidTodayRecovered: "Nuevas personas recuperadas hoy",
+            covidTodayDeaths: "Nuevas personas fallecidas hoy",
+            covidTotal: "Casos en total",
+            covidTotalRecovered: "Personas recuperadas en total",
+            covidTotalDeaths: "Personas fallecidas en total",
+            // Fortnite Command
+            fortniteNo: "Debes colocar un nombre de usuario o `shop` para mostrar la tienda de hoy.",
+            fortniteUserStats: (player, level) => `Estadisticas del jugador ${player} en Fortnite (Nivel: ${level})`,
+            fortniteUserSolo: "Modo un jugador",
+            fortniteUserDuo: "Modo duo",
+            fortniteUserSquad: "Modo squad",
+            fortniteUserWinrate: "Porcentaje de partidas ganadas",
+            fortniteUserKD: "KD",
+            fortniteUserKills: "Asesinatos",
+            fortniteUserMinutes: "Minutos jugados",
+            fortniteUserMatchs: "Partidas jugadas",
+            fortniteShop: "Tienda diaria de Fortnite",
+            fortniteShopDescription: "Descripción",
+            fortniteShopType: "Tipo",
+            fortniteShopRarity: "Raredad",
+            fortniteShopPrice: "Precio",
+            fortniteShopCurrency: "PaVos",
+            fortniteShopItem: (current, max) => `Ítem ${current}/${max}`,
+            // Osu Command
+            osuNoMode: "Debes colocar un modo válido (`normal`, `taiko`, `catch` or `mania`).",
+            osuNoUser: "Debes colocar un nombre de usuario válido.",
+            osuStats: (player, mode) => `Estadísticas del jugador ${player} en osu!${mode}`,
+            osuCountry: "País",
+            osuLevel: "Nivel",
+            osuPP: "Puntos de rendimiento",
+            osuAccuracy: "Precisión",
+            osuTotalScore: "Puntuación total",
+            osuScores: "Puntuaciones"
         }, {
             permissions: {
                 default: "permisos por defecto",
@@ -110,18 +177,18 @@ module.exports = class Spanish extends Language {
                 WATCHING: "Viendo",
                 CUSTOM_STATUS: "Estado personalizado"
             },
-            verificationLevels: [
-                "Sin restricciones.",
-                "Deben tener un correo electrónico verificado en su cuenta de Discord.",
-                "Deben tener un correo electrónico verificado y estar registrados en Discord por más de 5 minutos.",
-                "Deben tener un correo electrónico verificado, estar registrados en Discord por más de 5 minutos y ser un miembro de este servidor por más de 10 minutos.",
-                "Deben tener un correo electrónico verificado, estar registrados en Discord por más de 5 minutos, ser un miembro de este servidor por más de 10 minutos y tener un teléfono verificado en su cuenta de Discord."
-            ],
-            explicitContentFilter: [
-                "No analizar ningún contenido multimedia.",
-                "Analizar el contenido multimedia de los miembros sin rol.",
-                "Analizar el contenido multimedia de todos los miembros."
-            ],
+            verificationLevels: {
+                NONE: "Sin restricciones.",
+                LOW: "Deben tener un correo electrónico verificado en su cuenta de Discord.",
+                MEDIUM: "Deben tener un correo electrónico verificado y estar registrados en Discord por más de 5 minutos.",
+                HIGH: "Deben tener un correo electrónico verificado, estar registrados en Discord por más de 5 minutos y ser un miembro de este servidor por más de 10 minutos.",
+                VERY_HIGH: "Deben tener un correo electrónico verificado, estar registrados en Discord por más de 5 minutos, ser un miembro de este servidor por más de 10 minutos y tener un teléfono verificado en su cuenta de Discord."
+            },
+            explicitContentFilter: {
+                DISABLED: "No analizar ningún contenido multimedia.",
+                MEMBERS_WITHOUT_ROLES: "Analizar el contenido multimedia de los miembros sin rol.",
+                ALL_MEMBERS: "Analizar el contenido multimedia de todos los miembros."
+            },
             time: {
                 seconds: (seconds) => `${seconds} segundos`,
                 second: (second) => `${second} segundo`,
@@ -138,22 +205,66 @@ module.exports = class Spanish extends Language {
                 years: (years) => `${years} años`,
                 year: (year) => `${year} año`,
                 ago: (date) => `hace ${date}`,
+                within: (date) => `dentro de ${date}`,
                 elapsed: (time) => `Tiempo transcurrido: **${time}**.`,
                 left: (time) => `Tiempo restante: **${time}**.`
             }
         }, {
             // Help Command
-            title: `Ayuda`,
-            description: (name, prefix) => `Holaaaa, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\`.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.`,
-            categories: ["Información", "Entretenimiento", "Administración", "NSFW"],
-            footer: (count) => `${count} comandos disponibles`
-            // Description's Commands
-
+            title: "Ayuda",
+            description: (name, prefix, links) => `Hola, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\` pero puedes mencionarme como remplazo al prefijo.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.\n\n¿Deseas información más detallada de un comando? Utiliza \`${prefix}help [Comando]\`.\n\nEnlaces útiles: ${links}`,
+            categories: ["Información", "Entretenimiento", "Interacción", "Configuración", "Administración", "NSFW"],
+            footer: (count) => `${count} comandos disponibles`,
+            usage: "Uso",
+            aliases: "Alias",
+            // Commands Description
+            banDescription: "Banea un miembro por ID o mención, se puede agregar una razón.",
+            softbanDescription: "Banea un miembro por ID o mención eliminando mensajes por días de antiguedad, una razón se puede agregar.",
+            clearDescription: "Elimina mensajes de acuerdo a la cantidad especificada entre 1 y 100.",
+            kickDescription: "Expulsa a un miembro, se puede agregar una razón.",
+            muteDescription: "Mutea a un miembro sin límite de tiempo definido.",
+            unmuteDescription: "Desmutea a un miembro ya muteado.",
+            helpDescription: "Muestra este mensaje.",
+            userDescription: "Muestra información detallada de un usuario.",
+            serverDescription: "Muestra información detallada del servidor.",
+            pingDescription: "Muestra la latencia del bot al responder y con el API de Discord.",
+            prefixDescription: "Muestra y cambia la configuración del prefijo del servidor.",
+            languageDescription: "Muestra y cambia la configuración del idioma del servidor.",
+            premiumDescription: "Muestra y establece la configuración premium del servidor.",
+            avatarDescription: "Muestra el avatar de un miembro por ID, mención o el tuyo.",
+            hugDescription: "Abraza a un usuario por ID o mención.",
+            slapDescription: "Dale una paliza a un miembro por ID o mención.",
+            patDescription: "Acaricia a un miembro por ID o mención.",
+            kissDescription: "Besa a un miembro por ID o mención.",
+            fortniteDescription: "Muestra información de la tienda de hoy o un jugador de Fortnite",
+            osuDescription: "Muestra información de un jugador de osu!",
             // Commands Usage
+            banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
+            softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
+            clearUsage: (prefix) => `${prefix}clear <Cantidad 1-100>\n${prefix}clear 10`,
+            kickUsage: (prefix) => `${prefix}kick <Miembro> [Razón]\n${prefix}kick @Someone#0001\n${prefix}ban 123123123123123123 Estás haciendo spam? Sí? Bieen, expulsado.`,
+            muteUsage: (prefix) => `${prefix}mute <Miembro>\n${prefix}mute @Free#7870\n${prefix}mute 123123123123123123`,
+            unmuteUsage: (prefix) => `${prefix}unmute <Miembro>\n${prefix}unmute @Free#7870\n${prefix}unmute 123123123123123123`,
+            helpUsage: (prefix) => `${prefix}help [Comando]`,
+            userUsage: (prefix) => `${prefix}user`,
+            serverUsage: (prefix) => `${prefix}server`,
+            pingUsage: (prefix) => `${prefix}ping`,
+            prefixUsage: (prefix) => `${prefix}prefix [Prefix]\n${prefix}prefix\n${prefix}prefix !`,
+            languageUsage: (prefix) => `${prefix}language [Language]\n${prefix}language\n${prefix}language en`,
+            premiumUsage: (prefix) => `${prefix}premium [Key]\n${prefix}premium AValidKeyHere`,
+            avatarUsage: (prefix) => `${prefix}avatar <Miembro>\n${prefix}avatar @Free#7870`,
+            hugUsage: (prefix) => `${prefix}hug <Miembro>\n${prefix}hug @Deivid#045`,
+            slapUsage: (prefix) => `${prefix}slap <Miembro>\n${prefix}slap @Free#7870`,
+            patUsage: (prefix) => `${prefix}pat <Miembro>\n${prefix}pat @Free#7870`,
+            kissUsage: (prefix) => `${prefix}kiss <Miembro>\n${prefix}kiss @Deivid#0045`,
+            covid19Usage: (prefix) => `${prefix}covid19 [País]\n${prefix}covid19\n${prefix}covid19 Mexico`,
+            fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jugador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
+            osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jugador>\n${prefix}osu normal Motxi`
         });
 
         this.displayName = "spanish";
         this.nativeName = "español";
         this.languageCode = "es";
+        this.flag = "🇪🇸";
     }
 }

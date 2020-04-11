@@ -1,14 +1,14 @@
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 
-const Maoid = require("./structures/Maoid.js");
-const bot = new Maoid({
+const Lidee = require("./structures/Lidee");
+const bot = new Lidee({
     botConfig: {
         token: process.env.botToken,
-        ownersId: process.env.ownersId,
-        mongoDbUrl: process.env.mongoDbUrl
+        mongoDbUrl: process.env.mongoDbUrl,
+        errorsChannel: process.env.errorsChannel
     }
 });
 
 process.on("unhandledRejection", (reason) => {
-    bot.log(reason.toString(), true);
+    bot.log(reason.toString(), reason);
 });

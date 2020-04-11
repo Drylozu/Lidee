@@ -1,6 +1,7 @@
-require("../utils/prototypes.js")();
-const { Client, Collection } = require("discord.js");
-const LanguageManager = require("./Languages.js");
+require("../utils/prototypes")();
+const { Client, Collection, MessageEmbed } = require("discord.js");
+const LanguageManager = require("../managers/Languages");
+const APIManager = require("../managers/APIs");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
@@ -11,7 +12,6 @@ module.exports = class Maoid extends Client {
         this.commands = new Collection();
 
         Object.defineProperty(this, "botConfig", { value: args[0].botConfig });
-        this.ownersId = this.botConfig.ownersId.split(",");
 
         mongoose.connect(this.botConfig.mongoDbUrl, {
             useNewUrlParser: true,
@@ -24,9 +24,10 @@ module.exports = class Maoid extends Client {
             } else this.log("MongoDB Ready!");
         });
 
-        this.db = require("../utils/databases.js");
-        
+        this.db = require("../utils/databases");
+
         this.languages = new LanguageManager();
+        this.apis = new APIManager();
 
         this.loadCommands();
         this.loadEvents();
@@ -48,7 +49,21 @@ module.exports = class Maoid extends Client {
         }
     }
 
-    log(msg, err = false) {
+    log(msg, err = false, message = null) {
+        if (err && err.message && err.stack) {
+            let errParsed = err.stack.split("\n");
+            errParsed[0] = `**${errParsed[0]}**`;
+            let embed = new MessageEmbed()
+                .setDescription(errParsed.join("\n> "))
+                .setColor(0xff6666)
+                .setTimestamp();
+            if (message && message.author && message.guild) {
+                embed.setFooter(`${message.guild.name} (${message.guild.id})`, message.author.displayAvatarURL())
+                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.iconURL())
+                    .addField("Message content", `\`${message.content}\``);
+            }
+            this.channels.resolve(this.botConfig.errorsChannel).send(embed);
+        }
         console.log(`\x1b[36m[${new Date().toLocaleTimeString()}]${err ? "\x1b[31m" : "\x1b[32m"}[LOG] \x1b[0m${msg}`);
     }
 }
