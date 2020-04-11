@@ -63,6 +63,7 @@ module.exports = class Spanish extends Language {
             prefixChange: (prefix) => `Puedes cambiar el prefijo usando \`${prefix}prefix [Prefijo]\`.`,
             prefixChanged: (prefix) => `El prefijo en este servidor ha sido cambiado a \`${prefix}\`.`,
             // Language Command
+            language: (language) => `El lenguaje actual del servidor es \`${language}\`.`,
             languageSupport: "Idioma soportados",
             languageActual: "Idioma actual",
             languageChange: (prefix) => `Puedes cambiar el idioma usando \`${prefix}language [Código de idioma]\`.`,

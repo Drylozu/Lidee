@@ -63,6 +63,7 @@ module.exports = class English extends Language {
             prefixChange: (prefix) => `You can change the prefix of the server using: \`${prefix}prefix [Prefix]\`.`,
             prefixChanged: (prefix) => `The prefix in this server has been change to \`${prefix}\`.`,
             // Language Command
+            language: (language) => `The language actual of the server is \`${language}\`.`,
             languageSupport: "Supported languages",
             languageActual: "Actual language",
             languageChange: (prefix) => `You can change the language of the server using \`${prefix}language [Language Code]\`.`,
