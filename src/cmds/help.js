@@ -22,7 +22,7 @@ module.exports = class Help extends Command {
         else {
             let embed = new MessageEmbed()
                 .setAuthor(this.lang.getHelp("title"), message.author.displayAvatarURL())
-                .setDescription(`>>> ${this.lang.getHelp("description", this.client.user.username, this.guild.prefix, `[${this.lang.getEmoji("inviteBot")}](https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot&permissions=268462110) [${this.lang.getEmoji("voteBot")}](https://top.gg/bot/${this.client.user.id}/vote)`)}`)
+                .setDescription(`>>> ${this.lang.getHelp("description", this.client.user.username, this.guild.prefix, `[${this.lang.getEmoji("inviteBot")}](https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot&permissions=268462110)`)}`)
                 .setFooter(this.lang.getHelp("footer", this.client.commands.filter((c) => !c.ownerOnly).size))
                 .setTimestamp()
                 .setColor(0x6666ff);
