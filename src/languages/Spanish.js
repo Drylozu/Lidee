@@ -63,6 +63,7 @@ module.exports = class Spanish extends Language {
             prefixChange: (prefix) => `Puedes cambiar el prefijo usando \`${prefix}prefix [Prefijo]\`.`,
             prefixChanged: (prefix) => `El prefijo en este servidor ha sido cambiado a \`${prefix}\`.`,
             // Language Command
+            language: (language) => `El lenguaje actual del servidor es \`${language}\`.`,
             languageSupport: "Idioma soportados",
             languageActual: "Idioma actual",
             languageChange: (prefix) => `Puedes cambiar el idioma usando \`${prefix}language [Código de idioma]\`.`,
@@ -91,6 +92,7 @@ module.exports = class Spanish extends Language {
             covidTotal: "Casos en total",
             covidTotalRecovered: "Personas recuperadas en total",
             covidTotalDeaths: "Personas fallecidas en total",
+            covidError: "Ha ocurrido un error obteniendo información del COVID19",
             // Fortnite Command
             fortniteNo: "Debes colocar un nombre de usuario o `shop` para mostrar la tienda de hoy.",
             fortniteUserStats: (player, level) => `Estadisticas del jugador ${player} en Fortnite (Nivel: ${level})`,

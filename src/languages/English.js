@@ -5,8 +5,8 @@ module.exports = class English extends Language {
         super({
             // Global
             userNo: "You need to mention an user or provide his ID.",
-            userPerms: (permission) => `You must have the permission \`${this.getConstant("permissions")[permission]}\` to execute this command.`,
-            botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions")[permission]}\` to execute this command.`,
+            userPerms: (permission) => `You must have the permission \`${this.getConstant("permissions", permission)}\` to execute this command.`,
+            botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions", permission)}\` to execute this command.`,
             nsfwChannel: "Este comando solo esta disponible en canales NSFW.",
             cooldown: (time) => `You need wait ${time} seconds to execute this command.`,
             premiumOnly: "The server must have premium to execute this command.",
@@ -63,6 +63,7 @@ module.exports = class English extends Language {
             prefixChange: (prefix) => `You can change the prefix of the server using: \`${prefix}prefix [Prefix]\`.`,
             prefixChanged: (prefix) => `The prefix in this server has been change to \`${prefix}\`.`,
             // Language Command
+            language: (language) => `The language actual of the server is \`${language}\`.`,
             languageSupport: "Supported languages",
             languageActual: "Actual language",
             languageChange: (prefix) => `You can change the language of the server using \`${prefix}language [Language Code]\`.`,
@@ -91,6 +92,7 @@ module.exports = class English extends Language {
             covidTotal: "Total cases",
             covidTotalRecovered: "Total recovered people",
             covidTotalDeaths: "Total deceased people",
+            covidError: "An error ocurred obtaining information about the COVID19",
             // Fortnite Command
             fortniteNo: "You must enter an username or `shop` to display today's store.",
             fortniteNoUser: "You must enter a valid username.",
