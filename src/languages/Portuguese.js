@@ -92,6 +92,7 @@ module.exports = class Portuguese extends Language {
             covidTotal: "Casos total",
             covidTotalRecovered: "Pessoas totalmente recuperadas",
             covidTotalDeaths: "Total de pessoas mortas",
+            covidError: "Ocorreu um erro ao obter informações do COVID19",
             // Fortnite Command
             fortniteNo: "Deve colocar um nome de usúario no `shop` para mostrar a loja de hoje.",
             fortniteUserStats: (player, level) => `Estatísticas do jogador ${player} no Fortnite (Nivel: ${level})`,
@@ -259,7 +260,7 @@ module.exports = class Portuguese extends Language {
             patUsage: (prefix) => `${prefix}pat <Membro>\n${prefix}pat @Free#7870`,
             kissUsage: (prefix) => `${prefix}kiss <Membro>\n${prefix}kiss @Deivid#0045`,
             covid19Usage: (prefix) => `${prefix}covid19 [País]\n${prefix}covid19\n${prefix}covid19 Mexico`,
-            fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jugador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
+            fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jogador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jogador>\n${prefix}osu normal Motxi`
         });
 

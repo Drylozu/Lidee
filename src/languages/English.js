@@ -5,8 +5,8 @@ module.exports = class English extends Language {
         super({
             // Global
             userNo: "You need to mention an user or provide his ID.",
-            userPerms: (permission) => `You must have the permission \`${this.getConstant("permissions")[permission]}\` to execute this command.`,
-            botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions")[permission]}\` to execute this command.`,
+            userPerms: (permission) => `You must have the permission \`${this.getConstant("permissions", permission)}\` to execute this command.`,
+            botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions", permission)}\` to execute this command.`,
             nsfwChannel: "Este comando solo esta disponible en canales NSFW.",
             cooldown: (time) => `You need wait ${time} seconds to execute this command.`,
             premiumOnly: "The server must have premium to execute this command.",
@@ -92,6 +92,7 @@ module.exports = class English extends Language {
             covidTotal: "Total cases",
             covidTotalRecovered: "Total recovered people",
             covidTotalDeaths: "Total deceased people",
+            covidError: "An error ocurred obtaining information about the COVID19",
             // Fortnite Command
             fortniteNo: "You must enter an username or `shop` to display today's store.",
             fortniteNoUser: "You must enter a valid username.",
