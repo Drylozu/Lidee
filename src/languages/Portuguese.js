@@ -36,7 +36,7 @@ module.exports = class Portuguese extends Language {
             // User Command
             userPermissions: "Permissões de usúario",
             userCreated: "Conta criada em",
-            userJoined: "entrou no servidor em",
+            userJoined: "Entrou no servidor em",
             userActivity: "Atividade do usúario",
             userBoosting: "Boosteando desde",
             // Server Command
