@@ -112,6 +112,7 @@ module.exports = class English extends Language {
             fortniteShopPrice: "Price",
             fortniteShopCurrency: "V-Bucks",
             fortniteShopItem: (current, max) => `Item ${current}/${max}`,
+            fortniteError: "An error occurred obtaining player information.",
             // Osu Command
             osuNoMode: "You must enter a valid mode (`normal`, `taiko`, `catch` or `mania`).",
             osuNoUser: "You must enter a valid username.",
@@ -121,7 +122,9 @@ module.exports = class English extends Language {
             osuPP: "Perfomance points",
             osuAccuracy: "Acurracy",
             osuTotalScore: "Total score",
-            osuScores: "Scores"
+            osuScores: "Scores",
+            // Say Command
+            sayNo: "You must enter a valid text to send."
         }, {
             permissions: {
                 default: "default permissions",
@@ -217,7 +220,8 @@ module.exports = class English extends Language {
             title: "Help",
             titleCommands: "List of commands",
             description: (name, prefix, links) => `Hello, I'm ${name}. I'm here to help you in everything you wanna do, you can get information about the server and/or of an user, you can also have a lot of fun playing games incorporated in me with your friends or just execute the administrative part.\n\nMy prefix in this server is \`${prefix}\` but you can mention me as a replacement for the prefix.\nYou can find different categories with the different commands I have available with the command \`${prefix}commands\`, each one of them starts with the previously mentioned prefix.\n\nDo you want more detailed information about a command? Use \`${prefix}help [Command]\`.\n\nUsefull links: ${links}`,
-            categories: ["Information", "Entertainment", "Interaction", "Configuration", "Administration", "NSFW"],
+            categories: ["Information", "Entertainment", "Images", "Configuration", "Administration", "NSFW"],
+            nsfw: "Use this command on an NSFW channel to view NSFW commands.",
             footer: (count) => `${count} commands available`,
             usage: "Usage",
             aliases: "Aliases",

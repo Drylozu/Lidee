@@ -10,18 +10,19 @@ module.exports = class Kick extends Command {
         });
     }
 
-    run(message, args) {
+    async run(message, args) {
         let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
         if (!member.kickable) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("kickNo")}`);
 
-        message.guild.members.kick(member.id, {
-            reason: `${message.author.tag}.${args.join(" ").length > 0 ? ` ${args.join(" ")}` : ""}`
-        }).then(() => {
+        try {
+            await message.guild.members.kick(member.id, {
+                reason: `${message.author.tag}.${args.join(" ").length > 0 ? ` ${args.join(" ")}` : ""}`
+            });
             message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("kick")}`);
-        }).catch((e) => {
+        } catch (e) {
             this.client.log(e.toString(), e, message);
             message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("kickError")}`);
-        });
+        }
     }
 }

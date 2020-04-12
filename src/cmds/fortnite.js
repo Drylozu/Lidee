@@ -23,7 +23,7 @@ module.exports = class Fortnite extends Command {
                 .setFooter(this.lang.get("fortniteShopItem", item, shop.length))
                 .setColor(0x6666ff)
                 .setTimestamp());
-        } else {
+        } else try {
             let user = await this.client.apis.fortnite.getUserStats(arg);
             if (user.error) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("fortniteNoUser")}`);
             message.channel.send(new MessageEmbed()
@@ -33,6 +33,9 @@ module.exports = class Fortnite extends Command {
                 .addField(this.lang.get("fortniteUserSquad"), `**${this.lang.get("fortniteUserWinrate")}**:\n${user.global_stats.squad.winrate.toLocaleString()}\n**${this.lang.get("fortniteUserKD")}**:\n${user.global_stats.squad.kd.toLocaleString()}\n**${this.lang.get("fortniteUserKills")}**:\n${user.global_stats.squad.kills.toLocaleString()}\n**${this.lang.get("fortniteUserMinutes")}**:\n${user.global_stats.squad.minutesplayed.toLocaleString()}\n**${this.lang.get("fortniteUserMatchs")}**:\n${user.global_stats.squad.matchesplayed.toLocaleString()}`, true)
                 .setColor(0x6666ff)
                 .setTimestamp());
+        } catch (e) {
+            this.client.log(e.toString(), e, message);
+            message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("fortniteError")}`)
         }
     }
 }

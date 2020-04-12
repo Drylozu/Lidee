@@ -54,7 +54,7 @@ module.exports = class EventMessage {
         }
     }
 
-    handleCooldown({ message, cmdFile }) {
+    handleCooldown({ message, cmdFile: cmd }) {
         if (!this.usersCooldown.has(message.author.id)) {
             this.usersCooldown.set(message.author.id, Date.now());
 
@@ -62,6 +62,7 @@ module.exports = class EventMessage {
                 this.usersCooldown.delete(message.author.id);
             }, 3000);
         } else
-            return message.channel.send(cmdFile.lang.get("cooldown", ((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)));
+            return message.channel.send(cmd.lang.get("cooldown", ((Date.now() - this.usersCooldown.get(message.author.id)) / 1000).toFixed(1)))
+                .then((msg) => msg.delete({ timeout: 2000 }));
     }
 }

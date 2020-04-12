@@ -95,6 +95,7 @@ module.exports = class Spanish extends Language {
             covidError: "Ha ocurrido un error obteniendo información del COVID19",
             // Fortnite Command
             fortniteNo: "Debes colocar un nombre de usuario o `shop` para mostrar la tienda de hoy.",
+            fortniteNoUser: "Debes colcar un nombre de usuario válido",
             fortniteUserStats: (player, level) => `Estadisticas del jugador ${player} en Fortnite (Nivel: ${level})`,
             fortniteUserSolo: "Modo un jugador",
             fortniteUserDuo: "Modo duo",
@@ -111,6 +112,7 @@ module.exports = class Spanish extends Language {
             fortniteShopPrice: "Precio",
             fortniteShopCurrency: "PaVos",
             fortniteShopItem: (current, max) => `Ítem ${current}/${max}`,
+            fortniteError: "Ha ocurrido un error obteniendo información del jugador",
             // Osu Command
             osuNoMode: "Debes colocar un modo válido (`normal`, `taiko`, `catch` or `mania`).",
             osuNoUser: "Debes colocar un nombre de usuario válido.",
@@ -120,7 +122,9 @@ module.exports = class Spanish extends Language {
             osuPP: "Puntos de rendimiento",
             osuAccuracy: "Precisión",
             osuTotalScore: "Puntuación total",
-            osuScores: "Puntuaciones"
+            osuScores: "Puntuaciones",
+            // Say Command
+            sayNo: "Debes colocar un texto válido para enviar."
         }, {
             permissions: {
                 default: "permisos por defecto",
@@ -216,7 +220,8 @@ module.exports = class Spanish extends Language {
             title: "Ayuda",
             titleCommands: "Lista de comandos",
             description: (name, prefix, links) => `Hola, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\` pero puedes mencionarme como remplazo al prefijo.\nPuedes encontrar diferentes categorías con los diferentes comandos que dispongo con el comando \`${prefix}commands\`, cada uno de estos empieza por el prefijo anteriormente mencionado.\n\n¿Deseas información más detallada de un comando? Utiliza \`${prefix}help [Comando]\`.\n\nEnlaces útiles: ${links}`,
-            categories: ["Información", "Entretenimiento", "Interacción", "Configuración", "Administración", "NSFW"],
+            categories: ["Información", "Entretenimiento", "Imágenes", "Configuración", "Administración", "NSFW"],
+            nsfw: "Usa este comando en un canal NSFW para ver los comandos NSFW.",
             footer: (count) => `${count} comandos disponibles`,
             usage: "Uso",
             aliases: "Alias",

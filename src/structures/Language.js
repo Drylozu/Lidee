@@ -157,12 +157,14 @@ module.exports = class Language {
         let hoistRole = memberRoles.hoist;
         let rolesParsed = memberRoles.cache
             .filter((r) => r.id !== everyoneRole.id)
+            .sort((a, b) => b.position - a.position)
             .map((r) => (r.id === hoistRole.id ? `__<@&${r.id}>__` : `<@&${r.id}>`))
             .slice(0, 15);
         if (rolesParsed.length < 1) return this.get("nothing");
         return rolesParsed.length > 15 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 15)}` : rolesParsed.join(", ");
     }
 
+    // eslint-disable-next-line complexity
     parseMemberActivity(activities) {
         let customStatus = activities.find((a) => a.type === "CUSTOM_STATUS");
         let principalActivity =
@@ -170,12 +172,12 @@ module.exports = class Language {
             activities.find((a) => a.state && a.details) ||
             activities.find((a) => a.type !== "CUSTOM_STATUS");
         return [
-            customStatus && customStatus.state ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state}\n\n` : "",
+            customStatus && ((customStatus.emoji && !principalActivity) || customStatus.state) ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state ? customStatus.state : ""}\n\n` : "",
             principalActivity && principalActivity.name ? `${customStatus && customStatus.emoji && !customStatus.state
                 ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
             principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
             principalActivity && principalActivity.details ? `**•** ${principalActivity.details}\n` : "",
-            principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",
+            principalActivity && principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",
                 principalActivity.timestamps.end
                     ? "left" : "elapsed",
                 this.parseTime(principalActivity.timestamps.end
@@ -189,9 +191,10 @@ module.exports = class Language {
         let everyoneRole = serverRoles.guild.roles.everyone;
         let rolesParsed = serverRoles.cache
             .filter((r) => r.id !== everyoneRole.id)
-            .map((r) => `<@&${r.id}>`).slice(0, 15);
+            .sort((a, b) => b.position - a.position)
+            .map((r) => `<@&${r.id}>`).slice(0, 25);
         if (rolesParsed.length < 1) return this.get("nothing");
-        return rolesParsed.length > 15 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 15)}` : rolesParsed.join(", ");
+        return rolesParsed.length > 25 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 25)}` : rolesParsed.join(", ");
     }
 
     parseServerEmojis(serverEmojis) {
