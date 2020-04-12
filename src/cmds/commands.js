@@ -30,10 +30,16 @@ module.exports = class Commands extends Command {
 
         cmdsCategories.forEach((cat, i) => {
             if (cat.length < 1) return;
-            embed.addField(
-                this.lang.getHelp("categories")[i],
-                cat.map((c) => `\`${c.name}\``).join(" ")
-            );
+            if (i === 6)
+                embed.addField(
+                    this.lang.getHelp("categories")[i],
+                    this.lang.getHelp("nsfw")
+                );
+            else
+                embed.addField(
+                    this.lang.getHelp("categories")[i],
+                    cat.map((c) => `\`${c.name}\``).join(" ")
+                );
         });
 
         message.channel.send(embed);

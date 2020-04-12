@@ -95,6 +95,7 @@ module.exports = class Portuguese extends Language {
             covidError: "Ocorreu um erro ao obter informações do COVID19",
             // Fortnite Command
             fortniteNo: "Deve colocar um nome de usúario no `shop` para mostrar a loja de hoje.",
+            fortniteNoUser: "Você deve inserir um nome de usuário válido.",
             fortniteUserStats: (player, level) => `Estatísticas do jogador ${player} no Fortnite (Nivel: ${level})`,
             fortniteUserSolo: "Modo um jugador",
             fortniteUserDuo: "Modo duo",
@@ -111,6 +112,7 @@ module.exports = class Portuguese extends Language {
             fortniteShopPrice: "Preço",
             fortniteShopCurrency: "PaVos",
             fortniteShopItem: (current, max) => `Ítem ${current}/${max}`,
+            fortniteError: "Ocorreu um erro ao obter informações do jogador.",
             // Osu Command
             osuNoMode: "Deve colocar um modo válido (`normal`, `taiko`, `catch` ou `mania`).",
             osuNoUser: "Deve colocar um nome de usúario válido.",
@@ -120,7 +122,9 @@ module.exports = class Portuguese extends Language {
             osuPP: "Pontos de rendimentos",
             osuAccuracy: "Precisão",
             osuTotalScore: "Pontuação total",
-            osuScores: "Pontuações"
+            osuScores: "Pontuações",
+            // Say Command
+            sayNo: "Você deve colocar um texto válido para enviar."
         }, {
             permissions: {
                 default: "permissões por defeito",
@@ -215,8 +219,9 @@ module.exports = class Portuguese extends Language {
             // Help Command
             title: "Ayuda",
             titleCommands: "Lista de comandos",
-            description: (name, prefix, links) => `Olá, eu sou ${name}. Estou aqui para ajudá-lo em tudo o que você deseja fazer, você pode obter informações do servidor e/ou usuários, também pode se divertir jogando jogos incorporados a mim com seus amigos ou apenas executar a parte administrativa.\n\nMi meu prefixo neste servidor é \`${prefix}\` mas você pode me mencionar como um substituto para o prefixo.\nVocê pode encontrar categorias diferentes com os diferentes comandos que tenho com o comando \`${prefix}commands\`, cada uma começando com o prefixo mencionado.\n\nDeseas deseja informações mais detalhadas sobre um comando? use \`${prefix}help [Comando]\`.\n\nInformações úteis: ${links}`,
-            categories: ["Informações", "Entretenimento", "Interação", "Configuração", "Administração", "NSFW"],
+            description: (name, prefix, links) => `Olá, eu sou ${name}. Estou aqui para ajudá-lo em tudo o que você deseja fazer, você pode obter informações do servidor e/ou usuários, também pode se divertir jogando jogos incorporados a mim com seus amigos ou apenas executar a parte administrativa.\n\nMi meu prefixo neste servidor é \`${prefix}\` mas você pode me mencionar como um substituto para o prefixo.\nVocê pode encontrar categorias diferentes com os diferentes comandos que tenho com o comando \`${prefix}commands\`, cada uma começando com o prefixo mencionado.\n\nDeseas deseja informações mais detalhadas sobre um comando? Use \`${prefix}help [Comando]\`.\n\nInformações úteis: ${links}`,
+            categories: ["Informações", "Entretenimento", "Imagens", "Configuração", "Administração", "NSFW"],
+            nsfw: "Use este comando em um canal NSFW para visualizar os comandos NSFW.",
             footer: (count) => `${count} comandos disponiveis`,
             usage: "Uso",
             aliases: "Alias",

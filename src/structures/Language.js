@@ -157,12 +157,14 @@ module.exports = class Language {
         let hoistRole = memberRoles.hoist;
         let rolesParsed = memberRoles.cache
             .filter((r) => r.id !== everyoneRole.id)
+            .sort((a, b) => b.position - a.position)
             .map((r) => (r.id === hoistRole.id ? `__<@&${r.id}>__` : `<@&${r.id}>`))
             .slice(0, 15);
         if (rolesParsed.length < 1) return this.get("nothing");
         return rolesParsed.length > 15 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 15)}` : rolesParsed.join(", ");
     }
 
+    // eslint-disable-next-line complexity
     parseMemberActivity(activities) {
         let customStatus = activities.find((a) => a.type === "CUSTOM_STATUS");
         let principalActivity =
@@ -189,9 +191,10 @@ module.exports = class Language {
         let everyoneRole = serverRoles.guild.roles.everyone;
         let rolesParsed = serverRoles.cache
             .filter((r) => r.id !== everyoneRole.id)
-            .map((r) => `<@&${r.id}>`).slice(0, 15);
+            .sort((a, b) => b.position - a.position)
+            .map((r) => `<@&${r.id}>`).slice(0, 25);
         if (rolesParsed.length < 1) return this.get("nothing");
-        return rolesParsed.length > 15 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 15)}` : rolesParsed.join(", ");
+        return rolesParsed.length > 25 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 25)}` : rolesParsed.join(", ");
     }
 
     parseServerEmojis(serverEmojis) {
