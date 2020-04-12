@@ -170,12 +170,12 @@ module.exports = class Language {
             activities.find((a) => a.state && a.details) ||
             activities.find((a) => a.type !== "CUSTOM_STATUS");
         return [
-            customStatus && customStatus.state ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state}\n\n` : "",
+            customStatus && ((customStatus.emoji && !principalActivity) || customStatus.state) ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state ? customStatus.state : ""}\n\n` : "",
             principalActivity && principalActivity.name ? `${customStatus && customStatus.emoji && !customStatus.state
                 ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
             principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
             principalActivity && principalActivity.details ? `**•** ${principalActivity.details}\n` : "",
-            principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",
+            principalActivity && principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",
                 principalActivity.timestamps.end
                     ? "left" : "elapsed",
                 this.parseTime(principalActivity.timestamps.end
