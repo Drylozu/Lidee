@@ -214,7 +214,8 @@ module.exports = class Spanish extends Language {
         }, {
             // Help Command
             title: "Ayuda",
-            description: (name, prefix, links) => `Hola, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\` pero puedes mencionarme como remplazo al prefijo.\nAbajo encontrarás diferentes categorías con los diferentes comandos que dispongo, cada uno de estos empieza por el prefijo anteriormente mencionado.\n\n¿Deseas información más detallada de un comando? Utiliza \`${prefix}help [Comando]\`.\n\nEnlaces útiles: ${links}`,
+            titleCommands: "Lista de comandos",
+            description: (name, prefix, links) => `Hola, yo soy ${name}. Estoy aquí para ayudarte en todo lo que desees hacer, puedes obtener información del servidor y/o de usuarios, también puedes entretenerte bastante jugando juegos incorporados en mí con tus amigos o simplemente ejecutar la parte administrativa.\n\nMi prefijo en este servidor es \`${prefix}\` pero puedes mencionarme como remplazo al prefijo.\nPuedes encontrar diferentes categorías con los diferentes comandos que dispongo con el comando \`${prefix}commands\`, cada uno de estos empieza por el prefijo anteriormente mencionado.\n\n¿Deseas información más detallada de un comando? Utiliza \`${prefix}help [Comando]\`.\n\nEnlaces útiles: ${links}`,
             categories: ["Información", "Entretenimiento", "Interacción", "Configuración", "Administración", "NSFW"],
             footer: (count) => `${count} comandos disponibles`,
             usage: "Uso",
@@ -240,6 +241,7 @@ module.exports = class Spanish extends Language {
             kissDescription: "Besa a un miembro por ID o mención.",
             fortniteDescription: "Muestra información de la tienda de hoy o un jugador de Fortnite",
             osuDescription: "Muestra información de un jugador de osu!",
+            commandsDescription: "Muestra todos los comandos disponibles",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -261,7 +263,8 @@ module.exports = class Spanish extends Language {
             kissUsage: (prefix) => `${prefix}kiss <Miembro>\n${prefix}kiss @Deivid#0045`,
             covid19Usage: (prefix) => `${prefix}covid19 [País]\n${prefix}covid19\n${prefix}covid19 Mexico`,
             fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jugador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
-            osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jugador>\n${prefix}osu normal Motxi`
+            osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jugador>\n${prefix}osu normal Motxi`,
+            commandsUsage: (prefix) => `${prefix}commands`
         });
 
         this.displayName = "spanish";
