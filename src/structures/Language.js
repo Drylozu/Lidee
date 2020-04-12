@@ -169,19 +169,18 @@ module.exports = class Language {
             activities.find((a) => a.type === "LISTENING" && (a.state && a.details)) ||
             activities.find((a) => a.state && a.details) ||
             activities.find((a) => a.type !== "CUSTOM_STATUS");
-        let { name, state, details, timestamps, type } = principalActivity;
         return [
             customStatus && customStatus.state ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state}\n\n` : "",
-            name ? `${customStatus && customStatus.emoji && !customStatus.state
-                ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", type)} **${name}**.${state && details ? this.getEmoji("richPresence") : ""}\n` : "",
-            state ? `**•** ${state}\n` : "",
-            details ? `**•** ${details}\n` : "",
-            timestamps && timestamps.start ? this.getConstant("time",
-                timestamps.end
+            principalActivity && principalActivity.name ? `${customStatus && customStatus.emoji && !customStatus.state
+                ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
+            principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
+            principalActivity && principalActivity.details ? `**•** ${principalActivity.details}\n` : "",
+            principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",
+                principalActivity.timestamps.end
                     ? "left" : "elapsed",
-                this.parseTime(timestamps.end
-                    ? timestamps.end - timestamps.end
-                    : new Date() - timestamps.start)
+                this.parseTime(principalActivity.timestamps.end
+                    ? principalActivity.timestamps.end - principalActivity.timestamps.end
+                    : new Date() - principalActivity.timestamps.start)
             ) : ""
         ].filter((o) => o !== "").join("");
     }
@@ -206,7 +205,25 @@ module.exports = class Language {
             normalEmojis = [this.get("nothing")];
         if (animatedEmojis.size < 1)
             animatedEmojis = [this.get("nothing")];
-        return `**${this.get("serverEmojisNormal")}**:\n> ${normalEmojis.length > 15 ? `${normalEmojis.slice(0, 15).join(" ")} ${this.get("others", normalEmojis.length - 15)}` : normalEmojis.slice(0, 15).join(" ")}\n**${this.get("serverEmojisAnimated")}**:\n> ${animatedEmojis.length > 15 ? `${animatedEmojis.slice(0, 15).join(" ")} ${this.get("others", animatedEmojis.length - 15)}` : animatedEmojis.slice(0, 15).join(" ")}`;
+
+        let normalEmojisOut = [];
+        let animatedEmojisOut = [];
+        for (let emoji of normalEmojis) {
+            if ((normalEmojisOut.join(" ").length + emoji.length) > 474) {
+                normalEmojisOut.push(this.get("others", normalEmojis.length - normalEmojisOut.length));
+                break;
+            }
+            normalEmojisOut.push(emoji);
+        }
+        for (let emoji of animatedEmojis) {
+            if ((animatedEmojisOut.join(" ").length + emoji.length) > 474) {
+                animatedEmojisOut.push(this.get("others", normalEmojis.length - animatedEmojisOut.length));
+                break;
+            }
+            animatedEmojisOut.push(emoji);
+        }
+
+        return `**${this.get("serverEmojisNormal")}**:\n> ${normalEmojisOut.join(" ")}\n**${this.get("serverEmojisAnimated")}**:\n> ${animatedEmojisOut.join(" ")}`;
     }
 
     parseServerFeatures(features) {
