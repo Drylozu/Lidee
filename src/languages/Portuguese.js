@@ -110,7 +110,7 @@ module.exports = class Portuguese extends Language {
             fortniteShopType: "Tipo",
             fortniteShopRarity: "Raridade",
             fortniteShopPrice: "Preço",
-            fortniteShopCurrency: "PaVos",
+            fortniteShopCurrency: "V-Bucks",
             fortniteShopItem: (current, max) => `Ítem ${current}/${max}`,
             fortniteError: "Ocorreu um erro ao obter informações do jogador.",
             // Osu Command
@@ -244,9 +244,11 @@ module.exports = class Portuguese extends Language {
             slapDescription: "Bata em um membro por ID ou menção",
             patDescription: "Acaricia um membro por ID ou menção.",
             kissDescription: "Beijar um membro por ID ou menção.",
-            fortniteDescription: "Exibir informações da loja de hoje ou de um jogador Fortnite",
+            fortniteDescription: "Exibir informações da loja de hoje ou de um jogador Fortnite.",
             osuDescription: "Mostrar informações sobre um osu player!",
-            commandsDescription: "Mostrar todos os comandos disponíveis",
+            commandsDescription: "Mostrar todos os comandos disponíveis.",
+            covid19Description: "Mostra o avance do COVID19 ao nivel global ou do cada pais.",
+            sayDescription: "O bot vai repetir oque voce coloque.",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -269,7 +271,8 @@ module.exports = class Portuguese extends Language {
             covid19Usage: (prefix) => `${prefix}covid19 [País]\n${prefix}covid19\n${prefix}covid19 Mexico`,
             fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jogador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jogador>\n${prefix}osu normal Motxi`,
-            commandsUsage: (prefix) => `${prefix}commands`
+            commandsUsage: (prefix) => `${prefix}commands`,
+            sayUsage: (prefix) => `${prefix}say <Texto>\n${prefix}say Loritta? nao, sou muito melhor`
         });
 
         this.displayName = "portuguese";

@@ -95,7 +95,7 @@ module.exports = class Spanish extends Language {
             covidError: "Ha ocurrido un error obteniendo información del COVID19",
             // Fortnite Command
             fortniteNo: "Debes colocar un nombre de usuario o `shop` para mostrar la tienda de hoy.",
-            fortniteNoUser: "Debes colcar un nombre de usuario válido",
+            fortniteNoUser: "Debes colocar un nombre de usuario válido",
             fortniteUserStats: (player, level) => `Estadisticas del jugador ${player} en Fortnite (Nivel: ${level})`,
             fortniteUserSolo: "Modo un jugador",
             fortniteUserDuo: "Modo duo",
@@ -244,9 +244,11 @@ module.exports = class Spanish extends Language {
             slapDescription: "Dale una paliza a un miembro por ID o mención.",
             patDescription: "Acaricia a un miembro por ID o mención.",
             kissDescription: "Besa a un miembro por ID o mención.",
-            fortniteDescription: "Muestra información de la tienda de hoy o un jugador de Fortnite",
-            osuDescription: "Muestra información de un jugador de osu!",
-            commandsDescription: "Muestra todos los comandos disponibles",
+            fortniteDescription: "Muestra información de la tienda de hoy o un jugador de Fortnite.",
+            osuDescription: "Muestra información de un jugador de osu!.",
+            commandsDescription: "Muestra todos los comandos disponibles.",
+            covid19Description: "Muestra el avance del COVID19 a nivel mundial o de cada pais.",
+            sayDescription: "El bot repetira lo que le indiques.",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -269,7 +271,8 @@ module.exports = class Spanish extends Language {
             covid19Usage: (prefix) => `${prefix}covid19 [País]\n${prefix}covid19\n${prefix}covid19 Mexico`,
             fortniteUsage: (prefix) => `${prefix}fortnite <shop|Jugador> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jugador>\n${prefix}osu normal Motxi`,
-            commandsUsage: (prefix) => `${prefix}commands`
+            commandsUsage: (prefix) => `${prefix}commands`,
+            sayUsage: (prefix) => `${prefix}say <Texto>\n${prefix}say Competencia? No existe, soy el mejor`
         });
 
         this.displayName = "spanish";

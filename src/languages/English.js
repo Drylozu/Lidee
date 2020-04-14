@@ -244,9 +244,11 @@ module.exports = class English extends Language {
             slapDescription: "Slaps a member by ID or mention.",
             patDescription: "Pats a member by ID or mention.",
             kissDescription: "Kisses a member by ID or mention.",
-            fortniteDescription: "Shows information from today's store or a Fortnite player",
-            osuDescription: "Shows information of a osu! player",
-            commandsDescription: "Shows all available commands",
+            fortniteDescription: "Shows information from today's store or a Fortnite player.",
+            osuDescription: "Shows information of a osu! player.",
+            commandsDescription: "Shows all available commands.",
+            covid19Description: "Shows the progress of the COVID19 worldwide or in each country.",
+            sayDescription: "The bot will repeat what you indicate",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid#0045 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -269,7 +271,8 @@ module.exports = class English extends Language {
             covid19Usage: (prefix) => `${prefix}covid19 [Country]\n${prefix}covid19\n${prefix}covid19 United States`,
             fortniteUsage: (prefix) => `${prefix}fortnite <shop|Player> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Player>\n${prefix}osu normal Motxi`,
-            commandsUsage: (prefix) => `${prefix}commands`
+            commandsUsage: (prefix) => `${prefix}commands`,
+            sayUsage: (prefix) => `${prefix}say <Text>\n${prefix}say I'm the best bot forever`
         });
 
         this.displayName = "english";
