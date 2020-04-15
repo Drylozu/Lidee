@@ -30,7 +30,7 @@ module.exports = class Commands extends Command {
 
         cmdsCategories.forEach((cat, i) => {
             if (cat.length < 1) return;
-            if (i === 6)
+            if (i === 6 && !message.channel.nsfw)
                 embed.addField(
                     this.lang.getHelp("categories")[i],
                     this.lang.getHelp("nsfw")

@@ -16,10 +16,10 @@ module.exports = class Kick extends Command {
         if (!member.kickable) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("kickNo")}`);
 
         try {
-            await message.guild.members.kick(member.id, {
-                reason: `${message.author.tag}.${args.join(" ").length > 0 ? ` ${args.join(" ")}` : ""}`
+            await member.kick(member.id, {
+                reason: `${message.author.tag}.${args.slice(1).join(" ").length > 0 ? ` ${args.slice(1).join(" ")}` : ""}`
             });
-            message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("kick")}`);
+            message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("kick", member.user.tag)}`);
         } catch (e) {
             this.client.log(e.toString(), e, message);
             message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("kickError")}`);

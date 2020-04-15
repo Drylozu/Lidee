@@ -6,7 +6,7 @@ module.exports = class Avatar extends Command {
         super(client, {
             name: "avatar",
             aliases: ["av", "useravatar"],
-            category: 1
+            category: 2
         });
     }
 

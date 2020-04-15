@@ -7,7 +7,7 @@ module.exports = class User extends Command {
         super(client, {
             name: "user",
             aliases: ["userinfo", "ui", "u"],
-            category: 1,
+            category: 2,
             botPermissions: ["EMBED_LINKS"]
         });
     }
