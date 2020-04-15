@@ -6,7 +6,7 @@ module.exports = class Server extends Command {
         super(client, {
             name: "server",
             aliases: ["serverinfo", "si", "s"],
-            category: 1,
+            category: 2,
             botPermissions: ["EMBED_LINKS"]
         });
     }

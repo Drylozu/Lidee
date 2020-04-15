@@ -95,7 +95,7 @@ module.exports = class English extends Language {
             covidError: "An error ocurred obtaining information about the COVID19",
             // Fortnite Command
             fortniteNo: "You must enter an username or `shop` to display today's store.",
-            fortniteNoUser: "You must enter a valid username.",
+            fortniteNoUser: "You must enter a valid Fortnite username.",
             fortniteUserStats: (player, level) => `${player} player statistic in Fortnite (Level: ${level})`,
             fortniteUserSolo: "Mode singleplayer",
             fortniteUserDuo: "Mode duo",
@@ -112,10 +112,10 @@ module.exports = class English extends Language {
             fortniteShopPrice: "Price",
             fortniteShopCurrency: "V-Bucks",
             fortniteShopItem: (current, max) => `Item ${current}/${max}`,
-            fortniteError: "An error occurred obtaining player information.",
+            fortniteError: "An error occurred obtaining Fortnite player information.",
             // Osu Command
             osuNoMode: "You must enter a valid mode (`normal`, `taiko`, `catch` or `mania`).",
-            osuNoUser: "You must enter a valid username.",
+            osuNoUser: "You must enter a valid osu! username.",
             osuStats: (player, mode) => `${player} player statistics in osu!${mode}`,
             osuCountry: "Country",
             osuLevel: "Level",
@@ -124,7 +124,14 @@ module.exports = class English extends Language {
             osuTotalScore: "Total score",
             osuScores: "Scores",
             // Say Command
-            sayNo: "You must enter a valid text to send."
+            sayNo: "You must enter a valid text to send.",
+            // Roblox Command
+            robloxNo: "You must enter a valid Roblox username.",
+            robloxId: (id) => `**ID**: ${id}`,
+            robloxOnline: "Online",
+            robloxGroups: "Groups",
+            robloxFriends: "Friends",
+            robloxError: "An error occurred obtaining Roblox player information."
         }, {
             permissions: {
                 default: "default permissions",
@@ -220,7 +227,7 @@ module.exports = class English extends Language {
             title: "Help",
             titleCommands: "List of commands",
             description: (name, prefix, links) => `Hello, I'm ${name}. I'm here to help you in everything you wanna do, you can get information about the server and/or of an user, you can also have a lot of fun playing games incorporated in me with your friends or just execute the administrative part.\n\nMy prefix in this server is \`${prefix}\` but you can mention me as a replacement for the prefix.\nYou can find different categories with the different commands I have available with the command \`${prefix}commands\`, each one of them starts with the previously mentioned prefix.\n\nDo you want more detailed information about a command? Use \`${prefix}help [Command]\`.\n\nUsefull links: ${links}`,
-            categories: ["Information", "Entertainment", "Images", "Configuration", "Administration", "NSFW"],
+            categories: ["Information", "Utility", "Entertainment", "Configuration", "Administration", "NSFW"],
             nsfw: "Use this command on an NSFW channel to view NSFW commands.",
             footer: (count) => `${count} commands available`,
             usage: "Usage",
@@ -244,9 +251,12 @@ module.exports = class English extends Language {
             slapDescription: "Slaps a member by ID or mention.",
             patDescription: "Pats a member by ID or mention.",
             kissDescription: "Kisses a member by ID or mention.",
-            fortniteDescription: "Shows information from today's store or a Fortnite player",
-            osuDescription: "Shows information of a osu! player",
-            commandsDescription: "Shows all available commands",
+            covid19Description: "Shows the progress of the COVID19 worldwide or in each country.",
+            fortniteDescription: "Shows information from today's store or a Fortnite player.",
+            osuDescription: "Shows information of a osu! player.",
+            commandsDescription: "Shows all available commands.",
+            sayDescription: "The bot will repeat what you indicate",
+            robloxDescription: "Shows information of a Roblox player.",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid#0045 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -269,7 +279,9 @@ module.exports = class English extends Language {
             covid19Usage: (prefix) => `${prefix}covid19 [Country]\n${prefix}covid19\n${prefix}covid19 United States`,
             fortniteUsage: (prefix) => `${prefix}fortnite <shop|Player> [Objeto de tienda]\n${prefix}fortnite shop\n${prefix}fortnite shop 4\n${prefix}fortnite Drylotranz`,
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Player>\n${prefix}osu normal Motxi`,
-            commandsUsage: (prefix) => `${prefix}commands`
+            commandsUsage: (prefix) => `${prefix}commands`,
+            sayUsage: (prefix) => `${prefix}say <Text>\n${prefix}say I'm the best bot forever`,
+            robloxUsage: (prefix) => `${prefix}roblox [Player]\n${prefix}roblox Dlodian131`
         });
 
         this.displayName = "english";

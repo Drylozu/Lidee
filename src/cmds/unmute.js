@@ -27,17 +27,13 @@ module.exports = class Unmute extends Command {
 
         message.guild.channels.cache
             .filter((c) => c.manageable)
-            .forEach((channel) => {
-                if (!channel.permissionOverwrites.get(role.id).deny.has("SEND_MESSAGES") ||
-                    !channel.permissionOverwrites.get(role.id).deny.has("ADD_REACTIONS"))
-                    channel.createOverwrite(role.id, {
-                        SEND_MESSAGES: false,
-                        ADD_REACTIONS: false
-                    });
-            });
+            .forEach((channel) => channel.createOverwrite(role.id, {
+                SEND_MESSAGES: false,
+                ADD_REACTIONS: false
+            }));
 
         if (!member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("unmuteNo")}`);
         await member.roles.remove(role.id);
-        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("unmute")}`);
+        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("unmute", member.user.tag)}`);
     }
 }

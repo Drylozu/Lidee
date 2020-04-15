@@ -26,6 +26,6 @@ module.exports = class Fortnite extends API {
     async getUserStats(username) {
         let userId = await this.getUserId(username);
         let userStats = await this.request("stats", { account: userId });
-        return userStats;
+        return { ...userStats, id: userId };
     }
 }

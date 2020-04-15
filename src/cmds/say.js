@@ -4,7 +4,7 @@ module.exports = class Say extends Command {
     constructor(client) {
         super(client, {
             name: "say",
-            category: 5
+            category: 2
         });
     }
 
