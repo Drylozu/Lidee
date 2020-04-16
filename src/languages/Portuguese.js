@@ -131,7 +131,14 @@ module.exports = class Portuguese extends Language {
             robloxOnline: "Em linha",
             robloxGroups: "Grupos",
             robloxFriends: "Amigos",
-            robloxError: "Ocorreu um erro ao obter as informações do jogador Roblox."
+            robloxError: "Ocorreu um erro ao obter as informações do jogador Roblox.",
+            // Roles Command
+            rolesNo: "Você deve marcar ao um miembro ou colocar o ID",
+            rolesOpts: "Você debe colocar uma opçao do que você quer fazer: `add, remove`",
+            rolesRol: "Você deve marcar um rol ou colocar o ID.",
+            rolNotFound: "No foi posivel pegar nesse cargo no servidor.",
+            rolesAdd: (member, role) => `Foi agredado o cargo **${role}** pra o membro **${member}**.`,
+            rolesRemove: (member, role) => `Foi retirado o cargo **${role}** pra o membro **${member}**.`
         }, {
             permissions: {
                 default: "permissões por defeito",
@@ -257,6 +264,7 @@ module.exports = class Portuguese extends Language {
             commandsDescription: "Mostrar todos os comandos disponíveis.",
             sayDescription: "O bot vai repetir oque voce coloque.",
             robloxDescription: "Mostra informações de um osu! jogador.",
+            rolesDescription: "Agrega o remueva um ou varios cargos do algum membro do seu servidor.",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -281,7 +289,8 @@ module.exports = class Portuguese extends Language {
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jogador>\n${prefix}osu normal Motxi`,
             commandsUsage: (prefix) => `${prefix}commands`,
             sayUsage: (prefix) => `${prefix}say <Texto>\n${prefix}say Loritta? nao, sou muito melhor`,
-            robloxUsage: (prefix) => `${prefix}roblox [Jogador]\n${prefix}roblox Dlodian131`
+            robloxUsage: (prefix) => `${prefix}roblox [Jogador]\n${prefix}roblox Dlodian131`,
+            rolesUsage: (prefix) => `${prefix}roles <Membro> [remove|add] [Cargo(s)]\n${prefix}roles @Free#7870 add @Miembro\n${prefix}roles @Free#7870 remove @Miembro`
         });
 
         this.displayName = "portuguese";

@@ -131,7 +131,14 @@ module.exports = class English extends Language {
             robloxOnline: "Online",
             robloxGroups: "Groups",
             robloxFriends: "Friends",
-            robloxError: "An error occurred obtaining Roblox player information."
+            robloxError: "An error occurred obtaining Roblox player information.",
+            // Roles Command
+            rolesNo: "You need to mention a member o provide an ID",
+            rolesOpts: "You need to put what do you want do: `add, remove`",
+            rolesRol: "You need to mention the rol ou provide an Role Id.",
+            rolNotFound: "It no posible to get the rol in the server..",
+            rolesAdd: (member, role) => `Has been added role **${role}** for the member **${member}**.`,
+            rolesRemove: (member, role) => `Has been remove role **${role}** for the member **${member}**.`
         }, {
             permissions: {
                 default: "default permissions",
@@ -257,6 +264,7 @@ module.exports = class English extends Language {
             commandsDescription: "Shows all available commands.",
             sayDescription: "The bot will repeat what you indicate",
             robloxDescription: "Shows information of a Roblox player.",
+            rolesDescription: "Add or Remove a rol(s) of a member in your server.",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid#0045 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -281,7 +289,8 @@ module.exports = class English extends Language {
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Player>\n${prefix}osu normal Motxi`,
             commandsUsage: (prefix) => `${prefix}commands`,
             sayUsage: (prefix) => `${prefix}say <Text>\n${prefix}say I'm the best bot forever`,
-            robloxUsage: (prefix) => `${prefix}roblox [Player]\n${prefix}roblox Dlodian131`
+            robloxUsage: (prefix) => `${prefix}roblox [Player]\n${prefix}roblox Dlodian131`,
+            rolesUsage: (prefix) => `${prefix}roles <Member> [remove|add] [Rol(s)]\n${prefix}roles @Free#7870 add @Miembro\n${prefix}roles @Free#7870 remove @Miembro`
         });
 
         this.displayName = "english";

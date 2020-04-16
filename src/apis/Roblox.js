@@ -1,6 +1,6 @@
 const API = require("../structures/API");
 
-module.exports = class Osu extends API {
+module.exports = class Roblox extends API {
     constructor() {
         super({
             name: "roblox",

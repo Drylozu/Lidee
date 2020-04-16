@@ -131,7 +131,14 @@ module.exports = class Spanish extends Language {
             robloxOnline: "En línea",
             robloxGroups: "Grupos",
             robloxFriends: "Amigos",
-            robloxError: "Ha ocurrido un error obteniendo información del jugador de Roblox."
+            robloxError: "Ha ocurrido un error obteniendo información del jugador de Roblox.",
+            // Roles Command
+            rolesNo: "Debes mencionar a un miembro o colocar su ID",
+            rolesOpts: "Debe colocar una opcion de lo que quieres hacer: `add, remove`",
+            rolesRol: "Debes mencionar un rol o colocar su ID.",
+            rolNotFound: "No se pudo obtener ese rol en el servidor.",
+            rolesAdd: (member, role) => `Se agrego el rol **${role}** al miembro **${member}**.`,
+            rolesRemove: (member, role) => `Se removio el rol **${role}** al miembro **${member}**.`
         }, {
             permissions: {
                 default: "permisos por defecto",
@@ -257,6 +264,7 @@ module.exports = class Spanish extends Language {
             commandsDescription: "Muestra todos los comandos disponibles.",
             sayDescription: "El bot repetira lo que le indiques.",
             robloxDescription: "Muestra información de un jugador de Roblox.",
+            rolesDescription: "Agrega o remueva uno o varios rol(es) a un miembro del servidor.",
             // Commands Usage
             banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid#0045\n${prefix}ban 123123123123123123 >:[`,
             softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid#0045 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -281,7 +289,8 @@ module.exports = class Spanish extends Language {
             osuUsage: (prefix) => `${prefix}osu <normal|taiko|catch|mania> <Jugador>\n${prefix}osu normal Motxi`,
             commandsUsage: (prefix) => `${prefix}commands`,
             sayUsage: (prefix) => `${prefix}say <Texto>\n${prefix}say Competencia? No existe, soy el mejor`,
-            robloxUsage: (prefix) => `${prefix}roblox [Jugador]\n${prefix}roblox Dlodian131`
+            robloxUsage: (prefix) => `${prefix}roblox [Jugador]\n${prefix}roblox Dlodian131`,
+            rolesUsage: (prefix) => `${prefix}roles <Miembro> [remove|add] [Rol(es)]\n${prefix}roles @Free#7870 add @Miembro\n${prefix}roles @Free#7870 remove @Miembro`
         });
 
         this.displayName = "spanish";
