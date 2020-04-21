@@ -7,7 +7,7 @@ module.exports = class Server extends Command {
             name: "server",
             aliases: ["serverinfo", "si", "s"],
             category: 2,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

@@ -5,7 +5,8 @@ module.exports = class Fortnite extends Command {
     constructor(client) {
         super(client, {
             name: "fortnite",
-            category: 1
+            category: 1,
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

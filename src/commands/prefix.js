@@ -6,7 +6,7 @@ module.exports = class Prefix extends Command {
         super(client, {
             name: "prefix",
             category: 4,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

@@ -1,0 +1,22 @@
+const { MessageAttachment } = require("discord.js");
+const Command = require("../structures/Command");
+
+module.exports = class Rainbow extends Command {
+    constructor(client) {
+        super(client, {
+            name: "rainbow",
+            aliases: ["rbow", "rain", "lgtb"],
+            category: 3,
+            botPermissions: ["channel", "ATTACH_FILES"]
+        });
+    }
+
+    async run(message, args) {
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || message.guild.members.cache.find((m) => m.user.tag.includes(args.join(" "))) || message.member;
+        let attachment = message.attachments.first() &&
+            [".png", ".gif", ".jpg"].some((e) => message.attachments.first().url.endsWith(e))
+            ? message.attachments.first().url : member.user.displayAvatarURL({ format: "png", size: 256 });
+        let rainbow = await this.client.apis.weez.getRainbow(attachment);
+        message.channel.send(new MessageAttachment(rainbow, "rainbow.png"));
+    }
+}

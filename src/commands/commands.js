@@ -7,7 +7,7 @@ module.exports = class Commands extends Command {
             name: "commands",
             category: 1,
             aliases: ["cmds", "cmmds"],
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

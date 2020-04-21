@@ -7,7 +7,7 @@ module.exports = class Ping extends Command {
             name: "covid19",
             aliases: ["covid", "coronavirus"],
             category: 1,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 
@@ -16,7 +16,7 @@ module.exports = class Ping extends Command {
         try {
             let AllUpdated = await this.client.apis.covid.getAllLastUpdate();
             let { Global, Countries } = await this.client.apis.covid.getAllStats();
-            if (!country || !Countries.find((c) => c.Country.toLowerCase() === country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()))
+            if (!country || !Countries.find((c) => c.Country.toLowerCase().includes(country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())))
                 message.channel.send(new MessageEmbed()
                     .setAuthor(this.lang.get("covidStatsGlobal"), message.author.displayAvatarURL())
                     .setDescription(`**${this.lang.get("covidLastUpdate")}**:\n${this.lang.parseCompleteDate(new Date(AllUpdated))}`)

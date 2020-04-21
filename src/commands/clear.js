@@ -6,13 +6,12 @@ module.exports = class Clear extends Command {
             name: "clear",
             category: 5,
             aliases: ["prune", "purge"],
-            botPermissions: ["MANAGE_MESSAGES"]
+            botPermissions: ["channel", "MANAGE_MESSAGES"],
+            userPermissions: ["channel", "MANAGE_MESSAGES"]
         });
     }
 
     async run(message, [messages]) {
-        let channelPerms = message.channel.permissionsFor(message.member);
-        if (!message.member.hasPermission(["MANAGE_MESSAGE"]) || !channelPerms.has("MANAGE_MESSAGES")) return message.channel.send(this.lang.get("userPerms", this.userPermissions));
         if (!messages || !parseInt(messages)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("clearNumber")}`);
         if (parseInt(message) < 1 || parseInt(messages) > 100) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("clearLimit")}`);
 

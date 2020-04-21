@@ -8,12 +8,12 @@ module.exports = class User extends Command {
             name: "user",
             aliases: ["userinfo", "ui", "u"],
             category: 2,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 
-    async run(message, [id]) {
-        let member = message.guild.members.resolve(id) || message.mentions.members.first() || message.member;
+    async run(message, args) {
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || message.guild.members.cache.find((m) => m.user.discriminator.includes(args.join(" "))) || message.member;
         let user = await this.client.db.users.findOne({ _id: member.id }).exec()
         if (!user)
             user = { flags: 0 };

@@ -1,26 +1,26 @@
 {
-    "name": "maoid",
-    "version": "1.0.1",
-    "description": "Maoid Discord Bot",
+    "name": "lidee",
+    "version": "1.0.2-beta",
+    "description": "Lidee Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",
     "license": "GNU v3",
     "private": true,
-    "engines": {
-        "node": "13.x"
-    },
     "scripts": {
         "eslint": "eslint src/",
         "start": "node src/index.js"
     },
-    "devDependencies": {
-        "eslint": "^6.8.0"
+    "engines": {
+        "node": "13.x"
     },
     "dependencies": {
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
         "mongoose": "^5.9.7",
         "phin": "^3.4.1"
+    },
+    "devDependencies": {
+        "eslint": "^6.8.0"
     },
     "keywords": [
         "Maoid",

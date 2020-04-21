@@ -7,12 +7,12 @@ module.exports = class Slap extends Command {
             name: "slap",
             aliases: ["hit"],
             category: 3,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 
-    async run(message, [id]) {
-        let member = message.guild.members.resolve(id) || message.mentions.members.first();
+    async run(message, args) {
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || message.guild.members.cache.find((m) => m.user.tag.includes(args.join(" ")));
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
         if (member.user.bot) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("slapBot")}`);
         let image = await this.client.apis.nekosLife.getSlapImage();

@@ -1,6 +1,7 @@
 require("../utils/prototypes")();
-const { Client, Collection, MessageEmbed } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const LanguageManager = require("../managers/Languages");
+const CommandsManager = require("../managers/Commands");
 const APIManager = require("../managers/APIs");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -9,7 +10,6 @@ const fs = require("fs");
 module.exports = class Maoid extends Client {
     constructor(...args) {
         super(...args);
-        this.commands = new Collection();
 
         Object.defineProperty(this, "botConfig", { value: args[0].botConfig });
 
@@ -26,10 +26,10 @@ module.exports = class Maoid extends Client {
 
         this.db = require("../utils/databases");
 
+        this.commands = new CommandsManager(this);
         this.languages = new LanguageManager();
         this.apis = new APIManager();
 
-        this.loadCommands();
         this.loadEvents();
 
         this.login(this.botConfig.token);
@@ -39,13 +39,6 @@ module.exports = class Maoid extends Client {
         for (let file of fs.readdirSync(path.join(__dirname, "../events/"))) {
             let event = new (require(`../events/${file}`))(this);
             this.on(file.split(".")[0], (...args) => event.run(...args));
-        }
-    }
-
-    loadCommands() {
-        for (let file of fs.readdirSync(path.join(__dirname, "../cmds/"))) {
-            let command = new (require(`../cmds/${file}`))(this);
-            this.commands.set(command.name, command);
         }
     }
 
