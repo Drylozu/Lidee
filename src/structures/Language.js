@@ -1,7 +1,7 @@
 const { Permissions } = require("discord.js");
 
 module.exports = class Language {
-    constructor(strings, constants, help) {
+    constructor({ strings, constants, help }) {
         Object.defineProperty(this, "strings", { value: strings });
         Object.defineProperty(this, "constants", { value: constants });
         Object.defineProperty(this, "help", { value: help });

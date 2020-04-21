@@ -3,8 +3,8 @@ const phin = require("phin");
 module.exports = class API {
     constructor({ name, baseURL, key }) {
         Object.defineProperty(this, "key", { value: key });
-        this.baseURL = baseURL;
         this.name = name;
+        this.baseURL = baseURL;
     }
 
     async request(path, options = {}) {

@@ -6,7 +6,8 @@ module.exports = class Osu extends Command {
         super(client, {
             name: "osu",
             aliases: [],
-            category: 1
+            category: 1,
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

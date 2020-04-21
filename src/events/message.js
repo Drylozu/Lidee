@@ -1,3 +1,4 @@
+const UserFlags = require("../structures/UserFlags");
 const { Collection } = require("discord.js");
 
 module.exports = class EventMessage {
@@ -44,7 +45,7 @@ module.exports = class EventMessage {
             cmdFile.prepare({ guild, user });
             let cooldowned = this.handleCooldown({ message, cmdFile });
             let cmdValids = cmdFile.validate({ message });
-            if (cooldowned || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
+            if ((cooldowned && !(new UserFlags(user.flags).has("DEVELOPER"))) || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
             cmdFile.run(message, args);
         } catch (e) {
             err = true;

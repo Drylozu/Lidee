@@ -1,12 +1,12 @@
 const Command = require("../structures/Command");
 
-module.exports = class Unmute extends Command {
+module.exports = class Mute extends Command {
     constructor(client) {
         super(client, {
-            name: "unmute",
+            name: "mute",
             category: 5,
-            botPermissions: ["MANAGE_ROLES"],
-            userPermissions: ["MANAGE_ROLES"]
+            botPermissions: ["guild", "MANAGE_ROLES"],
+            userPermissions: ["guild", "MANAGE_ROLES"]
         });
     }
 
@@ -32,8 +32,8 @@ module.exports = class Unmute extends Command {
                 ADD_REACTIONS: false
             }));
 
-        if (!member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("unmuteNo")}`);
-        await member.roles.remove(role.id);
-        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("unmute", member.user.tag)}`);
+        if (member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("muteNo")}`);
+        await member.roles.add(role.id);
+        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("mute", member.user.tag)}`);
     }
 }

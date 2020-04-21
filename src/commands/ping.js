@@ -7,7 +7,7 @@ module.exports = class Ping extends Command {
             name: "ping",
             aliases: ["latency"],
             category: 1,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

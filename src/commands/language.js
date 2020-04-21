@@ -7,7 +7,7 @@ module.exports = class Language extends Command {
             name: "language",
             aliases: ["lang"],
             category: 4,
-            botPermissions: ["EMBED_LINKS"]
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 

@@ -6,8 +6,8 @@ module.exports = class Clear extends Command {
             name: "clear",
             category: 5,
             aliases: ["prune", "purge"],
-            botPermissions: ["MANAGE_MESSAGES"],
-            userPermissions: ["MANAGE_MESSAGES"]
+            botPermissions: ["channel", "MANAGE_MESSAGES"],
+            userPermissions: ["channel", "MANAGE_MESSAGES"]
         });
     }
 

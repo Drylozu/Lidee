@@ -19,6 +19,7 @@ module.exports = class Command {
         this.lang = this.client.languages.get(this.guild.language);
     }
 
+    // eslint-disable-next-line complexity
     validate({ message }) {
         let conditionals = {
             ownerOnly: false,
@@ -42,7 +43,15 @@ module.exports = class Command {
             }
 
         if (this.userPermissions.length > 0)
-            if (!message.member.hasPermission(this.userPermissions)) {
+            if (this.userPermissions[0] === "guild" &&
+                !message.member.hasPermission(this.userPermissions.slice(1))) {
+                conditionals.userPermissions = true;
+                if (!messageSent) {
+                    message.channel.send(this.lang.get("userPerms", this.userPermissions));
+                    messageSent = true;
+                }
+            } else if (this.userPermissions[0] === "channel" &&
+                !message.channel.permissionsFor(message.member).has(this.userPermissions.slice(1))) {
                 conditionals.userPermissions = true;
                 if (!messageSent) {
                     message.channel.send(this.lang.get("userPerms", this.userPermissions));
@@ -51,7 +60,15 @@ module.exports = class Command {
             }
 
         if (this.botPermissions.length > 0)
-            if (!message.guild.me.hasPermission(this.botPermissions)) {
+            if (this.botPermissions[0] === "guild" &&
+                !message.guild.me.hasPermission(this.botPermissions.slice(1))) {
+                conditionals.botPermissions = true;
+                if (!messageSent) {
+                    message.channel.send(this.lang.get("botPerms", this.botPermissions));
+                    messageSent = true;
+                }
+            } else if (this.botPermissions[0] === "channel" &&
+                !message.channel.permissionsFor(message.guild.me).has(this.userPermissions.slice(1))) {
                 conditionals.botPermissions = true;
                 if (!messageSent) {
                     message.channel.send(this.lang.get("botPerms", this.botPermissions));

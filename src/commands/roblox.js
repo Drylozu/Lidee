@@ -6,7 +6,8 @@ module.exports = class Roblox extends Command {
         super(client, {
             name: "roblox",
             aliases: ["rblx", "rb"],
-            category: 1
+            category: 1,
+            botPermissions: ["channel", "EMBED_LINKS"]
         });
     }
 
