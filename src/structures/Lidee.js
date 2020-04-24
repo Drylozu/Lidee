@@ -51,12 +51,12 @@ module.exports = class Maoid extends Client {
                 .setColor(0xff6666)
                 .setTimestamp();
             if (message && message.author && message.guild) {
-                embed.setFooter(`${message.guild.name} (${message.guild.id})`, message.author.displayAvatarURL())
+                embed.setFooter(`${message.guild.name} (${message.guild.id} - ${this.shard.ids.join("-")})`, message.author.displayAvatarURL())
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.iconURL())
                     .addField("Message content", `\`${message.content}\``);
             }
             this.channels.resolve(this.botConfig.errorsChannel).send(embed);
         }
-        console.log(`\x1b[36m[${new Date().toLocaleTimeString()}]${err ? "\x1b[31m" : "\x1b[32m"}[LOG] \x1b[0m${msg}`);
+        console.log(`\x1b[36m[${new Date().toLocaleTimeString()}]\x1b[33m[S${this.shard.ids.join("-")}]${err ? "\x1b[31m" : "\x1b[32m"}[LOG] \x1b[0m${msg}`);
     }
 }

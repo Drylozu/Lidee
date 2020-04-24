@@ -1,7 +1,7 @@
 const Command = require("../structures/Command");
 const { MessageEmbed } = require("discord.js");
 
-module.exports = class Ping extends Command {
+module.exports = class COVID19 extends Command {
     constructor(client) {
         super(client, {
             name: "covid19",
@@ -20,25 +20,19 @@ module.exports = class Ping extends Command {
                 message.channel.send(new MessageEmbed()
                     .setAuthor(this.lang.get("covidStatsGlobal"), message.author.displayAvatarURL())
                     .setDescription(`**${this.lang.get("covidLastUpdate")}**:\n${this.lang.parseCompleteDate(new Date(AllUpdated))}`)
-                    .addField(this.lang.get("covidToday"), Global.NewConfirmed.toLocaleString(), true)
-                    .addField(this.lang.get("covidTodayRecovered"), Global.NewRecovered.toLocaleString(), true)
-                    .addField(this.lang.get("covidTodayDeaths"), Global.NewDeaths.toLocaleString(), true)
-                    .addField(this.lang.get("covidTotal"), Global.TotalConfirmed.toLocaleString(), true)
-                    .addField(this.lang.get("covidTotalRecovered"), Global.TotalRecovered.toLocaleString(), true)
-                    .addField(this.lang.get("covidTotalDeaths"), Global.TotalDeaths.toLocaleString(), true)
+                    .addField(this.lang.get("covidCases"), `**${Global.TotalConfirmed.toLocaleString()}** (+${Global.NewConfirmed.toLocaleString()})`, true)
+                    .addField(this.lang.get("covidRecovered"), `**${Global.TotalRecovered.toLocaleString()}** (+${Global.NewRecovered.toLocaleString()})`, true)
+                    .addField(this.lang.get("covidDeaths"), `**${Global.TotalDeaths.toLocaleString()}** (+${Global.NewDeaths.toLocaleString()})`, true)
                     .setColor(0x6666ff)
                     .setTimestamp());
             else {
-                let covidCountry = Countries.find((c) => c.Country.toLowerCase() === country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase());
+                let covidCountry = Countries.find((c) => c.Country.toLowerCase().includes(country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()));
                 message.channel.send(new MessageEmbed()
                     .setAuthor(this.lang.get("covidStatsCountry", covidCountry.Country), message.author.displayAvatarURL())
                     .setDescription(`**${this.lang.get("covidLastUpdate")}**:\n${this.lang.parseCompleteDate(new Date(covidCountry.Date))}`)
-                    .addField(this.lang.get("covidToday"), covidCountry.NewConfirmed.toLocaleString(), true)
-                    .addField(this.lang.get("covidTodayRecovered"), covidCountry.NewRecovered.toLocaleString(), true)
-                    .addField(this.lang.get("covidTodayDeaths"), covidCountry.NewDeaths.toLocaleString(), true)
-                    .addField(this.lang.get("covidTotal"), covidCountry.TotalConfirmed.toLocaleString(), true)
-                    .addField(this.lang.get("covidTotalRecovered"), covidCountry.TotalRecovered.toLocaleString(), true)
-                    .addField(this.lang.get("covidTotalDeaths"), covidCountry.TotalDeaths.toLocaleString(), true)
+                    .addField(this.lang.get("covidCases"), `**${covidCountry.TotalConfirmed.toLocaleString()}** (+${covidCountry.NewConfirmed.toLocaleString()})`, true)
+                    .addField(this.lang.get("covidRecovered"), `**${covidCountry.TotalRecovered.toLocaleString()}** (+${covidCountry.NewRecovered.toLocaleString()})`, true)
+                    .addField(this.lang.get("covidDeaths"), `**${covidCountry.TotalDeaths.toLocaleString()}** (+${covidCountry.NewDeaths.toLocaleString()})`, true)
                     .setColor(0x6666ff)
                     .setTimestamp());
             }

@@ -7,8 +7,8 @@ module.exports = class Portuguese extends Language {
             strings: {
                 // Global
                 userNo: "Deve mencionar um usúario ou colocar seu ID.",
-                userPerms: (permission) => `Você deve ter a permissão de \`${this.getConstant("permissions", permission)}\` para executar este comando.`,
-                botPerms: (permission) => `Eu devo ter a permissão de \`${this.getConstant("permissions", permission)}\` para executar este comando.`,
+                userPerms: (permission) => `Você deve ter a permissão de \`${permission}\` para executar este comando.`,
+                botPerms: (permission) => `Eu devo ter a permissão de \`${permission}\` para executar este comando.`,
                 nsfwChannel: "Este comando so está funcionando em canal NSFW.",
                 cooldown: (time) => `Deve esperar ${time} segundos para executar este comando.`,
                 premiumOnly: "O servidor deve ser premium para executar este comando.",
@@ -88,12 +88,9 @@ module.exports = class Portuguese extends Language {
                 covidLastUpdate: "Últimas atualizações",
                 covidStatsGlobal: "Estatísticas do COVID19 globalmente",
                 covidStatsCountry: (country) => `Estatísticas do COVID19 em ${country}`,
-                covidToday: "Novos casos de hoje",
-                covidTodayRecovered: "Novas pessoas recuperadas hoje",
-                covidTodayDeaths: "Novas mortes hoje",
-                covidTotal: "Casos total",
-                covidTotalRecovered: "Pessoas totalmente recuperadas",
-                covidTotalDeaths: "Total de pessoas mortas",
+                covidCases: "Casos",
+                covidRecovered: "Pessoas recuperadas",
+                covidDeaths: "Pessoas mortas",
                 covidError: "Ocorreu um erro ao obter informações do COVID19",
                 // Fortnite Command
                 fortniteNo: "Deve colocar um nome de usúario no `shop` para mostrar a loja de hoje.",
@@ -145,7 +142,15 @@ module.exports = class Portuguese extends Language {
                 rolesPluralRemove: (quantity, user) => `**${quantity}** cargo foram removidos ao membro **${user}**.`,
                 rolesError: "Ocorreu um erro ao alterar as cargos do membro.",
                 // Trump Command
-                trumpNo: "Você deve inserir um texto válido para escrever."
+                trumpNo: "Você deve inserir um texto válido para escrever.",
+                // Role Command
+                roleNo: "Você deve mencionar um papel ou fornecer seu ID ou nome.",
+                roleCreated: "Cargo criado em",
+                roleColor: "Cor da cargo",
+                rolePermissions: "Permissões de cargo",
+                roleMembers: "Membros com a função",
+                rolePosition: "Posição da cargo",
+                rolePositionNote: "de baixo para cima"
             }, constant: {
                 permissions: {
                     default: "permissões por defeito",
@@ -275,6 +280,7 @@ module.exports = class Portuguese extends Language {
                 trumpDescription: "Donald Trump escreve algo.",
                 scaredDescription: "Alguém vê o avatar de alguém ou uma imagem anexada por você e fica assustado...",
                 rainbowDescription: "Torna o avatar de um membro ou uma imagem anexada por você em um arco-íris",
+                roleDescription: "Mostrar as informações de um cargo por nome, menção ou ID.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -303,7 +309,8 @@ module.exports = class Portuguese extends Language {
                 triggeredUsage: (prefix) => `${prefix}triggered [Membro]\n${prefix}triggered\n${prefix}triggered @Motxi`,
                 trumpUsage: (prefix) => `${prefix}trump <Texto>\n${prefix}trump Este é o melhor bot`,
                 scaredUsage: (prefix) => `${prefix}scared [Membro]\n${prefix}scared\n${prefix}scared @Free`,
-                rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`
+                rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
+                roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`
             }
         });
 

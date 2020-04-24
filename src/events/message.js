@@ -45,7 +45,7 @@ module.exports = class EventMessage {
             cmdFile.prepare({ guild, user });
             let cooldowned = this.handleCooldown({ message, cmdFile });
             let cmdValids = cmdFile.validate({ message });
-            if ((cooldowned && !(new UserFlags(user.flags).has("DEVELOPER"))) || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
+            if (cooldowned || cmdValids.ownerOnly || cmdValids.userPermissions || cmdValids.botPermissions) return;
             cmdFile.run(message, args);
         } catch (e) {
             err = true;
@@ -56,6 +56,7 @@ module.exports = class EventMessage {
     }
 
     handleCooldown({ message, cmdFile: cmd }) {
+        if (new UserFlags(cmd.user.flags).has("DEVELOPER")) return;
         if (!this.usersCooldown.has(message.author.id)) {
             this.usersCooldown.set(message.author.id, Date.now());
 
