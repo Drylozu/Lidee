@@ -144,7 +144,7 @@ module.exports = class Spanish extends Language {
                 // Trump Command
                 trumpNo: "Debes colocar un texto válido para escribir.",
                 // Role Command
-                roleNo: "Debes mencionar un rol o colocar su ID o nombre.",
+                roleNo: "Debes mencionar un rol, colocar su ID o nombre.",
                 roleCreated: "Rol creado el",
                 roleColor: "Color del rol",
                 rolePermissions: "Permisos del rol",
