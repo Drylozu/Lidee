@@ -13,7 +13,7 @@ module.exports = class User extends Command {
     }
 
     async run(message, args) {
-        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || message.guild.members.cache.find((m) => m.user.discriminator.includes(args.join(" "))) || message.member;
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || (args.join(" ").length > 2 ? message.guild.roles.cache.find((r) => r.name.toLowerCase().includes(args.join(" ").toLowerCase())) : null) || message.member;
         let user = await this.client.db.users.findOne({ _id: member.id }).exec()
         if (!user)
             user = { flags: 0 };
