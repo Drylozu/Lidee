@@ -47,14 +47,14 @@ module.exports = class Command {
                 !message.member.hasPermission(this.userPermissions.slice(1))) {
                 conditionals.userPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("userPerms", this.userPermissions));
+                    message.channel.send(this.lang.get("userPerms", this.userPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
                     messageSent = true;
                 }
             } else if (this.userPermissions[0] === "channel" &&
                 !message.channel.permissionsFor(message.member).has(this.userPermissions.slice(1))) {
                 conditionals.userPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("userPerms", this.userPermissions));
+                    message.channel.send(this.lang.get("userPerms", this.userPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
                     messageSent = true;
                 }
             }
@@ -64,14 +64,14 @@ module.exports = class Command {
                 !message.guild.me.hasPermission(this.botPermissions.slice(1))) {
                 conditionals.botPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("botPerms", this.botPermissions));
+                    message.channel.send(this.lang.get("botPerms", this.botPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
                     messageSent = true;
                 }
             } else if (this.botPermissions[0] === "channel" &&
                 !message.channel.permissionsFor(message.guild.me).has(this.userPermissions.slice(1))) {
                 conditionals.botPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("botPerms", this.botPermissions));
+                    message.channel.send(this.lang.get("botPerms", this.botPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
                     messageSent = true;
                 }
             }

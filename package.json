@@ -1,6 +1,6 @@
 {
     "name": "lidee",
-    "version": "1.0.2-beta",
+    "version": "1.0.3",
     "description": "Lidee Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",
@@ -16,7 +16,7 @@
     "dependencies": {
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
-        "mongoose": "^5.9.7",
+        "mongoose": "^5.9.10",
         "phin": "^3.4.1"
     },
     "devDependencies": {

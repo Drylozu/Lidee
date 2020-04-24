@@ -6,10 +6,10 @@ module.exports = class English extends Language {
         super({
             strings: {
                 // Global
-                userNo: "You need to mention an user or provide his ID.",
-                userPerms: (permission) => `You must have the permission \`${this.getConstant("permissions", permission)}\` to execute this command.`,
-                botPerms: (permission) => `I must have the permission \`${this.getConstant("permissions", permission)}\` to execute this command.`,
-                nsfwChannel: "Este comando solo esta disponible en canales NSFW.",
+                userNo: "You must mention an user or provide his ID.",
+                userPerms: (permission) => `You must have the permission \`${permission}\` to execute this command.`,
+                botPerms: (permission) => `I must have the permission \`${permission}\` to execute this command.`,
+                nsfwChannel: "This command is only available in a NSFW channel.",
                 cooldown: (time) => `You need wait ${time} seconds to execute this command.`,
                 premiumOnly: "The server must have premium to execute this command.",
                 others: (number) => `and ${number} others more...`,
@@ -88,12 +88,9 @@ module.exports = class English extends Language {
                 covidLastUpdate: "Last update",
                 covidStatsGlobal: "COVID19 statistics globally",
                 covidStatsCountry: (country) => `Statistics of COVID19 in ${country}`,
-                covidToday: "Today new cases",
-                covidTodayRecovered: "Today new people recovered",
-                covidTodayDeaths: "Today new deceased people",
-                covidTotal: "Total cases",
-                covidTotalRecovered: "Total recovered people",
-                covidTotalDeaths: "Total deceased people",
+                covidCases: "Cases",
+                covidRecovered: "Recovered people",
+                covidDeaths: "Deceased people",
                 covidError: "An error ocurred obtaining information about the COVID19",
                 // Fortnite Command
                 fortniteNo: "You must enter an username or `shop` to display today's store.",
@@ -145,7 +142,15 @@ module.exports = class English extends Language {
                 rolesPluralRemove: (quantity, user) => `**${quantity}** roles were removed from member **${user}**.`,
                 rolesError: "An error ocurred while changing the member's roles",
                 // Trump Command
-                trumpNo: "You must enter a valid text to write."
+                trumpNo: "You must enter a valid text to write.",
+                // Role Command
+                roleNo: "You must mention a role or provide his ID or name.",
+                roleCreated: "Role created at",
+                roleColor: "Role color",
+                rolePermissions: "Role permissions",
+                roleMembers: "Members with role",
+                rolePosition: "Role position",
+                rolePositionNote: "to top"
             }, constants: {
                 permissions: {
                     default: "default permissions",
@@ -275,6 +280,7 @@ module.exports = class English extends Language {
                 trumpDescription: "Donald Trump writes something.",
                 scaredDescription: "Someone sees a member's avatar or an image attached by you and is scared...",
                 rainbowDescription: "Makes a member's avatar or an image attached by you in a rainbow.",
+                roleDescription: "Shows the information of a role by the name, mention or ID.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -303,7 +309,8 @@ module.exports = class English extends Language {
                 triggeredUsage: (prefix) => `${prefix}triggered [Member]\n${prefix}triggered\n${prefix}triggered @Motxi`,
                 trumpUsage: (prefix) => `${prefix}trump <Text>\n${prefix}trump This is the best bot`,
                 scaredUsage: (prefix) => `${prefix}scared [Member]\n${prefix}scared\n${prefix}scared @Free`,
-                rainbowUsage: (prefix) => `${prefix}rainbow [Member]\n${prefix}rainbow\n${prefix}rainbow @Free`
+                rainbowUsage: (prefix) => `${prefix}rainbow [Member]\n${prefix}rainbow\n${prefix}rainbow @Free`,
+                roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`
             }
         });
 

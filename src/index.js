@@ -1,14 +1,7 @@
-require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
+const { join } = require("path");
+require("dotenv").config({ path: join(__dirname, "../.env") });
 
-const Lidee = require("./structures/Lidee");
-const bot = new Lidee({
-    botConfig: {
-        token: process.env.botToken,
-        mongoDbUrl: process.env.mongoDbUrl,
-        errorsChannel: process.env.errorsChannel
-    }
-});
+const { ShardingManager } = require("discord.js");
+const Manager = new ShardingManager(join(__dirname, "./bot.js"), { token: process.env.botToken });
 
-process.on("unhandledRejection", (reason) => {
-    bot.log(reason.toString(), reason);
-});
+Manager.spawn();
