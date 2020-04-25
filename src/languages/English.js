@@ -150,7 +150,10 @@ module.exports = class English extends Language {
                 rolePermissions: "Role permissions",
                 roleMembers: "Members with role",
                 rolePosition: "Role position",
-                rolePositionNote: "to top"
+                rolePositionNote: "to top",
+                // Unban Command
+                unbanNo: "That user don't have been baned in the server",
+                unban: (user) => `The member ${user} has been unbaned in the server.`
             }, constants: {
                 permissions: {
                     default: "default permissions",

@@ -150,8 +150,11 @@ module.exports = class Portuguese extends Language {
                 rolePermissions: "Permissões de cargo",
                 roleMembers: "Membros com a função",
                 rolePosition: "Posição da cargo",
-                rolePositionNote: "de baixo para cima"
-            }, constant: {
+                rolePositionNote: "de baixo para cima",
+                // Unban Command
+                unbanNo: "Nesse membro nao foi banido do neste servidor.",
+                unban: (user) => `O membro ${user} foi desbanido do servidor.`
+            }, constants: {
                 permissions: {
                     default: "permissões por defeito",
                     ADMINISTRATOR: "administrador",

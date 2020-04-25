@@ -150,7 +150,10 @@ module.exports = class Spanish extends Language {
                 rolePermissions: "Permisos del rol",
                 roleMembers: "Miembros con el rol",
                 rolePosition: "Posición del rol",
-                rolePositionNote: "de abajo hacia arriba"
+                rolePositionNote: "de abajo hacia arriba",
+                // Unban Command
+                unbanNo: "Ese miembro no a sido baneado del servidor.",
+                unban: (user) => `El miembro ${user} a sido desbaneado del servidor.`
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",
