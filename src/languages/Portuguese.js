@@ -150,8 +150,13 @@ module.exports = class Portuguese extends Language {
                 rolePermissions: "Permissões de cargo",
                 roleMembers: "Membros com a função",
                 rolePosition: "Posição da cargo",
-                rolePositionNote: "de baixo para cima"
-            }, constant: {
+                rolePositionNote: "de baixo para cima",
+                // Unban Command
+                unbanNoUser: "Você deve inserir o ID de um usuário válido.",
+                unbanNo: "O usuário não é banido neste servidor",
+                unban: (user) => `O usuário **${user}** foi desbanido do servidor.`,
+                unbanError: "Ocorreu um erro ao desbanir o usuário."
+            }, constants: {
                 permissions: {
                     default: "permissões por defeito",
                     ADMINISTRATOR: "administrador",
@@ -252,10 +257,10 @@ module.exports = class Portuguese extends Language {
                 usage: "Uso",
                 aliases: "Alias",
                 // Commands Description
-                banDescription: "Banir um membro por ID ou menção, o motivo pode ser adicionado.",
+                banDescription: "Banir um membro por ID ou menção, um motivo pode ser adicionado.",
                 softbanDescription: "Banir um membro por ID ou menção ao excluir mensagens por dias de idade, um motivo pode ser adicionado.",
                 clearDescription: "Exclua as mensagens de acordo com a quantidade especificada entre 1 e 100.",
-                kickDescription: "Expulsar um membro, o motivo pode ser adicionado.",
+                kickDescription: "Expulsar um membro, um motivo pode ser adicionado.",
                 muteDescription: "Mutar um membro por tempo inderteminado.",
                 unmuteDescription: "Desmutar um membro mutado",
                 helpDescription: "Mostrar essa mensagem",
@@ -281,6 +286,7 @@ module.exports = class Portuguese extends Language {
                 scaredDescription: "Alguém vê o avatar de alguém ou uma imagem anexada por você e fica assustado...",
                 rainbowDescription: "Torna o avatar de um membro ou uma imagem anexada por você em um arco-íris",
                 roleDescription: "Mostrar as informações de um cargo por nome, menção ou ID.",
+                unbanDescription: "Desbanir um membro por ID, um motivo pode ser adicionado.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -310,7 +316,8 @@ module.exports = class Portuguese extends Language {
                 trumpUsage: (prefix) => `${prefix}trump <Texto>\n${prefix}trump Este é o melhor bot`,
                 scaredUsage: (prefix) => `${prefix}scared [Membro]\n${prefix}scared\n${prefix}scared @Free`,
                 rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
-                roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`
+                roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`,
+                unbanUsage: (prefix) => `${prefix}unban <Usuário>\n${prefix}unban 123123123123123123`
             }
         });
 
