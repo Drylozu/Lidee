@@ -140,7 +140,7 @@ module.exports = class English extends Language {
                 rolesSingularRemove: (quantity, user) => `**${quantity}** roles were added to the member **${user}**.`,
                 rolesPluralAdd: (quantity, user) => `**${quantity}** role was removed from member **${user}**.`,
                 rolesPluralRemove: (quantity, user) => `**${quantity}** roles were removed from member **${user}**.`,
-                rolesError: "An error ocurred while changing the member's roles",
+                rolesError: "An error ocurred changing the member's roles",
                 // Trump Command
                 trumpNo: "You must enter a valid text to write.",
                 // Role Command
@@ -152,8 +152,10 @@ module.exports = class English extends Language {
                 rolePosition: "Role position",
                 rolePositionNote: "to top",
                 // Unban Command
-                unbanNo: "That user don't have been baned in the server",
-                unban: (user) => `The member ${user} has been unbaned in the server.`
+                unbanNoUser: "You must enter the ID of a valid user.",
+                unbanNo: "That user isn't banned on this server.",
+                unban: (user) => `The user **${user}** has been unbaned from the server.`,
+                unbanError: "An error ocurred unbanning the user."
             }, constants: {
                 permissions: {
                     default: "default permissions",
@@ -284,6 +286,7 @@ module.exports = class English extends Language {
                 scaredDescription: "Someone sees a member's avatar or an image attached by you and is scared...",
                 rainbowDescription: "Makes a member's avatar or an image attached by you in a rainbow.",
                 roleDescription: "Shows the information of a role by the name, mention or ID.",
+                unbanDescription: "Unbans a member by ID, a reason can be added.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -313,7 +316,8 @@ module.exports = class English extends Language {
                 trumpUsage: (prefix) => `${prefix}trump <Text>\n${prefix}trump This is the best bot`,
                 scaredUsage: (prefix) => `${prefix}scared [Member]\n${prefix}scared\n${prefix}scared @Free`,
                 rainbowUsage: (prefix) => `${prefix}rainbow [Member]\n${prefix}rainbow\n${prefix}rainbow @Free`,
-                roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`
+                roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`,
+                unbanUsage: (prefix) => `${prefix}unban <User>\n${prefix}unban 123123123123123123`
             }
         });
 

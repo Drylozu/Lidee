@@ -152,8 +152,10 @@ module.exports = class Spanish extends Language {
                 rolePosition: "Posición del rol",
                 rolePositionNote: "de abajo hacia arriba",
                 // Unban Command
-                unbanNo: "Ese miembro no a sido baneado del servidor.",
-                unban: (user) => `El miembro ${user} a sido desbaneado del servidor.`
+                unbanNoUser: "Debes colocar la ID de un usuario válido.",
+                unbanNo: "Ese usuario no está baneado en este servidor.",
+                unban: (user) => `El usuario **${user}** ha sido desbaneado del servidor.`,
+                unbanError: "Ha ocurrido un error al desbanear al usuario."
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",
@@ -283,6 +285,7 @@ module.exports = class Spanish extends Language {
                 trumpDescription: "Donald Trump escribe algo.",
                 scaredDescription: "Alguien ve el avatar de alguien o una imagen adjuntada por ti y se asusta...",
                 roleDescription: "Muestra la información de un rol por nombre, mención o ID.",
+                unbanDescription: "Desbanea un miembro por ID, se puede agregar una razón.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -312,7 +315,8 @@ module.exports = class Spanish extends Language {
                 trumpUsage: (prefix) => `${prefix}trump <Texto>\n${prefix}trump Este es el mejor bot`,
                 scaredUsage: (prefix) => `${prefix}scared [Miembro]\n${prefix}scared\n${prefix}scared @Free`,
                 rainbowUsage: (prefix) => `${prefix}rainbow [Miembro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
-                roleUsage: (prefix) => `${prefix}role <Rol>\n${prefix}role @Miembro\n${prefix}role Administrador`
+                roleUsage: (prefix) => `${prefix}role <Rol>\n${prefix}role @Miembro\n${prefix}role Administrador`,
+                unbanUsage: (prefix) => `${prefix}unban <Usuario>\n${prefix}unban 123123123123123123`
             }
         });
 

@@ -11,7 +11,7 @@ module.exports = class Role extends Command {
     }
 
     run(message, args) {
-        let role = message.guild.roles.resolve(args[0]) || message.mentions.roles.first() || (args.join(" ").length > 2 ? message.guild.roles.cache.find((r) => r.name.toLowerCase().includes(args.join(" ").toLowerCase())) : null);
+        let role = message.guild.roles.resolve(args[0]) || message.mentions.roles.first() || (args.join(" ").length > 2 ? message.guild.roles.cache.sort((a, b) => b.name - a.name).find((r) => r.name.toLowerCase().includes(args.join(" ").toLowerCase())) : null);
         if (!role) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("roleNo")}`);
         let embed = new MessageEmbed()
             .setAuthor(role.name, message.author.displayAvatarURL())
