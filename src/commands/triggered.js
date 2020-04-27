@@ -12,7 +12,7 @@ module.exports = class Triggered extends Command {
     }
 
     async run(message, args) {
-        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || (args.join(" ").length > 2 ? message.guild.members.cache.sort((a, b) => b.user.tag - a.user.tag).find((m) => m.user.tag.toLowerCase().includes(args.join(" ").toLowerCase())) : null) || message.member;
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || (args.join(" ").length > 2 ? message.guild.members.cache.sort((a, b) => a.user.tag.localeCompare(b.user.tag)).find((m) => m.user.tag.toLowerCase().includes(args.join(" ").toLowerCase())) : null) || message.member;
         let attachment = message.attachments.first() &&
             [".png", ".gif", ".jpg"].some((e) => message.attachments.first().url.endsWith(e))
             ? message.attachments.first().url : member.user.displayAvatarURL({ format: "png", size: 256 });

@@ -34,6 +34,7 @@ module.exports = class EventMessage {
             message.mentions.users.delete(message.mentions.users.first().id);
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let cmd = args.shift().toLowerCase();
+        let cmdFullname = cmd;
         let err = false;
 
         try {
@@ -42,6 +43,7 @@ module.exports = class EventMessage {
                 err = true;
                 return;
             }
+            cmdFullname = cmdFile.name;
             cmdFile.prepare({ guild, user });
             let cooldowned = this.handleCooldown({ message, cmdFile });
             let cmdValids = cmdFile.validate({ message });
@@ -51,7 +53,7 @@ module.exports = class EventMessage {
             err = true;
             this.client.log(e.toString(), e, message);
         } finally {
-            this.client.log(`${message.author.tag} ran the command ${cmd} in ${message.guild.name}`, err);
+            this.client.log(`${message.author.tag} ran the command ${cmdFullname} in ${message.guild.name}`, err);
         }
     }
 

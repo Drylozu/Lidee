@@ -23,7 +23,7 @@ module.exports = class Portuguese extends Language {
                 // Clear Command
                 clearNumber: "Deve especificar quantas mensagens deseja apagar.",
                 clearLimit: "Deve especificar um numero de 0 a 100.",
-                clear: (number) => `Foram eliminadas ${number} mensagens.`,
+                clear: (number) => `Foram eliminadas **${number}** mensagens.`,
                 clearError: "Teve um erro enquanto tentava apagar as mensagens.",
                 // Kick Command
                 kickNo: "Não posso expulsar este membro do servidor.",
@@ -244,7 +244,8 @@ module.exports = class Portuguese extends Language {
                     ago: (date) => `faz ${date}`,
                     within: (date) => `dentro de ${date}`,
                     elapsed: (time) => `Tempo decorrido: **${time}**.`,
-                    left: (time) => `Tempo restante: **${time}**.`
+                    left: (time) => `Tempo restante: **${time}**.`,
+                    now: "justo agora"
                 }
             }, help: {
                 // Help Command

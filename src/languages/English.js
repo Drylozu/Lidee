@@ -23,7 +23,7 @@ module.exports = class English extends Language {
                 // Clear Command
                 clearNumber: "You must specify how many messages will be deleted.",
                 clearLimit: "You must specify a number between 1 and 100.",
-                clear: (number) => `${number} messages have been deleted.`,
+                clear: (number) => `**${number}** messages have been deleted.`,
                 clearError: "An error ocurred while deleting messages.",
                 // Kick Command
                 kickNo: "I don't able to kick that member.",
@@ -244,7 +244,8 @@ module.exports = class English extends Language {
                     ago: (date) => `${date} ago`,
                     within: (date) => `within ${date}`,
                     elapsed: (time) => `**${time}** elapsed.`,
-                    left: (time) => `**${time}** left.`
+                    left: (time) => `**${time}** left.`,
+                    now: "right now"
                 }
             }, help: {
                 // Help Command

@@ -1,6 +1,6 @@
 {
     "name": "lidee",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Lidee Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",
@@ -23,11 +23,11 @@
         "eslint": "^6.8.0"
     },
     "keywords": [
-        "Maoid",
+        "Lidee",
         "Discord Bot"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/BlueGameYT/Maoid.git"
+        "url": "https://github.com/Drylotrans/Lidee.git"
     }
 }
