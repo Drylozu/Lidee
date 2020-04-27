@@ -4,6 +4,7 @@ module.exports = class Roles extends Command {
     constructor(client) {
         super(client, {
             name: "roles",
+            aliases: ["rs"],
             category: 5,
             userPermissions: ["guild", "MANAGE_ROLES"]
         });

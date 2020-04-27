@@ -128,7 +128,7 @@ module.exports = class Language {
             timeObj.seconds ? this.getConstant("time", `second${timeObj.seconds > 1 ? "s" : ""}`, timeObj.seconds) : ""
         ];
 
-        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()} (${this.getConstant("time", old ? "ago" : "within", time.filter((t) => t !== "").slice(0, 4).join(", "))})`;
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()} (${time.filter((u) => u !== "").length < 1 ? this.getConstant("time", "now") : this.getConstant("time", old ? "ago" : "within", time.filter((u) => u !== "").slice(0, 4).join(", "))})`;
     }
 
     parseTime(milliseconds) {
@@ -175,14 +175,14 @@ module.exports = class Language {
             customStatus && ((customStatus.emoji && !principalActivity) || customStatus.state) ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state ? customStatus.state : ""}\n\n` : "",
             principalActivity && principalActivity.name ? `${customStatus && customStatus.emoji && !customStatus.state
                 ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
-            principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
             principalActivity && principalActivity.details ? `**•** ${principalActivity.details}\n` : "",
+            principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
             principalActivity && principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",
                 principalActivity.timestamps.end
                     ? "left" : "elapsed",
                 this.parseTime(principalActivity.timestamps.end
-                    ? principalActivity.timestamps.end - principalActivity.timestamps.end
-                    : new Date() - principalActivity.timestamps.start)
+                    ? principalActivity.timestamps.end - Date.now()
+                    : Date.now() - principalActivity.timestamps.start)
             ) : ""
         ].filter((o) => o !== "").join("");
     }

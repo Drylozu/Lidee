@@ -1,6 +1,6 @@
 {
     "name": "lidee",
-    "version": "1.0.5-beta",
+    "version": "1.0.6-beta",
     "description": "Lidee Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",
@@ -23,7 +23,7 @@
         "eslint": "^6.8.0"
     },
     "keywords": [
-        "Maoid",
+        "Lidee",
         "Discord Bot"
     ],
     "repository": {

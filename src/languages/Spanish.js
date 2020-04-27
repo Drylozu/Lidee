@@ -23,7 +23,7 @@ module.exports = class Spanish extends Language {
                 // Clear Command
                 clearNumber: "Debes especifcar cuántos mensajes vas a eliminar.",
                 clearLimit: "Debes especificar un número entre 0 y 100.",
-                clear: (number) => `Han sido eliminados ${number} mensajes.`,
+                clear: (number) => `Han sido eliminados **${number}** mensajes.`,
                 clearError: "Ha ocurrido un error mientras se eliminaban mensajes.",
                 // Kick Command
                 kickNo: "No puedo expulsar a ese miembro.",
@@ -244,7 +244,8 @@ module.exports = class Spanish extends Language {
                     ago: (date) => `hace ${date}`,
                     within: (date) => `dentro de ${date}`,
                     elapsed: (time) => `Tiempo transcurrido: **${time}**.`,
-                    left: (time) => `Tiempo restante: **${time}**.`
+                    left: (time) => `Tiempo restante: **${time}**.`,
+                    now: "justo ahora"
                 }
             }, help: {
                 // Help Command
@@ -284,6 +285,7 @@ module.exports = class Spanish extends Language {
                 triggeredDescription: "Hace una imagen __***triggered***_ por medio del avatar de un usuario o una imagen adjunta.",
                 trumpDescription: "Donald Trump escribe algo.",
                 scaredDescription: "Alguien ve el avatar de alguien o una imagen adjuntada por ti y se asusta...",
+                rainbowDescription: "Hace el avatar de un miembro o una imagen adjuntada por ti en un arcoíris.",
                 roleDescription: "Muestra la información de un rol por nombre, mención o ID.",
                 unbanDescription: "Desbanea un miembro por ID, se puede agregar una razón.",
                 // Commands Usage
