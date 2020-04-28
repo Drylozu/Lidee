@@ -1,4 +1,3 @@
-require("../utils/prototypes")();
 const { Client, MessageEmbed } = require("discord.js");
 const LanguageManager = require("../managers/Languages");
 const CommandsManager = require("../managers/Commands");
@@ -42,21 +41,21 @@ module.exports = class Maoid extends Client {
         }
     }
 
-    log(msg, err = false, message = null) {
-        if (err && err.message && err.stack) {
-            let errParsed = err.stack.split("\n");
+    log(content, error = false, message = null) {
+        if (error && error.message && error.stack) {
+            let errParsed = error.stack.split("\n");
             errParsed[0] = `**${errParsed[0]}**`;
             let embed = new MessageEmbed()
                 .setDescription(errParsed.join("\n> "))
                 .setColor(0xff6666)
                 .setTimestamp();
             if (message && message.author && message.guild) {
-                embed.setFooter(`${message.guild.name} (${message.guild.id} - ${this.shard.ids.join("-")})`, message.guild.iconURL())
-                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.displayAvatarURL())
+                embed.setFooter(`${message.guild.name} (${message.guild.id} - ${this.shard.ids.join("-")})`, message.author.displayAvatarURL())
+                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.iconURL())
                     .addField("Message content", `\`${message.content}\``);
             }
             this.channels.resolve(this.botConfig.errorsChannel).send(embed);
         }
-        console.log(`\x1b[36m[${new Date().toLocaleTimeString()}]\x1b[33m[S${this.shard.ids.join("-")}]${err ? "\x1b[31m" : "\x1b[32m"}[LOG] \x1b[0m${msg}`);
+        console.clientLog(content, error, this.shard.ids.join("-"));
     }
 }

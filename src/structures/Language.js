@@ -33,10 +33,24 @@ module.exports = class Language {
                 "<:2Boost:697135840828325998>",
                 "<:3Boost:697135841566523443>"
             ],
+
             statusMobile: {
                 online: "<:MobileOnline:697135842346532935>",
                 idle: "<:MobileIdle:697135841973370921>",
                 dnd: "<:MobileDnd:697135841474117695>"
+            },
+            userFlags: {
+                HOUSE_BRILLIANCE: "<:HypeSquadBrilliance:704769227290181735>",
+                VERIFIED_DEVELOPER: "<:VerifiedDeveloper:704769227478794260>",
+                HYPESQUAD_EVENTS: "<:HypeSquadEvents:704769227273535519>",
+                DISCORD_EMPLOYEE: "<:DiscordEmployee:704769219945824416>",
+                HOUSE_BRAVERY: "<:HypeSquadBravery:704769227349033071>",
+                HOUSE_BALANCE: "<:HypeSquadBalance:704769226531143691>",
+                EARLY_SUPPORTER: "<:EarlySupporter:704769224207237202>",
+                BUGHUNTER_LEVEL_1: "<:BugHunter2:704769216796164237>",
+                BUGHUNTER_LEVEL_2: "<:BugHunter1:704769215881805866>",
+                DISCORD_PARTNER: "<:UserPartner:704769227332255774>",
+                VERIFIED_BOT: "<:BotVerified:704769185254735893>"
             },
             status: {
                 offline: "<a:UInvisible:690932032187924500>",

@@ -16,6 +16,7 @@ module.exports = class English extends Language {
                 roles: (number) => `Roles (${number})`,
                 id: (id) => `ID: ${id}`,
                 nothing: "Nothing to show...",
+                imageUrl: "Link with maximum resolution",
                 // Ban Command
                 banNo: "I don't able to ban that member.",
                 ban: (member) => `The member **${member}** has been banned from the server.`,
@@ -41,6 +42,7 @@ module.exports = class English extends Language {
                 userJoined: "Member joined at",
                 userActivity: "User activity",
                 userBoosting: "Boosting since",
+                userFlags: "User flags",
                 // Server Command
                 serverVanityUrl: "Vanity URL",
                 serverCreated: "Server created at",
@@ -70,8 +72,6 @@ module.exports = class English extends Language {
                 languageActual: "Actual language",
                 languageChange: (prefix) => `You can change the language of the server using \`${prefix}language [Language Code]\`.`,
                 languageChanged: (language) => `Server language is now \`${language}\`.`,
-                // Avatar Command
-                avatar: "Link with maximum resolution",
                 // Hug Command
                 hug: (author, user) => `**${author}** hugged **${user}** ༼ つ ◕_◕ ༽つ`,
                 hugBot: "You can't hug a bot.",
