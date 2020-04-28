@@ -51,8 +51,8 @@ module.exports = class Maoid extends Client {
                 .setColor(0xff6666)
                 .setTimestamp();
             if (message && message.author && message.guild) {
-                embed.setFooter(`${message.guild.name} (${message.guild.id} - ${this.shard.ids.join("-")})`, message.guild.iconURL())
-                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.displayAvatarURL())
+                embed.setFooter(`${message.guild.name} (${message.guild.id} - ${this.shard.ids.join("-")})`, message.author.displayAvatarURL())
+                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.guild.iconURL())
                     .addField("Message content", `\`${message.content}\``);
             }
             this.channels.resolve(this.botConfig.errorsChannel).send(embed);
