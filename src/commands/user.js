@@ -18,10 +18,12 @@ module.exports = class User extends Command {
         if (!user)
             user = { flags: 0 };
         let userFlags = new UserFlags(user.flags);
+        let parsedEmojis = `${userFlags.has("DEVELOPER") ? this.lang.getEmoji("userDeveloper") : ""}${userFlags.has("BUG_HUNTER") ? this.lang.getEmoji("userBugHunter") : ""}${userFlags.has("TRANSLATOR") ? this.lang.getEmoji("userTranslator") : ""}${userFlags.has("DONATOR") ? this.lang.getEmoji("userDonator") : ""}${member.user.bot ? this.lang.getEmoji("userBot") : ""}${message.guild.owner.id === member.id ? this.lang.getEmoji("userOwner") : ""}${member.user.presence.clientStatus && member.user.presence.clientStatus.mobile ? this.lang.getEmoji("statusMobile")[member.user.presence.clientStatus.mobile] : this.lang.getEmoji("status")[member.user.presence.status]}${member.premiumSince ? this.lang.getEmoji("userBooster") : ""}${member.voice.channel ? this.lang.getEmoji("voiceChannel") : ""}`;
+        let parsedFlags = (await member.user.fetchFlags()).toArray().map((f) => this.lang.getEmoji("userFlags")[f]).filter((f) => f);
 
         let embed = new MessageEmbed()
             .setAuthor(member.user.tag, member.user.displayAvatarURL())
-            .setDescription(`> <@${member.id}> ${userFlags.has("DEVELOPER") ? this.lang.getEmoji("userDeveloper") : ""}${userFlags.has("BUG_HUNTER") ? this.lang.getEmoji("userBugHunter") : ""}${userFlags.has("TRANSLATOR") ? this.lang.getEmoji("userTranslator") : ""}${userFlags.has("DONATOR") ? this.lang.getEmoji("userDonator") : ""}${member.user.bot ? this.lang.getEmoji("userBot") : ""}${message.guild.owner.id === member.id ? this.lang.getEmoji("userOwner") : ""}${member.user.presence.clientStatus && member.user.presence.clientStatus.mobile ? this.lang.getEmoji("statusMobile")[member.user.presence.clientStatus.mobile] : this.lang.getEmoji("status")[member.user.presence.status]}${member.premiumSince ? this.lang.getEmoji("userBooster") : ""}${member.voice.channel ? this.lang.getEmoji("voiceChannel") : ""}`)
+            .setDescription(`> <@${member.id}> ${parsedEmojis}\n**${this.lang.get("userFlags")}**: ${parsedFlags}`)
             .addField(this.lang.get("userJoined"), this.lang.parseCompleteDate(member.joinedAt), true)
             .addField(this.lang.get("userCreated"), this.lang.parseCompleteDate(member.user.createdAt), true)
             .addField(this.lang.get("userPermissions"), this.lang.parsePermissions(member.permissions.toArray()));

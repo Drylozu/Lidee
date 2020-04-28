@@ -1,3 +1,4 @@
+require("./utils/prototypes")();
 const Lidee = require("./structures/Lidee");
 const bot = new Lidee({
     botConfig: {

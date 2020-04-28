@@ -15,8 +15,8 @@ module.exports = class Avatar extends Command {
         let avatar = member.user.displayAvatarURL({ size: 512, format: "png", dynamic: true });
 
         message.channel.send(new MessageEmbed()
-            .setAuthor(member.user.tag, member.user.displayAvatarURL())
-            .setDescription(`[${this.lang.get("avatar")}](${avatar})`)
+            .setAuthor(member.user.tag, message.author.displayAvatarURL())
+            .setDescription(`[${this.lang.get("imageUrl")}](${avatar})`)
             .setImage(avatar)
             .setColor(0x6666ff)
             .setTimestamp());

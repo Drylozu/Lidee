@@ -16,6 +16,7 @@ module.exports = class Spanish extends Language {
                 roles: (number) => `Roles (${number})`,
                 id: (id) => `ID: ${id}`,
                 nothing: "Nada para mostrar...",
+                imageUrl: "Enlace con máxima resolución",
                 // Ban Command
                 banNo: "No puedo banear a ese miembro.",
                 ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,
@@ -41,6 +42,7 @@ module.exports = class Spanish extends Language {
                 userJoined: "Entró al servidor el",
                 userActivity: "Actividad de usuario",
                 userBoosting: "Boosteando desde",
+                userFlags: "Insignias del usuario",
                 // Server Command
                 serverVanityUrl: "URL de vanidad",
                 serverCreated: "Servidor creado el",
@@ -70,8 +72,6 @@ module.exports = class Spanish extends Language {
                 languageActual: "Idioma actual",
                 languageChange: (prefix) => `Puedes cambiar el idioma usando \`${prefix}language [Código de idioma]\`.`,
                 languageChanged: (language) => `El idioma del servidor ahora es \`${language}\`.`,
-                // Avatar Command
-                avatar: "Enlace con máxima resolución",
                 // Hug Command
                 hug: (author, user) => `**${author}** ha abrazado a **${user}** ༼ つ ◕_◕ ༽つ`,
                 hugBot: "No puedes abrazar a un bot.",
