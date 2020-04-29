@@ -19,6 +19,7 @@ module.exports = class English extends Language {
                 imageUrl: "Link with maximum resolution",
                 // Ban Command
                 banNo: "I don't able to ban that member.",
+                banPermissions: "You don't able to ban that member.",
                 ban: (member) => `The member **${member}** has been banned from the server.`,
                 banError: "An error ocurred while banning the member.",
                 // Clear Command
@@ -28,10 +29,12 @@ module.exports = class English extends Language {
                 clearError: "An error ocurred while deleting messages.",
                 // Kick Command
                 kickNo: "I don't able to kick that member.",
+                kickPermissions: "You don't able to kick that member.",
                 kick: (member) => `The member **${member}** has been kicked from the server.`,
                 kickError: "An error ocurred while kicking the member.",
                 // Mute Command
                 muteNo: "That member is already muted!",
+                mutePermissions: "You don't able to mute that member.",
                 mute: (member) => `The member **${member}** has been muted from the server.`,
                 // Unmute Command
                 unmuteNo: "That member is not muted!",
@@ -134,6 +137,7 @@ module.exports = class English extends Language {
                 // Roles Command
                 rolesNoOption: "You must enter a valid option (`add` or `remove`).",
                 rolesNoValid: "You must enter at least one valid role.",
+                rolesPermisions: "You cannot modify the roles of that member.",
                 rolesNoneAdd: (user) => `No role has been added to member **${user}**.`,
                 rolesNoneRemove: (user) => `No role has been removed from the member **${user}**.`,
                 rolesSingularAdd: (quantity, user) => `**${quantity}** role was added to member **${user}**.`,
@@ -155,7 +159,15 @@ module.exports = class English extends Language {
                 unbanNoUser: "You must enter the ID of a valid user.",
                 unbanNo: "That user isn't banned on this server.",
                 unban: (user) => `The user **${user}** has been unbaned from the server.`,
-                unbanError: "An error ocurred unbanning the user."
+                unbanError: "An error ocurred unbanning the user.",
+                // EventMessageUpdate
+                messageEdit: (tag, id) => `**${tag}** (${id}) has edited his message`,
+                messageBefore: "Before:",
+                messageAfter: "After:",
+                messageEdited: "Edited Message",
+                // EventMessageDelete
+                messageDelete: (tag, id) => `The message of **${tag}** (${id}) has been deleted`,
+                messageDeleted: "Deleted Message"
             }, constants: {
                 permissions: {
                     default: "default permissions",

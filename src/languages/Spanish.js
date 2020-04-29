@@ -19,6 +19,7 @@ module.exports = class Spanish extends Language {
                 imageUrl: "Enlace con máxima resolución",
                 // Ban Command
                 banNo: "No puedo banear a ese miembro.",
+                banPermissions: "Tu no puedes banear a ese miembro.",
                 ban: (member) => `El miembro **${member}** ha sido baneado del servidor.`,
                 banError: "Ha ocurrido un error mientras se baneaba al miembro.",
                 // Clear Command
@@ -28,10 +29,12 @@ module.exports = class Spanish extends Language {
                 clearError: "Ha ocurrido un error mientras se eliminaban mensajes.",
                 // Kick Command
                 kickNo: "No puedo expulsar a ese miembro.",
+                kickPermissions: "Tu no puedes expulsar a ese miembro.",
                 kick: (member) => `El miembro **${member}** ha sido expulsado del servidor.`,
                 kickError: "Ha ocurrido un error mientras se expulsaba al miembro.",
                 // Mute Command
                 muteNo: "¡Ese miembro ya está muteado!",
+                mutePermissions: "Tu no puedes mutear a ese miembro.",
                 mute: (member) => `El miembro **${member}** ha sido muteado del servidor.`,
                 // Unmute Command
                 unmuteNo: "¡Ese miembro no está muteado!",
@@ -134,6 +137,7 @@ module.exports = class Spanish extends Language {
                 // Roles Command
                 rolesNoOption: "Debes colocar una opción válida (`add` o `remove`).",
                 rolesNoValid: "Debes colocar por lo menos un rol válido.",
+                rolesPermisions: "Tu no puedes modificar los roles de ese miembro.",
                 rolesNoneAdd: (user) => `Ningún rol ha sido añadido al miembro **${user}**.`,
                 rolesNoneRemove: (user) => `Ningún rol ha sido eliminado del miembro **${user}**.`,
                 rolesSingularAdd: (quantity, user) => `**${quantity}** rol fue añadido al miembro **${user}**.`,
@@ -155,7 +159,15 @@ module.exports = class Spanish extends Language {
                 unbanNoUser: "Debes colocar la ID de un usuario válido.",
                 unbanNo: "Ese usuario no está baneado en este servidor.",
                 unban: (user) => `El usuario **${user}** ha sido desbaneado del servidor.`,
-                unbanError: "Ha ocurrido un error al desbanear al usuario."
+                unbanError: "Ha ocurrido un error al desbanear al usuario.",
+                // EventMessageUpdate
+                messageEdit: (tag, id) => `**${tag}** (${id}) ha editado su mensaje`,
+                messageBefore: "Antes:",
+                messageAfter: "Después:",
+                messageEdited: "Mensaje Editado",
+                // EventMessageDelete
+                messageDelete: (tag, id) => `El mensaje de **${tag}** (${id}) a sido eliminado`,
+                messageDeleted: "Mensaje Eliminado"
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",

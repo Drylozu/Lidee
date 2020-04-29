@@ -15,6 +15,12 @@ let guildSchema = new Schema({
     premium: {
         type: Boolean,
         default: false
+    },
+    logs: {
+        messages: {
+          type: String,
+          default: ""
+      }
     }
 });
 
