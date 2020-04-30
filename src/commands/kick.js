@@ -14,6 +14,7 @@ module.exports = class Kick extends Command {
         let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
         if (!member.kickable) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("kickNo")}`);
+        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 && message.guild.owner.id !== message.author.id) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("kickPermissions")}`);
 
         try {
             await member.kick(member.id, {

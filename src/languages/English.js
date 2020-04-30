@@ -19,6 +19,7 @@ module.exports = class English extends Language {
                 imageUrl: "Link with maximum resolution",
                 // Ban Command
                 banNo: "I don't able to ban that member.",
+                banPermissions: "You don't able to ban that member.",
                 ban: (member) => `The member **${member}** has been banned from the server.`,
                 banError: "An error ocurred while banning the member.",
                 // Clear Command
@@ -28,10 +29,12 @@ module.exports = class English extends Language {
                 clearError: "An error ocurred while deleting messages.",
                 // Kick Command
                 kickNo: "I don't able to kick that member.",
+                kickPermissions: "You don't able to kick that member.",
                 kick: (member) => `The member **${member}** has been kicked from the server.`,
                 kickError: "An error ocurred while kicking the member.",
                 // Mute Command
                 muteNo: "That member is already muted!",
+                mutePermissions: "You don't able to mute that member.",
                 mute: (member) => `The member **${member}** has been muted from the server.`,
                 // Unmute Command
                 unmuteNo: "That member is not muted!",
@@ -54,6 +57,8 @@ module.exports = class English extends Language {
                 serverEmojis: "Server emojis",
                 serverEmojisNormal: "Normal emojis",
                 serverEmojisAnimated: "Animated emojis",
+                serverBoosts: "Server boosts",
+                serverBoostsTotal: (number, level) => `**Level ${level}** - ${number} boosts`,
                 // Ping Command
                 pingCalculating: "Pong! *calculating...*",
                 ping: (ms) => `Pong! **${ms}ms**.`,
@@ -134,6 +139,7 @@ module.exports = class English extends Language {
                 // Roles Command
                 rolesNoOption: "You must enter a valid option (`add` or `remove`).",
                 rolesNoValid: "You must enter at least one valid role.",
+                rolesPermissions: "You can't modify the roles of that member.",
                 rolesNoneAdd: (user) => `No role has been added to member **${user}**.`,
                 rolesNoneRemove: (user) => `No role has been removed from the member **${user}**.`,
                 rolesSingularAdd: (quantity, user) => `**${quantity}** role was added to member **${user}**.`,
@@ -155,7 +161,15 @@ module.exports = class English extends Language {
                 unbanNoUser: "You must enter the ID of a valid user.",
                 unbanNo: "That user isn't banned on this server.",
                 unban: (user) => `The user **${user}** has been unbaned from the server.`,
-                unbanError: "An error ocurred unbanning the user."
+                unbanError: "An error ocurred unbanning the user.",
+                // MessageUpdate Event
+                messageEdit: (user, id) => `**${user}** (${id}) edited a message`,
+                messageBefore: "Before",
+                messageAfter: "After",
+                messageEdited: "Edited message",
+                // MessageDelete Event
+                messageDelete: (user, id) => `The message of **${user}** (${id}) has been deleted`,
+                messageDeleted: "Deleted message"
             }, constants: {
                 permissions: {
                     default: "default permissions",

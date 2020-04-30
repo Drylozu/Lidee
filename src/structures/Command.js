@@ -19,7 +19,6 @@ module.exports = class Command {
         this.lang = this.client.languages.get(this.guild.language);
     }
 
-    // eslint-disable-next-line complexity
     validate({ message }) {
         let conditionals = {
             ownerOnly: false,

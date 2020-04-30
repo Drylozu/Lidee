@@ -19,6 +19,7 @@ module.exports = class Portuguese extends Language {
                 imageUrl: "Link do resolução máxima",
                 // Ban Command
                 banNo: "Não pode banir este membro.",
+                banPermissions: "Você não pode banir a este membro.",
                 ban: (member) => `O **${member}** foi banido do servidor com sucesso.`,
                 banError: "Ocorreu um erro enquanto bania o usúario.",
                 // Clear Command
@@ -28,10 +29,12 @@ module.exports = class Portuguese extends Language {
                 clearError: "Teve um erro enquanto tentava apagar as mensagens.",
                 // Kick Command
                 kickNo: "Não posso expulsar este membro do servidor.",
+                kickPermissions: "Você não pode expulsar a este membro.",
                 kick: (member) => `O **${member}** foi expulso do servidor.`,
                 kickError: "Teve um erro enquanto estava tentando expulsar o usúario.",
                 // Mute Command
                 muteNo: "Esse membro ja está mutado!",
+                mutePermissions: "Você não pode silenciar a este membro.",
                 mute: (member) => `O **${member}** foi mutado com sucesso.`,
                 // Unmute Command
                 unmuteNo: "Esse membro não está mutado!",
@@ -54,6 +57,8 @@ module.exports = class Portuguese extends Language {
                 serverEmojis: "Emojis do servidor",
                 serverEmojisNormal: "Emojis normais",
                 serverEmojisAnimated: "Emojis animados",
+                serverBoosts: "Boosts do servidor",
+                serverBoostsTotal: (number, level) => `**Nível ${level}** - ${number} boosts`,
                 // Ping Command
                 pingCalculating: "Pong! *calculando...*",
                 ping: (ms) => `Pong! **${ms}ms**.`,
@@ -134,6 +139,7 @@ module.exports = class Portuguese extends Language {
                 // Roles Command
                 rolesNoOption: "Você deve colocar uma opção válida (`add` ou `remove`).",
                 rolesNoValid: "Você deve colocar pelo menos um cargo válido.",
+                rolesPermisions: "Você não pode modificar os cargos desse membro.",
                 rolesNoneAdd: (user) => `Nenhuma cargo foi adicionada ao membro **${user}**`,
                 rolesNoneRemove: (user) => `Nenhuma cargo foi removida do membro **${user}**.`,
                 rolesSingularAdd: (quantity, user) => `**${quantity}** cargo foi adicionado ao membro **${user}**.`,
@@ -155,7 +161,15 @@ module.exports = class Portuguese extends Language {
                 unbanNoUser: "Você deve inserir o ID de um usuário válido.",
                 unbanNo: "O usuário não é banido neste servidor",
                 unban: (user) => `O usuário **${user}** foi desbanido do servidor.`,
-                unbanError: "Ocorreu um erro ao desbanir o usuário."
+                unbanError: "Ocorreu um erro ao desbanir o usuário.",
+                // MessageUpdate Event
+                messageEdit: (user, id) => `**${user}** (${id}) editou sua mensagem`,
+                messageBefore: "Antes",
+                messageAfter: "Depois",
+                messageEdited: "Mensagen editado",
+                // MessageDelete Event
+                messageDelete: (user, id) => `O mensagen do **${user}** (${id}) foi eliminado`,
+                messageDeleted: "Mensagen eliminado"
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",

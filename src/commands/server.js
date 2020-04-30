@@ -12,18 +12,18 @@ module.exports = class Server extends Command {
     }
 
     run(message, [option]) {
-        if (option && option.toLowerCase() === "splash" && message.guild.splash)
-            message.channel.send(new MessageEmbed()
-                .setAuthor(message.guild.nameAcronym, message.author.displayAvatarURL())
-                .setDescription(`[${this.lang.get("imageUrl")}](${message.guild.iconURL({ format: "png" })})`)
-                .setImage(message.guild.iconURL({ size: 512 }))
-                .setColor(0x6666ff)
-                .setTimestamp());
-        else if (option && option.toLowerCase() === "icon" && message.guild.icon)
+        if (option && option.toLowerCase() === "icon" && message.guild.icon)
             message.channel.send(new MessageEmbed()
                 .setAuthor(message.guild.nameAcronym, message.author.displayAvatarURL())
                 .setDescription(`[${this.lang.get("imageUrl")}](${message.guild.iconURL({ size: 2048, format: "png", dynamic: true })})`)
                 .setImage(message.guild.iconURL({ size: 512, format: "png", dynamic: true }))
+                .setColor(0x6666ff)
+                .setTimestamp());
+        else if (option && option.toLowerCase() === "splash" && message.guild.splash)
+            message.channel.send(new MessageEmbed()
+                .setAuthor(message.guild.nameAcronym, message.author.displayAvatarURL())
+                .setDescription(`[${this.lang.get("imageUrl")}](${message.guild.iconURL({ size: 2048, format: "png", dynamic: true })})`)
+                .setImage(message.guild.splashURL({ size: 512, format: "png", dynamic: true }))
                 .setColor(0x6666ff)
                 .setTimestamp());
         else if (option && option.toLowerCase() === "banner" && message.guild.banner)
@@ -43,6 +43,8 @@ module.exports = class Server extends Command {
                 .addField(this.lang.get("serverExplicitContentFilter"), this.lang.getConstant("explicitContentFilter", message.guild.explicitContentFilter));
             if (message.guild.description)
                 embed.addField(this.lang.get("serverDescription"), message.guild.description);
+            if (message.guild.premiumSubscriptionCount > 0)
+                embed.addField(this.lang.get("serverBoosts"), this.lang.get("serverBoostsTotal", message.guild.premiumTier, message.guild.premiumSubscriptionCount));
             if (message.guild.features.length > 0)
                 embed.addField(this.lang.get("serverFeatures"), this.lang.parseServerFeatures(message.guild.features));
             if (message.guild.emojis.cache.size > 0)

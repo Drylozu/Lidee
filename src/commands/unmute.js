@@ -15,7 +15,7 @@ module.exports = class Unmute extends Command {
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
 
         let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);
-        if (!role)
+        if (!role) {
             role = await message.guild.roles.create({
                 data: {
                     name: `${this.client.user.username} Mute`,
@@ -24,13 +24,13 @@ module.exports = class Unmute extends Command {
                     permissions: 0
                 }
             });
-
-        message.guild.channels.cache
-            .filter((c) => c.manageable)
-            .forEach((channel) => channel.createOverwrite(role.id, {
-                SEND_MESSAGES: false,
-                ADD_REACTIONS: false
-            }));
+            message.guild.channels.cache
+                .filter((c) => c.manageable)
+                .forEach((channel) => channel.createOverwrite(role.id, {
+                    SEND_MESSAGES: false,
+                    ADD_REACTIONS: false
+                }));
+        }
 
         if (!member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("unmuteNo")}`);
         await member.roles.remove(role.id);

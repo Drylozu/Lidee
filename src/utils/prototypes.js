@@ -25,7 +25,7 @@ module.exports = () => {
         return this.replace(/(?:^|\s)\S/g, (c) => c.toUpperCase());
     }
 
-    console.clientLog = function (content, error = false,  shard = null) {
+    console.clientLog = function (content, error = false, shard = null) {
         this.log(`\x1b[36m[${new Date().toLocaleTimeString()}]${shard ? `\x1b[33m[S${shard}]` : ""}${error ? "\x1b[31m" : "\x1b[32m"}[LOG] \x1b[0m${content}`);
     }
 }
