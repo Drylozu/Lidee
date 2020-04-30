@@ -226,7 +226,7 @@ module.exports = class English extends Language {
                     STREAMING: "Streaming",
                     LISTENING: "Listening",
                     WATCHING: "Watching",
-                    CUSTOM_STATUS: "Custom Status"
+                    CUSTOM_STATUS: "Custom status"
                 },
                 verificationLevels: {
                     NONE: "Unrestricted",

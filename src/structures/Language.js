@@ -179,16 +179,19 @@ module.exports = class Language {
         return rolesParsed.length > 15 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 15)}` : rolesParsed.join(", ");
     }
 
-    parseMemberActivity(activities) {
+    parseMemberActivity(activities, client) {
         let customStatus = activities.find((a) => a.type === "CUSTOM_STATUS");
         let principalActivity =
             activities.find((a) => a.type === "LISTENING" && (a.state && a.details)) ||
             activities.find((a) => a.state && a.details) ||
             activities.find((a) => a.type !== "CUSTOM_STATUS");
+        let statusEmojiGuild = customStatus && customStatus.emoji
+            && customStatus.emoji.id ? client.emojis.resolve(customStatus.emoji.id) : false;
+        
         return [
-            customStatus && ((customStatus.emoji && !principalActivity) || customStatus.state) ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `${customStatus.emoji.toString()} ` : ""}${customStatus.state ? customStatus.state : ""}\n\n` : "",
+            customStatus && ((customStatus.emoji && !principalActivity) || customStatus.state) ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `*${statusEmojiGuild ? customStatus.emoji.toString() : customStatus.emoji.name}* ` : ""}${customStatus.state ? customStatus.state : ""}\n\n` : "",
             principalActivity && principalActivity.name ? `${customStatus && customStatus.emoji && !customStatus.state
-                ? `${customStatus.emoji.toString()} ` : ""}${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
+                ? `*${statusEmojiGuild ? customStatus.emoji.toString() : customStatus.emoji.name}* ` : ""}${this.getConstant("activities", principalActivity.type)} **${principalActivity.name}**.${principalActivity.state && principalActivity.details ? this.getEmoji("richPresence") : ""}\n` : "",
             principalActivity && principalActivity.details ? `**•** ${principalActivity.details}\n` : "",
             principalActivity && principalActivity.state ? `**•** ${principalActivity.state}\n` : "",
             principalActivity && principalActivity.timestamps && principalActivity.timestamps.start ? this.getConstant("time",

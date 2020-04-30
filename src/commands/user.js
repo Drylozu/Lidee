@@ -30,7 +30,7 @@ module.exports = class User extends Command {
             .addField(this.lang.get("userCreated"), this.lang.parseCompleteDate(member.user.createdAt), true)
             .addField(this.lang.get("userPermissions"), this.lang.parsePermissions(member.permissions.toArray()));
         if (member.user.presence.activities.length > 0)
-            embed.addField(this.lang.get("userActivity"), this.lang.parseMemberActivity(member.user.presence.activities));
+            embed.addField(this.lang.get("userActivity"), this.lang.parseMemberActivity(member.user.presence.activities, this.client));
         if (member.premiumSince)
             embed.addField(this.lang.get("userBoosting"), this.lang.parseCompleteDate(member.premiumSince));
         embed.addField(this.lang.get("roles", member.roles.cache.filter((r) => r.id !== r.guild.roles.everyone.id).size), this.lang.parseMemberRoles(member.roles))
