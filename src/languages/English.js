@@ -58,7 +58,7 @@ module.exports = class English extends Language {
                 serverEmojisNormal: "Normal emojis",
                 serverEmojisAnimated: "Animated emojis",
                 serverBoosts: "Server boosts",
-                serverBoostsTotal: (number, level) => `**Level ${level}** - ${number} boosts`,
+                serverBoostsTotal: (level, number) => `**Level ${level}** - ${number} boosts`,
                 // Ping Command
                 pingCalculating: "Pong! *calculating...*",
                 ping: (ms) => `Pong! **${ms}ms**.`,
