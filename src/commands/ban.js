@@ -14,7 +14,7 @@ module.exports = class Ban extends Command {
         let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
         if (!member.bannable) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("banNo")}`);
-        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 || message.guild.owner.id == member.id) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("banPermissions")}`);
+        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 && message.guild.owner.id !== message.author.id) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("banPermissions")}`);
 
         try {
             await message.guild.members.ban(member.id, {

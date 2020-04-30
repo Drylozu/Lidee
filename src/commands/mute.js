@@ -13,10 +13,10 @@ module.exports = class Mute extends Command {
     async run(message, args) {
         let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
         if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
-        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 || message.guild.owner.id == member.id) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("mutePermisions")}`);
+        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 && message.guild.owner.id !== message.author.id) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("mutePermisions")}`);
 
         let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);
-        if (!role)
+        if (!role) {
             role = await message.guild.roles.create({
                 data: {
                     name: `${this.client.user.username} Mute`,
@@ -25,13 +25,13 @@ module.exports = class Mute extends Command {
                     permissions: 0
                 }
             });
-
-        message.guild.channels.cache
-            .filter((c) => c.manageable)
-            .forEach((channel) => channel.createOverwrite(role.id, {
-                SEND_MESSAGES: false,
-                ADD_REACTIONS: false
-            }));
+            message.guild.channels.cache
+                .filter((c) => c.manageable)
+                .forEach((channel) => channel.createOverwrite(role.id, {
+                    SEND_MESSAGES: false,
+                    ADD_REACTIONS: false
+                }));
+        }
 
         if (member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("muteNo")}`);
         await member.roles.add(role.id);

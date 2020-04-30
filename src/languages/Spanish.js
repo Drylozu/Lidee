@@ -57,6 +57,8 @@ module.exports = class Spanish extends Language {
                 serverEmojis: "Emojis del servidor",
                 serverEmojisNormal: "Emojis normales",
                 serverEmojisAnimated: "Emojis animados",
+                serverBoosts: "Boosts del servidor",
+                serverBoostsTotal: (number, level) => `**Nivel ${level}** - ${number} boosts`,
                 // Ping Command
                 pingCalculating: "Pong! *calculando...*",
                 ping: (ms) => `Pong! **${ms}ms**.`,
@@ -160,14 +162,14 @@ module.exports = class Spanish extends Language {
                 unbanNo: "Ese usuario no está baneado en este servidor.",
                 unban: (user) => `El usuario **${user}** ha sido desbaneado del servidor.`,
                 unbanError: "Ha ocurrido un error al desbanear al usuario.",
-                // EventMessageUpdate
-                messageEdit: (tag, id) => `**${tag}** (${id}) ha editado su mensaje`,
-                messageBefore: "Antes:",
-                messageAfter: "Después:",
+                // MessageUpdate Event
+                messageEdit: (user, id) => `**${user}** (${id}) ha editado un mensaje`,
+                messageBefore: "Antes",
+                messageAfter: "Después",
                 messageEdited: "Mensaje Editado",
-                // EventMessageDelete
-                messageDelete: (tag, id) => `El mensaje de **${tag}** (${id}) a sido eliminado`,
-                messageDeleted: "Mensaje Eliminado"
+                // MessageDelete Event
+                messageDelete: (user, id) => `El mensaje de **${user}** (${id}) ha sido eliminado`,
+                messageDeleted: "Mensaje eliminado"
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",
@@ -204,7 +206,7 @@ module.exports = class Spanish extends Language {
                     MANAGE_EMOJIS: "administrar emojis"
                 },
                 serverFeatures: {
-                    ANIMATED_ICON: "icono animado",
+                    ANIMATED_ICON: "ícono animado",
                     BANNER: "banner",
                     COMMERCE: "comercio",
                     DISCOVERABLE: "reconocible",

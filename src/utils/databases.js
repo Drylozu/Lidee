@@ -18,9 +18,9 @@ let guildSchema = new Schema({
     },
     logs: {
         messages: {
-          type: String,
-          default: ""
-      }
+            type: String,
+            default: ""
+        }
     }
 });
 

@@ -50,6 +50,7 @@ module.exports = class Language {
                 BUGHUNTER_LEVEL_1: "<:BugHunter2:704769216796164237>",
                 BUGHUNTER_LEVEL_2: "<:BugHunter1:704769215881805866>",
                 DISCORD_PARTNER: "<:UserPartner:704769227332255774>",
+                DISCORD_NITRO: "<:DiscordNitro:705459275413323877>",
                 VERIFIED_BOT: "<:BotVerified:704769185254735893>"
             },
             status: {
@@ -178,7 +179,6 @@ module.exports = class Language {
         return rolesParsed.length > 15 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 15)}` : rolesParsed.join(", ");
     }
 
-    // eslint-disable-next-line complexity
     parseMemberActivity(activities) {
         let customStatus = activities.find((a) => a.type === "CUSTOM_STATUS");
         let principalActivity =
@@ -206,9 +206,9 @@ module.exports = class Language {
         let rolesParsed = serverRoles.cache
             .filter((r) => r.id !== everyoneRole.id)
             .sort((a, b) => b.position - a.position)
-            .map((r) => `<@&${r.id}>`).slice(0, 25);
+            .map((r) => `<@&${r.id}>`);
         if (rolesParsed.length < 1) return this.get("nothing");
-        return rolesParsed.length > 25 ? `${rolesParsed.join(", ")} ${this.get("others", rolesParsed.length - 25)}` : rolesParsed.join(", ");
+        return rolesParsed.length > 25 ? `${rolesParsed.slice(0, 25).join(", ")} ${this.get("others", rolesParsed.length - 25)}` : rolesParsed.slice(0, 25).join(", ");
     }
 
     parseServerEmojis(serverEmojis) {

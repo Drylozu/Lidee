@@ -57,6 +57,8 @@ module.exports = class Portuguese extends Language {
                 serverEmojis: "Emojis do servidor",
                 serverEmojisNormal: "Emojis normais",
                 serverEmojisAnimated: "Emojis animados",
+                serverBoosts: "Boosts do servidor",
+                serverBoostsTotal: (number, level) => `**Nível ${level}** - ${number} boosts`,
                 // Ping Command
                 pingCalculating: "Pong! *calculando...*",
                 ping: (ms) => `Pong! **${ms}ms**.`,
@@ -160,14 +162,14 @@ module.exports = class Portuguese extends Language {
                 unbanNo: "O usuário não é banido neste servidor",
                 unban: (user) => `O usuário **${user}** foi desbanido do servidor.`,
                 unbanError: "Ocorreu um erro ao desbanir o usuário.",
-                // EventMessageUpdate
-                messageEdit: (tag, id) => `**${tag}** (${id}) Editou sua mensagem`,
-                messageBefore: "Antes:",
-                messageAfter: "Depois:",
-                messageEdited: "Mensagen Editada",
-                // EventMessageDelete
-                messageDelete: (tag, id) => `O mensagen do **${tag}** (${id}) foi eliminado`,
-                messageDeleted: "Mensagen Eliminado"
+                // MessageUpdate Event
+                messageEdit: (user, id) => `**${user}** (${id}) editou sua mensagem`,
+                messageBefore: "Antes",
+                messageAfter: "Depois",
+                messageEdited: "Mensagen editado",
+                // MessageDelete Event
+                messageDelete: (user, id) => `O mensagen do **${user}** (${id}) foi eliminado`,
+                messageDeleted: "Mensagen eliminado"
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",

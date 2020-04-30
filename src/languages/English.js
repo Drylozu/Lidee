@@ -57,6 +57,8 @@ module.exports = class English extends Language {
                 serverEmojis: "Server emojis",
                 serverEmojisNormal: "Normal emojis",
                 serverEmojisAnimated: "Animated emojis",
+                serverBoosts: "Server boosts",
+                serverBoostsTotal: (number, level) => `**Level ${level}** - ${number} boosts`,
                 // Ping Command
                 pingCalculating: "Pong! *calculating...*",
                 ping: (ms) => `Pong! **${ms}ms**.`,
@@ -137,7 +139,7 @@ module.exports = class English extends Language {
                 // Roles Command
                 rolesNoOption: "You must enter a valid option (`add` or `remove`).",
                 rolesNoValid: "You must enter at least one valid role.",
-                rolesPermisions: "You cannot modify the roles of that member.",
+                rolesPermissions: "You can't modify the roles of that member.",
                 rolesNoneAdd: (user) => `No role has been added to member **${user}**.`,
                 rolesNoneRemove: (user) => `No role has been removed from the member **${user}**.`,
                 rolesSingularAdd: (quantity, user) => `**${quantity}** role was added to member **${user}**.`,
@@ -160,14 +162,14 @@ module.exports = class English extends Language {
                 unbanNo: "That user isn't banned on this server.",
                 unban: (user) => `The user **${user}** has been unbaned from the server.`,
                 unbanError: "An error ocurred unbanning the user.",
-                // EventMessageUpdate
-                messageEdit: (tag, id) => `**${tag}** (${id}) has edited his message`,
-                messageBefore: "Before:",
-                messageAfter: "After:",
-                messageEdited: "Edited Message",
-                // EventMessageDelete
-                messageDelete: (tag, id) => `The message of **${tag}** (${id}) has been deleted`,
-                messageDeleted: "Deleted Message"
+                // MessageUpdate Event
+                messageEdit: (user, id) => `**${user}** (${id}) edited a message`,
+                messageBefore: "Before",
+                messageAfter: "After",
+                messageEdited: "Edited message",
+                // MessageDelete Event
+                messageDelete: (user, id) => `The message of **${user}** (${id}) has been deleted`,
+                messageDeleted: "Deleted message"
             }, constants: {
                 permissions: {
                     default: "default permissions",
