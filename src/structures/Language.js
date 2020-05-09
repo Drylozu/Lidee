@@ -185,8 +185,8 @@ module.exports = class Language {
             activities.find((a) => a.type === "LISTENING" && (a.state && a.details)) ||
             activities.find((a) => a.state && a.details) ||
             activities.find((a) => a.type !== "CUSTOM_STATUS");
-        let statusEmojiGuild = customStatus && customStatus.emoji
-            && customStatus.emoji.id ? client.emojis.resolve(customStatus.emoji.id) : false;
+        let statusEmojiGuild = customStatus && customStatus.emoji &&
+            customStatus.emoji.id ? client.emojis.resolve(customStatus.emoji.id) : false;
         
         return [
             customStatus && ((customStatus.emoji && !principalActivity) || customStatus.state) ? `**${this.getConstant("activities", "CUSTOM_STATUS")}**: ${customStatus.emoji ? `*${statusEmojiGuild ? customStatus.emoji.toString() : customStatus.emoji.name}* ` : ""}${customStatus.state ? customStatus.state : ""}\n\n` : "",

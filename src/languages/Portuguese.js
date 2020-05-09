@@ -170,11 +170,12 @@ module.exports = class Portuguese extends Language {
                 // MessageDelete Event
                 messageDelete: (user, id) => `O mensagen do **${user}** (${id}) foi eliminado`,
                 messageDeleted: "Mensagen eliminado",
-                // Logs
-                logsNoOption: "Você deve colocar uma das opções válidas: (`messages`).",
-                logsNoValid: "Você deve colocar um canal válido.",
+                // Logs Command
+                logsNoOption: "Você deve colocar uma das opções válidas (`messages`).",
+                logsNoValid: "Não tenho permissão para enviar mensagens nesse canal.",
                 logsNoPermissions: "Não consigo enviar mensagens no canal escolhido, verifique minhas permissões.",
-                logsSave: "Configurações salvas."
+                logsReset: (log) => `Os registros de **${log}** foram removidos.`,
+                logs: (log, channel) => `Os registros de **${log}** será enviado para o canal **${channel}**.`
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",
@@ -265,6 +266,9 @@ module.exports = class Portuguese extends Language {
                     elapsed: (time) => `Tempo decorrido: **${time}**.`,
                     left: (time) => `Tempo restante: **${time}**.`,
                     now: "justo agora"
+                },
+                logs: {
+                    messages: "mensagens"
                 }
             }, help: {
                 // Help Command
@@ -307,7 +311,7 @@ module.exports = class Portuguese extends Language {
                 rainbowDescription: "Torna o avatar de um membro ou uma imagem anexada por você em um arco-íris",
                 roleDescription: "Mostrar as informações de um cargo por nome, menção ou ID.",
                 unbanDescription: "Desbanir um membro por ID, um motivo pode ser adicionado.",
-                logsDescription: "Configurar um canal para logs do servidor.",
+                logsDescription: "Configure um canal para os diferentes registrados dentro do servidor.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -339,7 +343,7 @@ module.exports = class Portuguese extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuário>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages> <channel>\n${prefix}logs messages #logs`
+                logsUsage: (prefix) => `${prefix}logs <messages> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs messages none`
             }
         });
 

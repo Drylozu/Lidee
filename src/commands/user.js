@@ -21,7 +21,7 @@ module.exports = class User extends Command {
         let parsedEmojis = `${userFlags.has("DEVELOPER") ? this.lang.getEmoji("userDeveloper") : ""}${userFlags.has("BUG_HUNTER") ? this.lang.getEmoji("userBugHunter") : ""}${userFlags.has("TRANSLATOR") ? this.lang.getEmoji("userTranslator") : ""}${userFlags.has("DONATOR") ? this.lang.getEmoji("userDonator") : ""}${member.user.bot ? this.lang.getEmoji("userBot") : ""}${message.guild.owner.id === member.id ? this.lang.getEmoji("userOwner") : ""}${member.user.presence.clientStatus && member.user.presence.clientStatus.mobile ? this.lang.getEmoji("statusMobile")[member.user.presence.clientStatus.mobile] : this.lang.getEmoji("status")[member.user.presence.status]}${member.premiumSince ? this.lang.getEmoji("userBooster") : ""}${member.voice.channel ? this.lang.getEmoji("voiceChannel") : ""}`;
         let parsedFlags = [].concat(...(await member.user.fetchFlags()).toArray().map((f) => this.lang.getEmoji("userFlags")[f]));
         if (member.user.avatar.startsWith("a_"))
-            parsedFlags.push(this.lang.getEmoji("userFlags")["DISCORD_NITRO"]);
+            parsedFlags.push(this.lang.getEmoji("userFlags").DISCORD_NITRO);
 
         let embed = new MessageEmbed()
             .setAuthor(member.user.tag, member.user.displayAvatarURL())
