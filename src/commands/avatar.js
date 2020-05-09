@@ -10,8 +10,8 @@ module.exports = class Avatar extends Command {
         });
     }
 
-    run(message, [id]) {
-        let member = message.guild.members.resolve(id) || message.mentions.members.first() || message.member;
+    run(message, args) {
+        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || (args.join(" ").length > 2 ? message.guild.members.cache.sort((a, b) => a.user.tag.localeCompare(b.user.tag)).find((r) => r.user.tag.toLowerCase().includes(args.join(" ").toLowerCase())) : null) || message.member;
         let avatar = member.user.displayAvatarURL({ size: 512, format: "png", dynamic: true });
 
         message.channel.send(new MessageEmbed()

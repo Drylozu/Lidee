@@ -169,7 +169,13 @@ module.exports = class English extends Language {
                 messageEdited: "Edited message",
                 // MessageDelete Event
                 messageDelete: (user, id) => `The message of **${user}** (${id}) has been deleted`,
-                messageDeleted: "Deleted message"
+                messageDeleted: "Deleted message",
+                // Logs Command
+                logsNoOption: "You must enter a valid option (`messages`).",
+                logsNoValid: "You must enter a valid channel.",
+                logsNoPermissions: "I don't have permission to send messages on that channel.",
+                logsReset: (log) => `The logs of **${log}** have been removed.`,
+                logs: (log, channel) => `The logs of **${log}** will be sent to the channel **${channel}**.`
             }, constants: {
                 permissions: {
                     default: "default permissions",
@@ -226,7 +232,7 @@ module.exports = class English extends Language {
                     STREAMING: "Streaming",
                     LISTENING: "Listening",
                     WATCHING: "Watching",
-                    CUSTOM_STATUS: "Custom Status"
+                    CUSTOM_STATUS: "Custom status"
                 },
                 verificationLevels: {
                     NONE: "Unrestricted",
@@ -260,6 +266,9 @@ module.exports = class English extends Language {
                     elapsed: (time) => `**${time}** elapsed.`,
                     left: (time) => `**${time}** left.`,
                     now: "right now"
+                },
+                logs: {
+                    messages: "messages"
                 }
             }, help: {
                 // Help Command
@@ -302,6 +311,7 @@ module.exports = class English extends Language {
                 rainbowDescription: "Makes a member's avatar or an image attached by you in a rainbow.",
                 roleDescription: "Shows the information of a role by the name, mention or ID.",
                 unbanDescription: "Unbans a member by ID, a reason can be added.",
+                logsDescription: "Configure a channel for the diferents server logs.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -332,7 +342,8 @@ module.exports = class English extends Language {
                 scaredUsage: (prefix) => `${prefix}scared [Member]\n${prefix}scared\n${prefix}scared @Free`,
                 rainbowUsage: (prefix) => `${prefix}rainbow [Member]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`,
-                unbanUsage: (prefix) => `${prefix}unban <User>\n${prefix}unban 123123123123123123`
+                unbanUsage: (prefix) => `${prefix}unban <User>\n${prefix}unban 123123123123123123`,
+                logsUsage: (prefix) => `${prefix}logs <messages> <Channel|none>\n${prefix}logs messages #logs\n${prefix}logs messages none`
             }
         });
 
