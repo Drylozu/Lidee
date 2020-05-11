@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 
 module.exports = class EventMessageDelete {
     constructor(client) {
@@ -15,13 +15,14 @@ module.exports = class EventMessageDelete {
         }
 
         let lang = this.client.languages.get(guild.language);
-
-        if (!message.guild.channels.cache.has(guild.logs.messages)) return;
-        let channel = message.guild.channels.cache.get(guild.logs.messages);
-        channel.send(new MessageEmbed().setAuthor(message.guild.nameAcronym, message.guild.iconURL())
-            .setDescription(`> ${lang.get("messageDelete", message.author.tag, message.author.id)}\n${message.content}`)
-            .setFooter(`${lang.get("messageDeleted")}`, message.author.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
+        let channelMessages = message.guild.channels.resolve(guild.logs.messages);
+        let channelAll = message.guild.channels.resolve(guild.logs.all);
+        let channel = channelMessages || channelAll;
+        if (channel)
+            channel.send(new MessageEmbed().setAuthor(message.guild.nameAcronym, message.guild.iconURL())
+                .setDescription(`> ${lang.get("messageDelete", message.author.tag, lang.get("id", message.author.id))}\n${message.content}`)
+                .setFooter(`${lang.get("messageDeleted")}`, message.author.displayAvatarURL())
+                .setColor(0xff6666)
+                .setTimestamp());
     }
 }

@@ -20,6 +20,10 @@ let guildSchema = new Schema({
         messages: {
             type: String,
             default: ""
+        },
+        all: {
+            type: String,
+            default: ""
         }
     }
 });
