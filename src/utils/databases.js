@@ -21,6 +21,10 @@ let guildSchema = new Schema({
             type: String,
             default: ""
         },
+        ban: {
+            type: String,
+            default: ""
+        },
         all: {
             type: String,
             default: ""

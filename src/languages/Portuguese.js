@@ -269,6 +269,7 @@ module.exports = class Portuguese extends Language {
                 },
                 logs: {
                     messages: "mensagens",
+                    ban: "banidos",
                     all: "todo"
                 }
             }, help: {
@@ -344,7 +345,7 @@ module.exports = class Portuguese extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuário>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`
+                logsUsage: (prefix) => `${prefix}logs <messages|ban|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`
             }
         });
 

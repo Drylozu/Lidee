@@ -171,7 +171,7 @@ module.exports = class Spanish extends Language {
                 messageDelete: (user, id) => `El mensaje de **${user}** (${id}) ha sido eliminado`,
                 messageDeleted: "Mensaje eliminado",
                 // Logs Command
-                logsNoOption: "Debes colocar un opción válida (`messages` y `all`).",
+                logsNoOption: "Debes colocar un opción válida (`messages`, `ban`, `all`).",
                 logsNoValid: "Debes colocar un canal válido.",
                 logsNoPermissions: "No tengo permisos de enviar mensajes en ese canal.",
                 logsReset: (log) => `Los registros de **${log}** han sido eliminados.`,
@@ -269,6 +269,7 @@ module.exports = class Spanish extends Language {
                 },
                 logs: {
                     messages: "mensajes",
+                    ban: "baneos",
                     all: "todo"
                 }
             }, help: {
@@ -344,7 +345,7 @@ module.exports = class Spanish extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Miembro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Rol>\n${prefix}role @Miembro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuario>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`
+                logsUsage: (prefix) => `${prefix}logs <messages|ban|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`
             }
         });
 
