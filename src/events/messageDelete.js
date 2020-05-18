@@ -6,6 +6,10 @@ module.exports = class EventMessageDelete {
     }
 
     async run(message) {
+        if (message.partial)
+            await message.fetch();
+
+        if (!message.content && message.attachments.size < 1) return;
         let guild = await this.client.db.guilds.findOne({ _id: message.guild.id }).exec();
         if (!guild) {
             guild = new this.client.db.guilds({
@@ -18,11 +22,12 @@ module.exports = class EventMessageDelete {
         let channelMessages = message.guild.channels.resolve(guild.logs.messages);
         let channelAll = message.guild.channels.resolve(guild.logs.all);
         let channel = channelMessages || channelAll;
-        if (channel)
-            channel.send(new MessageEmbed().setAuthor(message.guild.nameAcronym, message.guild.iconURL())
-                .setDescription(`> ${lang.get("messageDelete", message.author.tag, lang.get("id", message.author.id))}\n${message.content}`)
-                .setFooter(`${lang.get("messageDeleted")}`, message.author.displayAvatarURL())
-                .setColor(0xff6666)
-                .setTimestamp());
+        if (!channel) return;
+        channel.send(new MessageEmbed()
+            .setAuthor(message.guild.nameAcronym, message.guild.iconURL())
+            .setDescription(`> ${lang.get("messageDelete", message.author.tag, lang.get("id", message.author.id))}\n\n${message.content.slice(0, 1700)}\n\n${message.attachments.map((a) => `[${a.name}](${a.proxyURL})`).join(" - ")}`)
+            .setFooter(`${lang.get("messageDeleted")}`, message.author.displayAvatarURL())
+            .setColor(0xff6666)
+            .setTimestamp());
     }
 }

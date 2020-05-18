@@ -9,7 +9,6 @@ module.exports = class EventMessage {
 
     async run(message) {
         if (message.channel.type === "dm") return;
-        if (message.author.bot) return;
 
         let guild = await this.client.db.guilds.findOne({ _id: message.guild.id }).exec();
         let user = await this.client.db.users.findOne({ _id: message.author.id }).exec();
@@ -27,6 +26,14 @@ module.exports = class EventMessage {
             user.save();
         }
 
+        if (message.channel.id === guild.multimedia) {
+            if (message.attachments.size < 1)
+                if (!message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES"))
+                    message.delete();
+            return;
+        }
+
+        if (message.author.bot) return;
         let prefixes = [guild.prefix, `<@${this.client.user.id}>`, `<@!${this.client.user.id}>`];
         let prefix = prefixes.find((p) => message.content.startsWith(p));
         if (!prefix) return;

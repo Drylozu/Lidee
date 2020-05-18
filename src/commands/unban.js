@@ -1,6 +1,6 @@
 const Command = require("../structures/Command");
 
-module.exports = class Trump extends Command {
+module.exports = class Unban extends Command {
     constructor(client) {
         super(client, {
             name: "unban",

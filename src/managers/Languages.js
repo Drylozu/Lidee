@@ -3,15 +3,17 @@ const path = require("path");
 const fs = require("fs");
 
 module.exports = class LanguageManager {
-    constructor() {
+    constructor(client) {
         Object.defineProperty(this, "languages", { value: new Collection() });
+        this.client = client;
         this.loadLanguages();
     }
 
     loadLanguages() {
         for (let file of fs.readdirSync(path.join(__dirname, "../languages/"))) {
             let language = new (require(`../languages/${file}`))();
-            if (this.languages.get(language.languageCode)) return;
+            let existingLanguage = this.languages.find((l) => [language.displayName, language.nativeName, language.languageCode, language.flag, language.constructor.name].some((n) => [l.displayName, l.nativeName, l.languageCode, l.flag, l.constructor.name].includes(n)));
+            if (existingLanguage) this.client.log(`Languages with equal names found (${file} and ${existingLanguage.displayName})`, true);
             this.languages.set(language.languageCode, language);
         }
     }

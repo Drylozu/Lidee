@@ -7,6 +7,7 @@ module.exports = class Spanish extends Language {
             strings: {
                 // Global
                 userNo: "Debes mencionar un usuario o colocar su ID.",
+                channelNo: "Debes colocar un canal válido.",
                 userPerms: (permission) => `Debes tener el permiso de \`${permission}\` para ejecutar este comando.`,
                 botPerms: (permission) => `Debo tener el permiso de \`${permission}\` para ejecutar este comando.`,
                 nsfwChannel: "Este comando solo esta disponible en canales NSFW.",
@@ -163,19 +164,25 @@ module.exports = class Spanish extends Language {
                 unban: (user) => `El usuario **${user}** ha sido desbaneado del servidor.`,
                 unbanError: "Ha ocurrido un error al desbanear al usuario.",
                 // MessageUpdate Event
-                messageEdit: (user, id) => `**${user}** (${id}) ha editado un mensaje`,
+                messageEdit: (user, id) => `**${user}** (${id}) ha editado un mensaje.`,
                 messageBefore: "Antes",
                 messageAfter: "Después",
-                messageEdited: "Mensaje Editado",
+                messageEdited: "Mensaje editado",
                 // MessageDelete Event
-                messageDelete: (user, id) => `El mensaje de **${user}** (${id}) ha sido eliminado`,
-                messageDeleted: "Mensaje eliminado",
+                messageDelete: (user, id) => `El mensaje de **${user}** (${id}) ha sido eliminado.`,
+                messageDeleted: "Mensaje eliminado.",
                 // Logs Command
-                logsNoOption: "Debes colocar un opción válida (`messages`, `ban`, `all`).",
-                logsNoValid: "Debes colocar un canal válido.",
-                logsNoPermissions: "No tengo permisos de enviar mensajes en ese canal.",
+                logsNoOption: (options) => `Debes colocar un opción válida (${options}).`,
+                logsNoPermissions: "No tengo permiso de enviar mensajes en ese canal.",
                 logsReset: (log) => `Los registros de **${log}** han sido eliminados.`,
-                logs: (log, channel) => `Los registros de **${log}** se enviarán ahora al canal **${channel}**.`
+                logs: (log, channel) => `Los registros de **${log}** se enviarán ahora al canal **${channel}**.`,
+                // Multimedia Command
+                multimediaNoPermissions: "No tengo permiso de administrar mensajes en ese canal.",
+                multimediaNo: "No hay canal de multimedia.",
+                multimedia: (channel) => `El canal de multimedia actual es ${channel}, todos los mensajes que no tengan un archivo serán eliminados.`,
+                multimediaChange: (prefix) => `Puedes cambiar el canal de multimedia usando \`${prefix}multimedia <Canal>\` o eliminarlo usando \`${prefix}multimedia none\`.`,
+                multimediaChanged: (channel) => `El canal de multimedia ahora es ${channel}.`,
+                multimediaReset: "El canal de multimedia ha sido eliminado."
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",
@@ -314,6 +321,7 @@ module.exports = class Spanish extends Language {
                 roleDescription: "Muestra la información de un rol por nombre, mención o ID.",
                 unbanDescription: "Desbanea un miembro por ID, se puede agregar una razón.",
                 logsDescription: "Configura un canal para los diferentes registros posibles dentro servidor.",
+                multimediaDescription: "Muestra y cambia el canal de multimedia del servidor, todos los mensajes que no tengan un archivo serán eliminados. No afecta en personas que tengan permiso de administrar mensajes en ese canal.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -345,7 +353,8 @@ module.exports = class Spanish extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Miembro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Rol>\n${prefix}role @Miembro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuario>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages|ban|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`
+                logsUsage: (prefix) => `${prefix}logs <messages|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
+                multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`
             }
         });
 

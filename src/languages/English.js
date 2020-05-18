@@ -7,6 +7,7 @@ module.exports = class English extends Language {
             strings: {
                 // Global
                 userNo: "You must mention an user or provide his ID.",
+                channelNo: "You must enter a valid channel.",
                 userPerms: (permission) => `You must have the permission \`${permission}\` to execute this command.`,
                 botPerms: (permission) => `I must have the permission \`${permission}\` to execute this command.`,
                 nsfwChannel: "This command is only available in a NSFW channel.",
@@ -163,19 +164,25 @@ module.exports = class English extends Language {
                 unban: (user) => `The user **${user}** has been unbaned from the server.`,
                 unbanError: "An error ocurred unbanning the user.",
                 // MessageUpdate Event
-                messageEdit: (user, id) => `**${user}** (${id}) edited a message`,
+                messageEdit: (user, id) => `**${user}** (${id}) edited a message.`,
                 messageBefore: "Before",
                 messageAfter: "After",
                 messageEdited: "Edited message",
                 // MessageDelete Event
-                messageDelete: (user, id) => `The message of **${user}** (${id}) has been deleted`,
+                messageDelete: (user, id) => `The message of **${user}** (${id}) has been deleted.`,
                 messageDeleted: "Deleted message",
                 // Logs Command
-                logsNoOption: "You must enter a valid option (`messages` and `all`).",
-                logsNoValid: "You must enter a valid channel.",
+                logsNoOption: (options) => `You must enter a valid option (${options}).`,
                 logsNoPermissions: "I don't have permission to send messages on that channel.",
                 logsReset: (log) => `The logs of **${log}** have been removed.`,
-                logs: (log, channel) => `The logs of **${log}** will be sent to the channel **${channel}**.`
+                logs: (log, channel) => `The logs of **${log}** will be sent to the channel **${channel}**.`,
+                // Multimedia Command
+                multimediaNoPermissions: "I don't have permission to manage messages on that channel.",
+                multimediaNo: "No media channel.",
+                multimedia: (channel) => `The current multimedia channel is ${channel}, all messages that don't contain a file will be deleted.`,
+                multimediaChange: (prefix) => `You can change the multimedia channel using \`${prefix}multimedia <Channel>\` or delete it using \`${prefix}multimedia none\`.`,
+                multimediaChanged: (channel) => `The multimedia channel is now ${channel}.`,
+                multimediaReset: "The multimedia channel has been deleted."
             }, constants: {
                 permissions: {
                     default: "default permissions",
@@ -314,6 +321,7 @@ module.exports = class English extends Language {
                 roleDescription: "Shows the information of a role by the name, mention or ID.",
                 unbanDescription: "Unbans a member by ID, a reason can be added.",
                 logsDescription: "Configure a channel for the diferents server logs.",
+                multimediaDescription: "Shows and changes the server multimedia channel, all messages that don't contain a file will be deleted. It doesn't affect people who have permission to manage messages on that channel.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -345,7 +353,8 @@ module.exports = class English extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Member]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`,
                 unbanUsage: (prefix) => `${prefix}unban <User>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages|ban|all> <Channel|none>\n${prefix}logs messages #logs\n\n${prefix}logs all #logs\n${prefix}logs messages none`
+                logsUsage: (prefix) => `${prefix}logs <messages|all> <Channel|none>\n${prefix}logs messages #logs\n\n${prefix}logs all #logs\n${prefix}logs messages none`,
+                multimediaUsage: (prefix) => `${prefix}multimedia <Channel|none>\n${prefix}multimedia #pictures\n${prefix}multimedia none`
             }
         });
 

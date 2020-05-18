@@ -6,7 +6,8 @@ module.exports = class Portuguese extends Language {
         super({
             strings: {
                 // Global
-                userNo: "Deve mencionar um usúario ou colocar seu ID.",
+                userNo: "Você deve mencionar um usúario ou colocar seu ID.",
+                channelNo: "Você deve inserir um canal válido.",
                 userPerms: (permission) => `Você deve ter a permissão de \`${permission}\` para executar este comando.`,
                 botPerms: (permission) => `Eu devo ter a permissão de \`${permission}\` para executar este comando.`,
                 nsfwChannel: "Este comando so está funcionando em canal NSFW.",
@@ -75,7 +76,7 @@ module.exports = class Portuguese extends Language {
                 language: (language) => `O idioma em neste servidor é \`${language}\`.`,
                 languageSupport: "Idioma suportados",
                 languageActual: "Idioma atuais",
-                languageChange: (prefix) => `Pode mudar o idioma usando: \`${prefix}language [Código do idioma]\`.`,
+                languageChange: (prefix) => `Pode alterar o idioma usando: \`${prefix}language [Código do idioma]\`.`,
                 languageChanged: (language) => `O idioma do server mudou para \`${language}\`.`,
                 // Hug Command
                 hug: (author, user) => `**${author}** abraçou **${user}** ༼ つ ◕_◕ ༽つ`,
@@ -163,19 +164,25 @@ module.exports = class Portuguese extends Language {
                 unban: (user) => `O usuário **${user}** foi desbanido do servidor.`,
                 unbanError: "Ocorreu um erro ao desbanir o usuário.",
                 // MessageUpdate Event
-                messageEdit: (user, id) => `**${user}** (${id}) editou sua mensagem`,
+                messageEdit: (user, id) => `**${user}** (${id}) editou sua mensagem.`,
                 messageBefore: "Antes",
                 messageAfter: "Depois",
                 messageEdited: "Mensagen editado",
                 // MessageDelete Event
-                messageDelete: (user, id) => `O mensagen do **${user}** (${id}) foi eliminado`,
+                messageDelete: (user, id) => `O mensagen do **${user}** (${id}) foi eliminado.`,
                 messageDeleted: "Mensagen eliminado",
                 // Logs Command
-                logsNoOption: "Você deve colocar uma das opções válidas (`messages` e `all`).",
-                logsNoValid: "Não tenho permissão para enviar mensagens nesse canal.",
-                logsNoPermissions: "Não consigo enviar mensagens no canal escolhido, verifique minhas permissões.",
+                logsNoOption: (options) => `Você deve colocar uma das opções válidas (${options}).`,
+                logsNoPermissions: "Não tenho permissão para enviar mensagens nesse canal.",
                 logsReset: (log) => `Os registros de **${log}** foram removidos.`,
-                logs: (log, channel) => `Os registros de **${log}** será enviado para o canal **${channel}**.`
+                logs: (log, channel) => `Os registros de **${log}** será enviado para o canal **${channel}**.`,
+                // Multimedia Command
+                multimediaNoPermissions: "Não tenho permissão para administrar mensagens nesse canal.",
+                multimediaNo: "Não há canal de multimídia.",
+                multimedia: (channel) => `O canal multimídia atual é ${channel}, todas as mensagens que não possuem um arquivo serão deletadas.`,
+                multimediaChange: (prefix) => `Você pode substituir o canal de multimídia usando \`${prefix}multimedia <Canal>\` ou eliminá-lo usando \`${prefix}multimedia none\`.`,
+                multimediaChanged: (channel) => `O canal multimídia agora é ${channel}.`,
+                multimediaReset: "O canal de mídia foi removido."
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",
@@ -205,7 +212,7 @@ module.exports = class Portuguese extends Language {
                     DEAFEN_MEMBERS: "mutar membros",
                     MOVE_MEMBERS: "mover membros",
                     USE_VAD: "usar a atividade de voz",
-                    CHANGE_NICKNAME: "mudar apelidio",
+                    CHANGE_NICKNAME: "alterar apelidio",
                     MANAGE_NICKNAMES: "administrar apelidios",
                     MANAGE_ROLES: "administrar roles",
                     MANAGE_WEBHOOKS: "administrar webhooks",
@@ -293,8 +300,8 @@ module.exports = class Portuguese extends Language {
                 userDescription: "Mostrar informações detalhadas de um usúario.",
                 serverDescription: "Mostrar informações detalhadas de um servidor.",
                 pingDescription: "Mostrar a latencia do bot e a API do discord.",
-                prefixDescription: "Mostrar e mudar as configurações do prefixo no servidor.",
-                languageDescription: "Mostrar e mudar as configurações do idioma no servidor.",
+                prefixDescription: "Mostrar e altera as configurações do prefixo no servidor.",
+                languageDescription: "Mostrar e altera as configurações do idioma no servidor.",
                 avatarDescription: "Mostrar o avatar de um membro por ID, menção ou o seu.",
                 hugDescription: "Abrace um usuário por ID ou menção.",
                 slapDescription: "Bata em um membro por ID ou menção",
@@ -314,6 +321,7 @@ module.exports = class Portuguese extends Language {
                 roleDescription: "Mostrar as informações de um cargo por nome, menção ou ID.",
                 unbanDescription: "Desbanir um membro por ID, um motivo pode ser adicionado.",
                 logsDescription: "Configure um canal para os diferentes registrados dentro do servidor.",
+                multimediaDescription: "Mostra e altera o canal multimídia do servidor, todas as mensagens que não contêm um arquivo serão excluídas. Não afeta as pessoas que têm permissão para gerenciar mensagens nesse canal.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -345,7 +353,8 @@ module.exports = class Portuguese extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuário>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages|ban|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`
+                logsUsage: (prefix) => `${prefix}logs <messages|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
+                multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`
             }
         });
 
