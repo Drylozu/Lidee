@@ -13,6 +13,7 @@ module.exports = class Language {
             userTranslator: "<:UserTranslator:697522235401043969>",
             serverPartner: "<:ServerPartner:697135845647581235>",
             userBugHunter: "<:UserBugHunter:697872203080794234>",
+            userStreaming: "<:UserStreaming:712854179932143676>",
             serverPremium: "<:ServerPremium:697522233513345126>",
             serverBoosted: "<:ServerBoosted:690932026987249685>",
             userDeveloper: "<:UserDeveloper:697522234490749008>",

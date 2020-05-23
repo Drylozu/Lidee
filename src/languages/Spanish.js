@@ -170,7 +170,7 @@ module.exports = class Spanish extends Language {
                 messageEdited: "Mensaje editado",
                 // MessageDelete Event
                 messageDelete: (user, id) => `El mensaje de **${user}** (${id}) ha sido eliminado.`,
-                messageDeleted: "Mensaje eliminado.",
+                messageDeleted: "Mensaje eliminado",
                 // Logs Command
                 logsNoOption: (options) => `Debes colocar un opción válida (${options}).`,
                 logsNoPermissions: "No tengo permiso de enviar mensajes en ese canal.",
@@ -182,7 +182,14 @@ module.exports = class Spanish extends Language {
                 multimedia: (channel) => `El canal de multimedia actual es ${channel}, todos los mensajes que no tengan un archivo serán eliminados.`,
                 multimediaChange: (prefix) => `Puedes cambiar el canal de multimedia usando \`${prefix}multimedia <Canal>\` o eliminarlo usando \`${prefix}multimedia none\`.`,
                 multimediaChanged: (channel) => `El canal de multimedia ahora es ${channel}.`,
-                multimediaReset: "El canal de multimedia ha sido eliminado."
+                multimediaReset: "El canal de multimedia ha sido eliminado.",
+                // Voice State Update Event
+                updateVoice: "Actualización de estado de voz",
+                joinVoice: (user, id, channel) => `El miembro **${user}** (${id}) se ha unido al canal de voz ${ channel}`,
+                leaveVoice: (user, id, channel) => `El miembro **${user}** (${id}) se ha desconectado del canal de voz ${ channel}`,
+                changeVoice: (user, id, channelOld, channelNew) => `El miembro **${user}** (${id}) ha cambiado de canal de voz ${channelOld} a ${channelNew}`,
+                startStreaming: (user, id, channel) => `El miembro **${user}** (${id}) ha iniciado un directo en el canal de voz ${ channel}`,
+                endStreaming: (user, id, channel) => `El miembro **${user}** (${id}) ha finalizado el directo en el canal de voz ${ channel}`
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",
@@ -276,7 +283,7 @@ module.exports = class Spanish extends Language {
                 },
                 logs: {
                     messages: "mensajes",
-                    ban: "baneos",
+                    voice: "voz",
                     all: "todo"
                 }
             }, help: {
@@ -353,7 +360,7 @@ module.exports = class Spanish extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Miembro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Rol>\n${prefix}role @Miembro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuario>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
+                logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
                 multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`
             }
         });

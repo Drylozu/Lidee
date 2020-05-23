@@ -8,7 +8,7 @@ module.exports = class Logs extends Command {
             userPermissions: ["guild", "MANAGE_GUILD"]
         });
 
-        this.logs = ["messages", "all"];
+        this.logs = ["messages", "voice", "all"];
     }
 
     async run(message, [log, channel]) {

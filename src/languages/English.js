@@ -182,7 +182,14 @@ module.exports = class English extends Language {
                 multimedia: (channel) => `The current multimedia channel is ${channel}, all messages that don't contain a file will be deleted.`,
                 multimediaChange: (prefix) => `You can change the multimedia channel using \`${prefix}multimedia <Channel>\` or delete it using \`${prefix}multimedia none\`.`,
                 multimediaChanged: (channel) => `The multimedia channel is now ${channel}.`,
-                multimediaReset: "The multimedia channel has been deleted."
+                multimediaReset: "The multimedia channel has been deleted.",
+                // Voice State Update Event
+                updateVoice: "Update voice state",
+                joinVoice: (user, id, channel) => `The member **${user}** (${id}) has joined the voice channel ${channel}`,
+                leaveVoice: (user, id, channel) => `The member **${user}** (${id}) has leaved the voice channel ${channel}`,
+                changeVoice: (user, id, channelOld, channelNew) => `The member **${user}** (${id}) has changed the voice channel ${channelOld} to ${channelNew}`,
+                startStreaming: (user, id, channel) => `The member **${user}** (${id}) has started a streaming on the voice channel ${channel}`,
+                endStreaming: (user, id, channel) => `The member **${user}** (${id}) has ended the streaming on the voice channel ${channel}`
             }, constants: {
                 permissions: {
                     default: "default permissions",
@@ -276,7 +283,7 @@ module.exports = class English extends Language {
                 },
                 logs: {
                     messages: "messages",
-                    ban: "ban",
+                    voice: "voice",
                     all: "all"
                 }
             }, help: {
@@ -353,7 +360,7 @@ module.exports = class English extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Member]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`,
                 unbanUsage: (prefix) => `${prefix}unban <User>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages|all> <Channel|none>\n${prefix}logs messages #logs\n\n${prefix}logs all #logs\n${prefix}logs messages none`,
+                logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Channel|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n${prefix}logs messages none`,
                 multimediaUsage: (prefix) => `${prefix}multimedia <Channel|none>\n${prefix}multimedia #pictures\n${prefix}multimedia none`
             }
         });

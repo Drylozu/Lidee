@@ -21,6 +21,10 @@ let guildSchema = new Schema({
             type: String,
             default: ""
         },
+        voice: {
+            type: String,
+            default: ""
+        },
         all: {
             type: String,
             default: ""
@@ -29,6 +33,10 @@ let guildSchema = new Schema({
     multimedia: {
         type: String,
         default: ""
+    },
+    autorol: {
+        type: Array,
+        default: []
     }
 });
 

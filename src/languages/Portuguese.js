@@ -182,7 +182,14 @@ module.exports = class Portuguese extends Language {
                 multimedia: (channel) => `O canal multimídia atual é ${channel}, todas as mensagens que não possuem um arquivo serão deletadas.`,
                 multimediaChange: (prefix) => `Você pode substituir o canal de multimídia usando \`${prefix}multimedia <Canal>\` ou eliminá-lo usando \`${prefix}multimedia none\`.`,
                 multimediaChanged: (channel) => `O canal multimídia agora é ${channel}.`,
-                multimediaReset: "O canal de mídia foi removido."
+                multimediaReset: "O canal de mídia foi removido.",
+                // Voice State Update Event
+                updateVoice: "Update voice state",
+                joinVoice: (user, id, channel) => `O membro **${user}** (${id}) entrou no canal de voz ${channel}`,
+                leaveVoice: (user, id, channel) => `O membro **${user}** (${id}) saiu do canal de voz ${channel}`,
+                changeVoice: (user, id, channelOld, channelNew) => `O membro **${user}** (${id}) mudou de canal de voz ${channelOld} pra ${channelNew}`,
+                startStreaming: (user, id, channel) => `O membro **${user}** (${id}) iniciou uma transmissão no canal de voz ${channel}`,
+                endStreaming: (user, id, channel) => `O membro **${user}** (${id}) terminou a transmissão no canal de voz ${channel}`
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",
@@ -276,7 +283,7 @@ module.exports = class Portuguese extends Language {
                 },
                 logs: {
                     messages: "mensagens",
-                    ban: "banidos",
+                    voice: "voz",
                     all: "todo"
                 }
             }, help: {
@@ -353,7 +360,7 @@ module.exports = class Portuguese extends Language {
                 rainbowUsage: (prefix) => `${prefix}rainbow [Membro]\n${prefix}rainbow\n${prefix}rainbow @Free`,
                 roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuário>\n${prefix}unban 123123123123123123`,
-                logsUsage: (prefix) => `${prefix}logs <messages|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
+                logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
                 multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`
             }
         });
