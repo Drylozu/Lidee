@@ -189,7 +189,10 @@ module.exports = class English extends Language {
                 leaveVoice: (user, id, channel) => `The member **${user}** (${id}) has leaved the voice channel ${channel}`,
                 changeVoice: (user, id, channelOld, channelNew) => `The member **${user}** (${id}) has changed the voice channel ${channelOld} to ${channelNew}`,
                 startStreaming: (user, id, channel) => `The member **${user}** (${id}) has started a streaming on the voice channel ${channel}`,
-                endStreaming: (user, id, channel) => `The member **${user}** (${id}) has ended the streaming on the voice channel ${channel}`
+                endStreaming: (user, id, channel) => `The member **${user}** (${id}) has ended the streaming on the voice channel ${channel}`,
+                // Autorol Command
+                noRoles: "You must mention the roles or enter their IDs.",
+                autorolSave: "Configuration saved."
             }, constants: {
                 permissions: {
                     default: "default permissions",

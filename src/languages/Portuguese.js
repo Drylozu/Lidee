@@ -189,7 +189,10 @@ module.exports = class Portuguese extends Language {
                 leaveVoice: (user, id, channel) => `O membro **${user}** (${id}) saiu do canal de voz ${channel}`,
                 changeVoice: (user, id, channelOld, channelNew) => `O membro **${user}** (${id}) mudou de canal de voz ${channelOld} pra ${channelNew}`,
                 startStreaming: (user, id, channel) => `O membro **${user}** (${id}) iniciou uma transmissão no canal de voz ${channel}`,
-                endStreaming: (user, id, channel) => `O membro **${user}** (${id}) terminou a transmissão no canal de voz ${channel}`
+                endStreaming: (user, id, channel) => `O membro **${user}** (${id}) terminou a transmissão no canal de voz ${channel}`,
+                // Autorol Command
+                noRoles: "Você deve mencionar um dos cargos ou colocar as ID's deles.",
+                autorolSave: "Configuração salva."
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",

@@ -185,11 +185,14 @@ module.exports = class Spanish extends Language {
                 multimediaReset: "El canal de multimedia ha sido eliminado.",
                 // Voice State Update Event
                 updateVoice: "Actualización de estado de voz",
-                joinVoice: (user, id, channel) => `El miembro **${user}** (${id}) se ha unido al canal de voz ${ channel}`,
-                leaveVoice: (user, id, channel) => `El miembro **${user}** (${id}) se ha desconectado del canal de voz ${ channel}`,
+                joinVoice: (user, id, channel) => `El miembro **${user}** (${id}) se ha unido al canal de voz ${channel}`,
+                leaveVoice: (user, id, channel) => `El miembro **${user}** (${id}) se ha desconectado del canal de voz ${channel}`,
                 changeVoice: (user, id, channelOld, channelNew) => `El miembro **${user}** (${id}) ha cambiado de canal de voz ${channelOld} a ${channelNew}`,
-                startStreaming: (user, id, channel) => `El miembro **${user}** (${id}) ha iniciado un directo en el canal de voz ${ channel}`,
-                endStreaming: (user, id, channel) => `El miembro **${user}** (${id}) ha finalizado el directo en el canal de voz ${ channel}`
+                startStreaming: (user, id, channel) => `El miembro **${user}** (${id}) ha iniciado un directo en el canal de voz ${channel}`,
+                endStreaming: (user, id, channel) => `El miembro **${user}** (${id}) ha finalizado el directo en el canal de voz ${channel}`,
+                // Autorol Command
+                noRoles: "Debes mencionar los roles o ingresar las ID's de ellos.",
+                autorolSave: "Configuracion guardada."
             }, constants: {
                 permissions: {
                     default: "permisos por defecto",

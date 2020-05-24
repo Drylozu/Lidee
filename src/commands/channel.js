@@ -12,7 +12,7 @@ module.exports = class Channel extends Command {
     async run(message, args) {
         let Alloweds = []
         let Denieds = []
-        
+
         message.guild.roles.cache.sort((a, b) => b.rawPosition - a.rawPosition).forEach(role => {
             let permissions = message.channel.permissionsFor(role.id);
             if(!permissions.has("SEND_MESSAGES") || !permissions.has("VIEW_CHANNEL")) {
