@@ -34,9 +34,9 @@ let guildSchema = new Schema({
         type: String,
         default: ""
     },
-    autorol: {
+    autorole: {
         type: Array,
-        default: []
+        default: ""
     }
 });
 

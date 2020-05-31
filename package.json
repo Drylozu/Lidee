@@ -1,6 +1,6 @@
 {
     "name": "lidee",
-    "version": "1.0.10-beta",
+    "version": "1.0.11-beta",
     "description": "Lidee Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",

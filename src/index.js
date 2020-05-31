@@ -9,4 +9,4 @@ Manager.spawn();
 
 process.on("unhandledRejection", (reason) => {
     console.clientLog(reason.toString(), reason);
-});
+})

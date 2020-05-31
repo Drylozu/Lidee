@@ -184,15 +184,20 @@ module.exports = class English extends Language {
                 multimediaChanged: (channel) => `The multimedia channel is now ${channel}.`,
                 multimediaReset: "The multimedia channel has been deleted.",
                 // Voice State Update Event
-                updateVoice: "Update voice state",
-                joinVoice: (user, id, channel) => `The member **${user}** (${id}) has joined the voice channel ${channel}`,
-                leaveVoice: (user, id, channel) => `The member **${user}** (${id}) has leaved the voice channel ${channel}`,
-                changeVoice: (user, id, channelOld, channelNew) => `The member **${user}** (${id}) has changed the voice channel ${channelOld} to ${channelNew}`,
-                startStreaming: (user, id, channel) => `The member **${user}** (${id}) has started a streaming on the voice channel ${channel}`,
-                endStreaming: (user, id, channel) => `The member **${user}** (${id}) has ended the streaming on the voice channel ${channel}`,
-                // Autorol Command
-                noRoles: "You must mention the roles or enter their IDs.",
-                autorolSave: "Configuration saved."
+                voiceState: "Update voice state",
+                voiceStateJoin: (user, channel) => `The member ${user} has joined the voice channel ${channel}`,
+                voiceStateLeave: (user, channel) => `The member ${user} has leaved the voice channel ${channel}`,
+                voiceStateChange: (user, oldChannel, newChannel) => `The member ${user} has changed the voice channel ${oldChannel} to ${newChannel}`,
+                voiceStateStream: (user, channel) => `The member ${user} has started a streaming on the voice channel ${channel}`,
+                voiceStateNoStream: (user, channel) => `The member ${user} has ended a streaming on the voice channel ${channel}`,
+                // Autorole Command
+                autorolNo: "You must mention a role or enter his ID or name.",
+                autorol: (role) => `The role **${role}** will now be added when someone joins the server.`,
+                // Channel Command
+                channelCreated: "Channel created at",
+                channelCooldown: "Cooldown",
+                channelSee: "Roles with permission to see the channel",
+                channelNoSee: "Roles without permission to see the channel"
             }, constants: {
                 permissions: {
                     default: "default permissions",
@@ -332,6 +337,7 @@ module.exports = class English extends Language {
                 unbanDescription: "Unbans a member by ID, a reason can be added.",
                 logsDescription: "Configure a channel for the diferents server logs.",
                 multimediaDescription: "Shows and changes the server multimedia channel, all messages that don't contain a file will be deleted. It doesn't affect people who have permission to manage messages on that channel.",
+                autoroleDescription: "Shows and changes the role to give when a user enters the server.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Member> [Reason]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Member> <Antiquity of messages in days to delete> [Reason]\n${prefix}softban @Deivid 1\n${prefix}softban 123123123123123123 1 >:[`,
@@ -364,7 +370,8 @@ module.exports = class English extends Language {
                 roleUsage: (prefix) => `${prefix}role <Role>\n${prefix}role @Member\n${prefix}role Administrator`,
                 unbanUsage: (prefix) => `${prefix}unban <User>\n${prefix}unban 123123123123123123`,
                 logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Channel|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n${prefix}logs messages none`,
-                multimediaUsage: (prefix) => `${prefix}multimedia <Channel|none>\n${prefix}multimedia #pictures\n${prefix}multimedia none`
+                multimediaUsage: (prefix) => `${prefix}multimedia <Channel|none>\n${prefix}multimedia #pictures\n${prefix}multimedia none`,
+                autoroleUsage: (prefix) => `${prefix}autorole <Role>\n${prefix}autorole @Members`
             }
         });
 

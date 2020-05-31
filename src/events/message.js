@@ -8,6 +8,7 @@ module.exports = class EventMessage {
     }
 
     async run(message) {
+        if (message.author.bot) return;
         if (message.channel.type === "dm") return;
 
         let guild = await this.client.db.guilds.findOne({ _id: message.guild.id }).exec();
@@ -33,7 +34,6 @@ module.exports = class EventMessage {
             return;
         }
 
-        if (message.author.bot) return;
         let prefixes = [guild.prefix, `<@${this.client.user.id}>`, `<@!${this.client.user.id}>`];
         let prefix = prefixes.find((p) => message.content.startsWith(p));
         if (!prefix) return;

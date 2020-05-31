@@ -24,14 +24,15 @@ module.exports = class EventMessageUpdate {
         let channelMessages = newMessage.guild.channels.resolve(guild.logs.messages);
         let channelAll = newMessage.guild.channels.resolve(guild.logs.all);
         let channel = channelMessages || channelAll;
-        if (!channel) return;
-        channel.send(new MessageEmbed()
-            .setAuthor(newMessage.guild.nameAcronym, newMessage.guild.iconURL())
-            .setDescription(`> ${lang.get("messageEdit", newMessage.author.tag, lang.get("id", newMessage.author.id))}\n${oldMessage.attachments.map((a) => `[${a.name}](${a.proxyURL})`).join(" - ")}`)
-            .addField(`${lang.get("messageBefore")}`, oldMessage.content)
-            .addField(`${lang.get("messageAfter")}`, newMessage.content)
-            .setFooter(`${lang.get("messageEdited")}`, newMessage.author.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
+
+        if (channel)
+            channel.send(new MessageEmbed()
+                .setAuthor(newMessage.guild.nameAcronym, newMessage.guild.iconURL())
+                .setDescription(`> ${lang.get("messageEdit", newMessage.author.tag, lang.get("id", newMessage.author.id))}\n${oldMessage.attachments.map((a) => `[${a.name}](${a.proxyURL})`).join(" - ")}`)
+                .addField(`${lang.get("messageBefore")}`, oldMessage.content)
+                .addField(`${lang.get("messageAfter")}`, newMessage.content)
+                .setFooter(`${lang.get("messageEdited")}`, newMessage.author.displayAvatarURL())
+                .setColor(0xff6666)
+                .setTimestamp());
     }
 }

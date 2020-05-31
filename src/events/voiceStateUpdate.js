@@ -6,8 +6,6 @@ module.exports = class EventVoiceStateUpdate {
     }
 
     async run(oldState, newState) {
-
-
         let guild = await this.client.db.guilds.findOne({ _id: newState.guild.id }).exec();
         if (!guild) {
             guild = new this.client.db.guilds({
@@ -21,40 +19,38 @@ module.exports = class EventVoiceStateUpdate {
         let channelAll = newState.guild.channels.resolve(guild.logs.all);
         let channel = channelMessages || channelAll;
 
-        if(!oldState.channelID && newState.channelID) {
-            channel.send(new MessageEmbed()
-            .setAuthor(newState.guild.nameAcronym, newState.guild.iconURL())
-            .setDescription(`> ${lang.get("joinVoice", newState.member.user.tag, newState.member.id, `${lang.getEmoji("voiceChannel")} **${newState.channel.name}**`)}`)
-            .setFooter(`${lang.get("updateVoice")}`, newState.member.user.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
-        } else if(oldState.channelID && !newState.channelID) {
-            channel.send(new MessageEmbed()
-            .setAuthor(newState.guild.nameAcronym, newState.guild.iconURL())
-            .setDescription(`> ${lang.get("leaveVoice", oldState.member.user.tag, oldState.member.id, `${lang.getEmoji("voiceChannel")} **${oldState.channel.name}**`)}`)
-            .setFooter(`${lang.get("updateVoice")}`, newState.member.user.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
-        } else if(oldState.channelID && newState.channelID && oldState.channelID !== newState.channelID) {
-            channel.send(new MessageEmbed().setAuthor(newState.guild.nameAcronym, newState.guild.iconURL())
-            .setDescription(`> ${lang.get("changeVoice", oldState.member.user.tag, oldState.member.id, `${lang.getEmoji("voiceChannel")} **${oldState.channel.name}**`, `${lang.getEmoji("voiceChannel")} **${newState.channel.name}**`)}`)
-            .setFooter(`${lang.get("updateVoice")}`, newState.member.user.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
-        } else if(!oldState.streaming && newState.streaming) {
-            channel.send(new MessageEmbed()
-            .setAuthor(newState.guild.nameAcronym, newState.guild.iconURL())
-            .setDescription(`> ${lang.get("startStreaming", oldState.member.user.tag, oldState.member.id, `${lang.getEmoji("voiceChannel")} **${newState.channel.name}**`)}`)
-            .setFooter(`${lang.get("updateVoice")}`, newState.member.user.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
-        } else if(oldState.streaming && !newState.streaming) {
-            channel.send(new MessageEmbed()
-            .setAuthor(newState.guild.nameAcronym, newState.guild.iconURL())
-            .setDescription(`> ${lang.get("endStreaming", oldState.member.user.tag, oldState.member.id, `${lang.getEmoji("voiceChannel")} **${oldState.channel.name}**`)}`)
-            .setFooter(`${lang.get("updateVoice")}`, newState.member.user.displayAvatarURL())
-            .setColor(0xff6666)
-            .setTimestamp());
+        let state = "voiceState";
+        let color = 0x0;
+        let channels = [];
+        if (!oldState.channelID && newState.channelID) {
+            state += "Join";
+            color = 0x66ff6;
+            channels.push(`${lang.getEmoji("voiceChannel")} **${newState.channel.name}**`);
+        } else if (oldState.channelID && !newState.channelID) {
+            state += "Leave";
+            color = 0xff6666;
+            channels.push(`${lang.getEmoji("voiceChannel")} **${oldState.channel.name}**`);
+        } else if (oldState.channelID && newState.channelID) {
+            state += "Change";
+            color = 0xffff66;
+            channels.push(`${lang.getEmoji("voiceChannel")} **${oldState.channel.name}**`);
+            channels.push(`${lang.getEmoji("voiceChannel")} **${newState.channel.name}**`);
+        } else if (!oldState.streaming && newState.streaming) {
+            state += "Stream";
+            color = 0x66ff66;
+            channels.push(`${lang.getEmoji("voiceChannel")} **${newState.channel.name}**`);
+        } else if (oldState.streaming && !newState.streaming) {
+            state += "NoStream";
+            color = 0xff6666;
+            channels.push(`${lang.getEmoji("voiceChannel")} **${oldState.channel.name}**`);
         }
+
+        if (channel && color !== 0x0)
+            channel.send(new MessageEmbed()
+                .setAuthor(newState.guild.nameAcronym, newState.guild.iconURL())
+                .setDescription(`> ${lang.get(state, ``, ...channels)}`)
+                .setFooter(`${lang.get("voiceState")}`, newState.member.user.displayAvatarURL())
+                .setColor(color)
+                .setTimestamp());
     }
 }

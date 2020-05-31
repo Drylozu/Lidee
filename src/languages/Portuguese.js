@@ -184,15 +184,20 @@ module.exports = class Portuguese extends Language {
                 multimediaChanged: (channel) => `O canal multimídia agora é ${channel}.`,
                 multimediaReset: "O canal de mídia foi removido.",
                 // Voice State Update Event
-                updateVoice: "Update voice state",
-                joinVoice: (user, id, channel) => `O membro **${user}** (${id}) entrou no canal de voz ${channel}`,
-                leaveVoice: (user, id, channel) => `O membro **${user}** (${id}) saiu do canal de voz ${channel}`,
-                changeVoice: (user, id, channelOld, channelNew) => `O membro **${user}** (${id}) mudou de canal de voz ${channelOld} pra ${channelNew}`,
-                startStreaming: (user, id, channel) => `O membro **${user}** (${id}) iniciou uma transmissão no canal de voz ${channel}`,
-                endStreaming: (user, id, channel) => `O membro **${user}** (${id}) terminou a transmissão no canal de voz ${channel}`,
-                // Autorol Command
-                noRoles: "Você deve mencionar um dos cargos ou colocar as ID's deles.",
-                autorolSave: "Configuração salva."
+                voiceState: "Update voice state",
+                voiceStateJoin: (user, channel) => `O membro ${user} entrou no canal de voz ${channel}`,
+                voiceStateLeave: (user, channel) => `O membro ${user} saiu do canal de voz ${channel}`,
+                voiceStateChange: (user, oldChannel, newChannel) => `O membro ${user} mudou de canal de voz ${oldChannel} pra ${newChannel}`,
+                voiceStateStream: (user, channel) => `O membro ${user} iniciou uma transmissão no canal de voz ${channel}`,
+                voiceStateNoStream: (user, channel) => `O membro ${user} terminou uma transmissão no canal de voz ${channel}`,
+                // Autorole Command
+                autorolNo: "Você deve mencionar um cargo ou colocar seu ID ou nome.",
+                autorol: (role) => `A cargo **${role}** será dada agora quando alguém entrar no servidor.`,
+                // Channel Command
+                channelCreated: "Canal criado em",
+                channelCooldown: "Cooldown",
+                channelSee: "Cargos com permissão para visualizar o canal",
+                channelNoSee: "Cargos sem permissão para visualizar o canal"
             }, constants: {
                 permissions: {
                     default: "permissões por defeito",
@@ -332,6 +337,7 @@ module.exports = class Portuguese extends Language {
                 unbanDescription: "Desbanir um membro por ID, um motivo pode ser adicionado.",
                 logsDescription: "Configure um canal para os diferentes registrados dentro do servidor.",
                 multimediaDescription: "Mostra e altera o canal multimídia do servidor, todas as mensagens que não contêm um arquivo serão excluídas. Não afeta as pessoas que têm permissão para gerenciar mensagens nesse canal.",
+                autoroleDescription: "Mostra e altera o cargo para dar quando um usuário entra no servidor.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Membro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensagens em dia para apagar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -364,7 +370,8 @@ module.exports = class Portuguese extends Language {
                 roleUsage: (prefix) => `${prefix}role <Cargo>\n${prefix}role @Membro\n${prefix}role Administrador`,
                 unbanUsage: (prefix) => `${prefix}unban <Usuário>\n${prefix}unban 123123123123123123`,
                 logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
-                multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`
+                multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`,
+                autoroleUsage: (prefix) => `${prefix}autorole <Cargo>\n${prefix}autorole @Membros`
             }
         });
 
