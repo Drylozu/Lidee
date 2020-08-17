@@ -238,7 +238,7 @@ module.exports = class Language {
         }
         for (let emoji of animatedEmojis) {
             if ((animatedEmojisOut.join(" ").length + emoji.length) > 474) {
-                animatedEmojisOut.push(this.get("others", normalEmojis.length - animatedEmojisOut.length));
+                animatedEmojisOut.push(this.get("others", animatedEmojis.length - animatedEmojisOut.length));
                 break;
             }
             animatedEmojisOut.push(emoji);

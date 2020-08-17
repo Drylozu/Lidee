@@ -13,7 +13,7 @@ module.exports = class Help extends Command {
 
     run(message, [command]) {
         let cmdArgs = this.client.commands.find((c) => c.name === command || c.aliases.includes(command));
-        if (cmdArgs)
+        if (cmdArgs && !cmdArgs.ownerOnly)
             message.channel.send(new MessageEmbed()
                 .setAuthor(cmdArgs.name, message.author.displayAvatarURL())
                 .setDescription(`> ${this.lang.getHelp(`${cmdArgs.name}Description`)}${cmdArgs.aliases.length > 0 ? `\n\n**${this.lang.getHelp("aliases")}**:\n${cmdArgs.aliases.map((a) => `\`${a}\``).join(", ")}` : ""}\n\n**${this.lang.getHelp("usage")}**:\n${this.lang.getHelp(`${cmdArgs.name}Usage`, this.guild.prefix).split("\n").map((l) => `\`${l}\``).join("\n")}`)

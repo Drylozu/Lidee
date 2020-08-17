@@ -5,6 +5,7 @@ module.exports = class Channel extends Command {
     constructor(client) {
         super(client, {
             name: "channel",
+            aliases: ["chn"],
             category: 5
         });
     }
@@ -28,8 +29,12 @@ module.exports = class Channel extends Command {
             .setDescription(`${channel.parent ? `${channel.parent}\n` : ""}> **<#${channel.id}>** ${channel.nsfw ? "🔞 " : ""}${this.lang.get("id", channel.id)}${channel.topic ? `\n\n> ${channel.topic}` : ""}`)
             .addField(this.lang.get("channelCreated"), this.lang.parseCompleteDate(message.channel.createdAt))
             .addField(this.lang.get("channelCooldown"), this.lang.parseTime(message.channel.rateLimitPerUser * 1000))
-            .addField(this.lang.get("channelSee"), alloweds.includes(`<@&${channel.guild.id}>`) ? "@everyone" : alloweds.join(", "))
-            .addField(this.lang.get("channelNoSee"), denieds.includes(`<@&${channel.guild.id}>`) ? "@everyone" : denieds.join(", "))
+            .addField(this.lang.get("channelSee"),
+                alloweds.length < 1 ? this.lang.get("nothing") :
+                    alloweds.length > 15 ? `${alloweds.slice(0, 15).join(", ")} ${this.get("others", alloweds.length - 15)}` : alloweds.join(", "))
+            .addField(this.lang.get("channelNoSee"),
+                denieds.length < 1 ? this.lang.get("nothing") :
+                    denieds.length > 15 ? `${denieds.slice(0, 15).join(", ")} ${this.get("others", denieds.length - 15)}` : denieds.join(", "))
             .setColor(0x6666ff));
     }
 }
