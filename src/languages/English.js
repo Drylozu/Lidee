@@ -364,7 +364,7 @@ module.exports = class English extends Language {
                 logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Channel|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n${prefix}logs messages none`,
                 multimediaUsage: (prefix) => `${prefix}multimedia <Channel|none>\n${prefix}multimedia #pictures\n${prefix}multimedia none`,
                 autoroleUsage: (prefix) => `${prefix}autorole <Role>\n${prefix}autorole @Members`,
-                channelUsage: (prefix) => `${prefix}channel <channel>\n${prefix}channel #general`
+                channelUsage: (prefix) => `${prefix}channel <Channel>\n${prefix}channel\n${prefix}channel #general`
             }
         });
 

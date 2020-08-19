@@ -364,7 +364,7 @@ module.exports = class Portuguese extends Language {
                 logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
                 multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`,
                 autoroleUsage: (prefix) => `${prefix}autorole <Cargo>\n${prefix}autorole @Membros`,
-                channelUsage: (prefix) => `${prefix}channel <Canal>\n${prefix}channel #general`
+                channelUsage: (prefix) => `${prefix}channel <Canal>\n${prefix}channel\n${prefix}channel #general`
             }
         });
 
