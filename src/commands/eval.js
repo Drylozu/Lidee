@@ -20,7 +20,7 @@ module.exports = class Eval extends Command {
                 evalued = temp;
             }
             let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime)[1] / 1000;
-            message.channel.send(`Evalued in **${endTimeMs}ms.**\`\`\`js\n${evalued}\n\`\`\``);
+            message.channel.send(`Evalued in **${endTimeMs}ms.**\`\`\`js\n${evalued.slice(0, 2000)}\n\`\`\``);
         } catch (err) {
             let endTimeMs = process.hrtime(startTime)[0] * 1000000 + process.hrtime(startTime)[1] / 1000;
             message.channel.send(`Evalued in **${endTimeMs}ms.**\`\`\`js\n${err.toString()}\n\`\`\``);
