@@ -333,6 +333,7 @@ module.exports = class Spanish extends Language {
                 logsDescription: "Configura un canal para los diferentes registros posibles dentro servidor.",
                 multimediaDescription: "Muestra y cambia el canal de multimedia del servidor, todos los mensajes que no tengan un archivo serán eliminados. No afecta en personas que tengan permiso de administrar mensajes en ese canal.",
                 autoroleDescription: "Muestra y cambia el rol a dar cuando un usuario entra al servidor.",
+                channelDescription: "Muestra la información de un canal.",
                 // Commands Usage
                 banUsage: (prefix) => `${prefix}ban <Miembro> [Razón]\n${prefix}ban @Deivid\n${prefix}ban 123123123123123123 >:[`,
                 softbanUsage: (prefix) => `${prefix}softban <Miembro> <Antiguedad de mensajes en días para eliminar> [Razón]\n${prefix}softban @Deivid 1\n${prefix}ban 123123123123123123 1 >:[`,
@@ -362,7 +363,8 @@ module.exports = class Spanish extends Language {
                 unbanUsage: (prefix) => `${prefix}unban <Usuario>\n${prefix}unban 123123123123123123`,
                 logsUsage: (prefix) => `${prefix}logs <messages|voice|all> <Canal|none>\n${prefix}logs messages #logs\n${prefix}logs all #logs\n\n${prefix}logs messages none`,
                 multimediaUsage: (prefix) => `${prefix}multimedia <Canal|none>\n${prefix}multimedia #fotos\n${prefix}multimedia none`,
-                autoroleUsage: (prefix) => `${prefix}autorole <Rol>\n${prefix}autorole @Miembros`
+                autoroleUsage: (prefix) => `${prefix}autorole <Rol>\n${prefix}autorole @Miembros`,
+                channelUsage: (prefix) => `${prefix}channel <Canal>\n${prefix}channel #general`
             }
         });
 
