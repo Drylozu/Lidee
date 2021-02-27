@@ -4,23 +4,23 @@
     "description": "Lidee Discord Bot",
     "author": "Deivid & Free",
     "main": "src/index.js",
-    "license": "GNU v3",
-    "private": true,
+    "license": "MIT",
     "scripts": {
         "eslint": "eslint src/",
         "start": "node src/index.js"
     },
     "engines": {
-        "node": "13.x"
+        "node": ">=13.x",
+        "npm": "*"
     },
     "dependencies": {
         "discord.js": "github:discordjs/discord.js",
         "dotenv": "^8.2.0",
-        "mongoose": "^5.10.0",
-        "phin": "^3.5.0"
+        "mongoose": "^5.11.13",
+        "phin": "^3.5.1"
     },
     "devDependencies": {
-        "eslint": "^6.8.0"
+        "eslint": "^7.21.0"
     },
     "keywords": [
         "Lidee",
