@@ -10,6 +10,7 @@
     ],
     "scripts": {
         "eslint": "eslint src/",
+        "eslint:fix": "eslint src/ --fix",
         "start": "node src/index.js"
     },
     "engines": {
