@@ -10,7 +10,7 @@ module.exports = class Osu extends API {
 
     getUser(username, mode) {
         return this.request('get_user', {
-            k: process.env.osuToken,
+            k: process.env.OSU_TOKEN,
             u: username,
             m: mode,
             type: 'string'

@@ -1,11 +1,12 @@
 require('./utils/prototypes')();
+require('dotenv').config();
+
 const { join } = require('path');
-require('dotenv').config({ path: join(__dirname, '../.env') });
 
 const { ShardingManager } = require('discord.js');
-const Manager = new ShardingManager(join(__dirname, './bot.js'), { token: process.env.botToken });
+const manager = new ShardingManager(join(__dirname, 'bot.js'), { token: process.env.BOT_TOKEN });
 
-Manager.spawn();
+manager.spawn();
 
 process.on('unhandledRejection', (reason) => {
     console.clientLog(reason.toString(), reason);

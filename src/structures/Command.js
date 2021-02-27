@@ -4,11 +4,11 @@ module.exports = class Command {
     constructor(client, options) {
         this.client = client;
         this.name = options.name;
-        this.nsfw = options.nsfw || false;
+        this.nsfw = typeof options.nsfw === 'boolean' ? options.nsfw : false;
         this.aliases = options.aliases || [];
         this.category = options.category || -1;
-        this.ownerOnly = options.ownerOnly || false;
-        this.premiumOnly = options.premiumOnly || false;
+        this.ownerOnly = typeof options.ownerOnly === 'boolean' ? options.ownerOnly : false;
+        this.premiumOnly = typeof options.premiumOnly === 'boolean' ? options.premiumOnly : false;
         this.botPermissions = options.botPermissions || [];
         this.userPermissions = options.userPermissions || [];
     }

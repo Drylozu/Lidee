@@ -5,7 +5,7 @@ module.exports = class Fortnite extends API {
         super({
             name: 'fortnite',
             baseURL: 'https://fortniteapi.io/',
-            key: process.env.fortniteToken
+            key: process.env.FORTNITE_TOKEN
         });
     }
 
