@@ -1,4 +1,4 @@
-const { BitField } = require("discord.js");
+const { BitField } = require('discord.js');
 
 class UserFlags extends BitField { }
 

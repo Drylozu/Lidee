@@ -1,24 +1,24 @@
-const Command = require("../structures/Command");
-const { MessageEmbed } = require("discord.js");
+const Command = require('../structures/Command');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class Pat extends Command {
     constructor(client) {
         super(client, {
-            name: "pat",
+            name: 'pat',
             category: 3,
-            botPermissions: ["channel", "EMBED_LINKS"]
+            botPermissions: ['channel', 'EMBED_LINKS']
         });
     }
 
     async run(message, args) {
-        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || (args.join(" ").length > 2 ? message.guild.members.cache.sort((a, b) => a.user.tag.localeCompare(b.user.tag)).find((m) => m.user.tag.toLowerCase().includes(args.join(" ").toLowerCase())) : null);
-        if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
-        if (member.user.bot) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("patBot")}`);
-        let image = await this.client.apis.nekosLife.getPatImage();
+        const member = message.guild.members.resolve(args[0]) || message.mentions.members.first() || (args.join(' ').length > 2 ? message.guild.members.cache.sort((a, b) => a.user.tag.localeCompare(b.user.tag)).find((m) => m.user.tag.toLowerCase().includes(args.join(' ').toLowerCase())) : null);
+        if (!member) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('userNo')}`);
+        if (member.user.bot) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('patBot')}`);
+        const image = await this.client.apis.nekosLife.getPatImage();
         message.channel.send(new MessageEmbed()
-            .setDescription(this.lang.get("pat", message.member.displayName, member.displayName))
+            .setDescription(this.lang.get('pat', message.member.displayName, member.displayName))
             .setImage(image)
             .setColor(0x6666ff)
             .setTimestamp());
     }
-}
+};

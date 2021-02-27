@@ -1,15 +1,15 @@
-const API = require("../structures/API");
+const API = require('../structures/API');
 
 module.exports = class Roblox extends API {
     constructor() {
         super({
-            name: "roblox",
-            baseURL: "https://api.roblox.com/"
+            name: 'roblox',
+            baseURL: 'https://api.roblox.com/'
         });
     }
 
     getUserBasics(username) {
-        return this.request("users/get-by-username", { username });
+        return this.request('users/get-by-username', { username });
     }
 
     getUserGroups(userId) {
@@ -24,4 +24,4 @@ module.exports = class Roblox extends API {
             ...await this.request(`users/${userId}/friends`, { page: 4 })
         ];
     }
-}
+};

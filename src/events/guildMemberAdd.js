@@ -13,9 +13,9 @@ module.exports = class EventGuildMemberAdd {
             guild.save();
         }
 
-        let role = member.guild.roles.resolve(guild.autorole);
+        const role = member.guild.roles.resolve(guild.autorole);
 
         if (role)
             member.roles.add(role.id);
     }
-}
+};

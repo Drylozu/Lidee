@@ -1,4 +1,4 @@
-const UserFlags = require("./UserFlags");
+const UserFlags = require('./UserFlags');
 
 module.exports = class Command {
     constructor(client, options) {
@@ -20,7 +20,7 @@ module.exports = class Command {
     }
 
     validate({ message }) {
-        let conditionals = {
+        const conditionals = {
             ownerOnly: false,
             userPermissions: false,
             botPermissions: false,
@@ -29,48 +29,48 @@ module.exports = class Command {
         let messageSent = false;
 
         if (this.ownerOnly)
-            if (!new UserFlags(this.user.flags).has("DEVELOPER"))
+            if (!new UserFlags(this.user.flags).has('DEVELOPER'))
                 conditionals.ownerOnly = true;
 
         if (this.premiumOnly)
             if (!this.guild.premium) {
                 conditionals.premiumOnly = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("premiumOnly"));
+                    message.channel.send(this.lang.get('premiumOnly'));
                     messageSent = true;
                 }
             }
 
         if (this.userPermissions.length > 0)
-            if (this.userPermissions[0] === "guild" &&
+            if (this.userPermissions[0] === 'guild' &&
                 !message.member.hasPermission(this.userPermissions.slice(1))) {
                 conditionals.userPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("userPerms", this.userPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
+                    message.channel.send(this.lang.get('userPerms', this.userPermissions.slice(1).map((p) => this.lang.getConstant('permissions', p)).join(', ')));
                     messageSent = true;
                 }
-            } else if (this.userPermissions[0] === "channel" &&
+            } else if (this.userPermissions[0] === 'channel' &&
                 !message.channel.permissionsFor(message.member).has(this.userPermissions.slice(1))) {
                 conditionals.userPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("userPerms", this.userPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
+                    message.channel.send(this.lang.get('userPerms', this.userPermissions.slice(1).map((p) => this.lang.getConstant('permissions', p)).join(', ')));
                     messageSent = true;
                 }
             }
 
         if (this.botPermissions.length > 0)
-            if (this.botPermissions[0] === "guild" &&
+            if (this.botPermissions[0] === 'guild' &&
                 !message.guild.me.hasPermission(this.botPermissions.slice(1))) {
                 conditionals.botPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("botPerms", this.botPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
+                    message.channel.send(this.lang.get('botPerms', this.botPermissions.slice(1).map((p) => this.lang.getConstant('permissions', p)).join(', ')));
                     messageSent = true;
                 }
-            } else if (this.botPermissions[0] === "channel" &&
+            } else if (this.botPermissions[0] === 'channel' &&
                 !message.channel.permissionsFor(message.guild.me).has(this.userPermissions.slice(1))) {
                 conditionals.botPermissions = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("botPerms", this.botPermissions.slice(1).map((p) => this.lang.getConstant("permissions", p)).join(", ")));
+                    message.channel.send(this.lang.get('botPerms', this.botPermissions.slice(1).map((p) => this.lang.getConstant('permissions', p)).join(', ')));
                     messageSent = true;
                 }
             }
@@ -79,11 +79,11 @@ module.exports = class Command {
             if (!message.channel.nsfw) {
                 conditionals.nsfw = true;
                 if (!messageSent) {
-                    message.channel.send(this.lang.get("nsfwChannel"));
+                    message.channel.send(this.lang.get('nsfwChannel'));
                     messageSent = true;
                 }
             }
 
         return conditionals;
     }
-}
+};

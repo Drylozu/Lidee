@@ -1,7 +1,7 @@
-require("./utils/prototypes")();
-const Lidee = require("./structures/Lidee");
+require('./utils/prototypes')();
+const Lidee = require('./structures/Lidee');
 const bot = new Lidee({
-    partials: ["MESSAGE", "CHANNEL"],
+    partials: ['MESSAGE', 'CHANNEL'],
     botConfig: {
         token: process.env.botToken,
         mongoDbUrl: process.env.mongoDbUrl,
@@ -9,6 +9,6 @@ const bot = new Lidee({
     }
 });
 
-process.on("unhandledRejection", (reason) => {
+process.on('unhandledRejection', (reason) => {
     bot.log(reason.toString(), reason);
 });

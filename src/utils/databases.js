@@ -1,16 +1,16 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
-let guildSchema = new Schema({
+const guildSchema = new Schema({
     _id: {
         type: String
     },
     prefix: {
         type: String,
-        default: "l:"
+        default: 'l:'
     },
     language: {
         type: String,
-        default: "en"
+        default: 'en'
     },
     premium: {
         type: Boolean,
@@ -19,28 +19,28 @@ let guildSchema = new Schema({
     logs: {
         messages: {
             type: String,
-            default: ""
+            default: ''
         },
         voice: {
             type: String,
-            default: ""
+            default: ''
         },
         all: {
             type: String,
-            default: ""
+            default: ''
         }
     },
     multimedia: {
         type: String,
-        default: ""
+        default: ''
     },
     autorole: {
         type: Array,
-        default: ""
+        default: ''
     }
 });
 
-let userSchema = new Schema({
+const userSchema = new Schema({
     _id: {
         type: String
     },
@@ -50,5 +50,5 @@ let userSchema = new Schema({
     }
 });
 
-exports.guilds = model("Guild", guildSchema);
-exports.users = model("User", userSchema);
+exports.guilds = model('Guild', guildSchema);
+exports.users = model('User', userSchema);

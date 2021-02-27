@@ -1,18 +1,18 @@
-const { Collection } = require("discord.js");
-const path = require("path");
-const fs = require("fs");
+const { Collection } = require('discord.js');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = class LanguageManager {
     constructor(client) {
-        Object.defineProperty(this, "languages", { value: new Collection() });
+        Object.defineProperty(this, 'languages', { value: new Collection() });
         this.client = client;
         this.loadLanguages();
     }
 
     loadLanguages() {
-        for (let file of fs.readdirSync(path.join(__dirname, "../languages/"))) {
-            let language = new (require(`../languages/${file}`))();
-            let existingLanguage = this.languages.find((l) => [language.displayName, language.nativeName, language.languageCode, language.flag, language.constructor.name].some((n) => [l.displayName, l.nativeName, l.languageCode, l.flag, l.constructor.name].includes(n)));
+        for (const file of fs.readdirSync(path.join(__dirname, '../languages/'))) {
+            const language = new (require(`../languages/${file}`))();
+            const existingLanguage = this.languages.find((l) => [language.displayName, language.nativeName, language.languageCode, language.flag, language.constructor.name].some((n) => [l.displayName, l.nativeName, l.languageCode, l.flag, l.constructor.name].includes(n)));
             if (existingLanguage) this.client.log(`Languages with equal names found (${file} and ${existingLanguage.displayName})`, true);
             this.languages.set(language.languageCode, language);
         }
@@ -27,16 +27,16 @@ module.exports = class LanguageManager {
     }
 
     get(code) {
-        let lang = this.languages.get(code.toLowerCase());
+        const lang = this.languages.get(code.toLowerCase());
         if (!lang)
-            return this.languages.get("en");
+            return this.languages.get('en');
         return lang;
     }
 
     getByDisplayName(name) {
-        let lang = this.languages.find((l) => l.displayName === name.toLowerCase());
+        const lang = this.languages.find((l) => l.displayName === name.toLowerCase());
         if (!lang)
-            return this.languages.find((l) => l.displayName === "english");
+            return this.languages.find((l) => l.displayName === 'english');
         return lang;
     }
-}
+};

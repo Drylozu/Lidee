@@ -1,14 +1,14 @@
 module.exports = {
-    "env": {
-        "commonjs": true,
-        "es6": true,
-        "node": true
+    env: {
+        commonjs: true,
+        es6: true,
+        node: true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": 12
+    extends: 'eslint:recommended',
+    parserOptions: {
+        ecmaVersion: 12
     },
-    "rules": {
+    rules: {
         'no-empty': 'off',
         'prefer-const': 'warn',
         'no-unused-vars': 'warn',
@@ -18,5 +18,6 @@ module.exports = {
         'comma-dangle': ['warn', 'never'],
         'quote-props': ['warn', 'as-needed'],
         semi: ['warn', 'always', { omitLastInOneLineBlock: true }]
-    }
-}
+    },
+    ignorePatterns: ['node_modules']
+};

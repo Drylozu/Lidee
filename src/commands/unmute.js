@@ -1,18 +1,18 @@
-const Command = require("../structures/Command");
+const Command = require('../structures/Command');
 
 module.exports = class Unmute extends Command {
     constructor(client) {
         super(client, {
-            name: "unmute",
+            name: 'unmute',
             category: 5,
-            botPermissions: ["guild", "MANAGE_ROLES"],
-            userPermissions: ["guild", "MANAGE_ROLES"]
+            botPermissions: ['guild', 'MANAGE_ROLES'],
+            userPermissions: ['guild', 'MANAGE_ROLES']
         });
     }
 
     async run(message, args) {
-        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
-        if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
+        const member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
+        if (!member) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('userNo')}`);
 
         let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);
         if (!role) {
@@ -32,8 +32,8 @@ module.exports = class Unmute extends Command {
                 }));
         }
 
-        if (!member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("unmuteNo")}`);
+        if (!member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('unmuteNo')}`);
         await member.roles.remove(role.id);
-        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("unmute", member.user.tag)}`);
+        message.channel.send(`${this.lang.getEmoji('okay')} ${this.lang.get('unmute', member.user.tag)}`);
     }
-}
+};

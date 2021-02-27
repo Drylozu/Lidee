@@ -4,13 +4,13 @@ module.exports = class EventReady {
     }
 
     run() {
-        this.client.log("Bot Ready!");
+        this.client.log('Bot Ready!');
         this.client.user.setPresence({
-            status: "online",
+            status: 'online',
             activity: {
                 name: `@${this.client.user.tag} help`,
-                type: "WATCHING"
+                type: 'WATCHING'
             }
         });
     }
-}
+};

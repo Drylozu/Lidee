@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class EventMessageUpdate {
     constructor(client) {
@@ -20,19 +20,19 @@ module.exports = class EventMessageUpdate {
             guild.save();
         }
 
-        let lang = this.client.languages.get(guild.language);
-        let channelMessages = newMessage.guild.channels.resolve(guild.logs.messages);
-        let channelAll = newMessage.guild.channels.resolve(guild.logs.all);
-        let channel = channelMessages || channelAll;
+        const lang = this.client.languages.get(guild.language);
+        const channelMessages = newMessage.guild.channels.resolve(guild.logs.messages);
+        const channelAll = newMessage.guild.channels.resolve(guild.logs.all);
+        const channel = channelMessages || channelAll;
 
         if (channel)
             channel.send(new MessageEmbed()
                 .setAuthor(newMessage.guild.nameAcronym, newMessage.guild.iconURL())
-                .setDescription(`> ${lang.get("messageEdit", newMessage.author.tag, lang.get("id", newMessage.author.id))}\n${oldMessage.attachments.map((a) => `[${a.name}](${a.proxyURL})`).join(" - ")}`)
-                .addField(`${lang.get("messageBefore")}`, oldMessage.content)
-                .addField(`${lang.get("messageAfter")}`, newMessage.content)
-                .setFooter(`${lang.get("messageEdited")}`, newMessage.author.displayAvatarURL())
+                .setDescription(`> ${lang.get('messageEdit', newMessage.author.tag, lang.get('id', newMessage.author.id))}\n${oldMessage.attachments.map((a) => `[${a.name}](${a.proxyURL})`).join(' - ')}`)
+                .addField(`${lang.get('messageBefore')}`, oldMessage.content)
+                .addField(`${lang.get('messageAfter')}`, newMessage.content)
+                .setFooter(`${lang.get('messageEdited')}`, newMessage.author.displayAvatarURL())
                 .setColor(0xff6666)
                 .setTimestamp());
     }
-}
+};

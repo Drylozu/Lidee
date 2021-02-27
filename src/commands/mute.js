@@ -1,19 +1,19 @@
-const Command = require("../structures/Command");
+const Command = require('../structures/Command');
 
 module.exports = class Mute extends Command {
     constructor(client) {
         super(client, {
-            name: "mute",
+            name: 'mute',
             category: 5,
-            botPermissions: ["guild", "MANAGE_ROLES"],
-            userPermissions: ["guild", "MANAGE_ROLES"]
+            botPermissions: ['guild', 'MANAGE_ROLES'],
+            userPermissions: ['guild', 'MANAGE_ROLES']
         });
     }
 
     async run(message, args) {
-        let member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
-        if (!member) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("userNo")}`);
-        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 && message.guild.owner.id !== message.author.id) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("mutePermisions")}`);
+        const member = message.guild.members.resolve(args[0]) || message.mentions.members.first();
+        if (!member) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('userNo')}`);
+        if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0 && message.guild.owner.id !== message.author.id) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('mutePermisions')}`);
 
         let role = message.guild.roles.cache.find(r => r.name === `${this.client.user.username} Mute`);
         if (!role) {
@@ -33,8 +33,8 @@ module.exports = class Mute extends Command {
                 }));
         }
 
-        if (member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji("error")} ${this.lang.get("muteNo")}`);
+        if (member.roles.cache.has(role.id)) return message.channel.send(`${this.lang.getEmoji('error')} ${this.lang.get('muteNo')}`);
         await member.roles.add(role.id);
-        message.channel.send(`${this.lang.getEmoji("okay")} ${this.lang.get("mute", member.user.tag)}`);
+        message.channel.send(`${this.lang.getEmoji('okay')} ${this.lang.get('mute', member.user.tag)}`);
     }
-}
+};
