@@ -5,14 +5,18 @@ module.exports = {
         "node": true
     },
     "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 12
     },
     "rules": {
-        "no-unused-vars": 0
+        'no-empty': 'off',
+        'prefer-const': 'warn',
+        'no-unused-vars': 'warn',
+        quotes: ['warn', 'single'],
+        'no-empty-function': 'warn',
+        'eol-last': ['warn', 'never'],
+        'comma-dangle': ['warn', 'never'],
+        'quote-props': ['warn', 'as-needed'],
+        semi: ['warn', 'always', { omitLastInOneLineBlock: true }]
     }
 }
