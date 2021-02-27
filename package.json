@@ -2,9 +2,12 @@
     "name": "lidee",
     "version": "1.1.0-beta",
     "description": "Lidee Discord Bot",
-    "author": "Deivid & Free",
     "main": "src/index.js",
     "license": "MIT",
+    "author": "Drylotrans",
+    "contributors": [
+        "FreeAoi"
+    ],
     "scripts": {
         "eslint": "eslint src/",
         "start": "node src/index.js"
