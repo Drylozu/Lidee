@@ -4,7 +4,7 @@
     "description": "Lidee Discord Bot",
     "main": "src/index.js",
     "license": "MIT",
-    "author": "Drylotrans",
+    "author": "Drylozu",
     "contributors": [
         "FreeAoi"
     ],
@@ -32,6 +32,6 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/Drylotrans/Lidee.git"
+        "url": "https://github.com/Drylozu/Lidee.git"
     }
 }
